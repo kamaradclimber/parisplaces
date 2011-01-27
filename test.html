@@ -1,16 +1,33 @@
 <html>
 <head>
-<title>Ajax avec JQuery - Exemple</title>
-<script type="text/javascript" src="jquery-1.3.1.min.js"></script>
-<script type="text/javascript">
+    <title>Ajax avec JQuery - Exemple</title>
 
-    $(document).ready(function(){ 	// le document est chargÃ©
-            $("a").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-	            page=($(this).attr("href")); // on recuperer l' adresse du lien
-	            page= adresse; // on recuperer l' adresse du lien
-	            alert(page);
-	            $.ajax(
-                    {  // ajax
+
+    <form name="criteres">
+                    <input type="checkbox" name="ecole" onclick="javascript:checkSelect(this.id);" id="ecole" />Ecole<br />
+            <script type="text/javascript" src="./js/jquery-1.4.4.min.js"></script>
+            <script type="text/javascript">
+
+                function checkSelect(elmId){
+                    form = document.all("criteres");
+                    inputs = form.getElementsByTagName("input");
+                    arguments="";
+                    for(i=0 ; i<inputs.length ; i++){
+                        if(inputs[i].type=="checkbox"){
+                            arguments += inputs[i].name + "=" + inputs[i].checked + "&";
+                        }
+                    }
+                    alert(arguments);
+                    return true;
+                }
+
+
+
+function(arguments){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
+	page = "index.php?" + arguments; // on recuperer l' adresse du lien
+	alert(page);
+	$.ajax(
+            {  // ajax
 url: page, // url de la page à charger
 cache: false, // pas de mise en cache
 success:function(html){ // si la requÃªtÃ© est un succÃ¨s
@@ -20,9 +37,8 @@ afficher(html);	    // on execute la fonction afficher(donnees)
 error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
 }
 });
-	            return false; // on desactive le lien
-                });
-            });
+return false; // on desactive le lien
+};
 
 function afficher(donnees){ // pour remplacer le contenu du div contenu
 	$("#contenu").empty(); // on vide le div
@@ -47,7 +63,7 @@ function afficher(donnees){ // pour remplacer le contenu du div contenu
 <body>
 <h1>Hello</h1>
 
-<a href="http://www.google.com/index.html">contenu1.html</a>
+<a href="http://www.google.com/index.html">contenu de google</a>
  
 <a href="contenu2.html">contenu2.html</a>
 <a href="index.php">site distant</a>
