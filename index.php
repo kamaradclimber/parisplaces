@@ -1,14 +1,15 @@
 <?php
 // Set your return content type
 header('Content-type: text/html');
-$bob ="places.xml?godmode=yes";
-foreach($_GET as $key=>$valeur) { $bob .= '&' . $key . '='. $valeur; }
+$bob ="place.php?";
+foreach($_GET as $key=>$valeur) { $bob .= $key . '='. $valeur . '&'; }
 // Website url to open
+//if (count($_GET)>0) $bob = substr($bob,0, count($bob)-1);
 $daurl = 'http://138.195.76.136/'. $bob;
-$daurl = 'http://www.google.com';
-echo $daurl;
-
+//$daurl = 'http://www.google.com';
 // Get that website's content
+
+
 $handle = fopen($daurl, "r");
 
 // If there is something, read and return
@@ -18,5 +19,5 @@ if ($handle) {
         echo $buffer;
     }
     fclose($handle);
-}
+} // */
 ?>

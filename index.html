@@ -30,12 +30,14 @@ $(document).ready(function(){ 	// le document est chargé
 		url: page, // url de la page � charger
 		cache: false, // pas de mise en cache
 		success:function(html){ // si la requêté est un succès
-            alert('cq fonctionne...');
+            alert('ca fonctionne...');
             alert(html);
 			afficher(html);	    // on execute la fonction afficher(donnees)
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
             alert("Something went wrong");
+            alert(textStatus);
+
 		}
 	});
 	return true; // on laisse la case coch�e
