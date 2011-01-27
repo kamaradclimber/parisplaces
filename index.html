@@ -23,20 +23,16 @@ $(document).ready(function(){ 	// le document est chargé
    $("input").click(function(){ 	// on selectionne tous les liens et on d�finit une action quand on clique dessus
 	   page="index.php"; // on recuperer l' adresse du lien
        data = checkSelect() + "final=ok";
-	alert(data);
 	$.ajax({  // ajax
         type: "GET",
         data: data,
 		url: page, // url de la page � charger
 		cache: false, // pas de mise en cache
 		success:function(html){ // si la requêté est un succès
-            alert('ca fonctionne...');
-            alert(html);
 			afficher(html);	    // on execute la fonction afficher(donnees)
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
             alert("Something went wrong");
-            alert(textStatus);
 
 		}
 	});
