@@ -41,15 +41,28 @@ public class CsvConnector {
         setHierarchie();
     }
         
-    public Array getLocations(String[] arrondissements, String[]  typeDeLieu) throws SQLException
+    public Array getLocations(String[] districts, String[]  typeOfLocation) throws SQLException
     {
     	
-    	Collection<String> types = consolidate( Arrays.asList(typeDeLieu));
+    	Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
  
     	
-    	String requete;
+    	String request="SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';') WHERE 'S_GEST' IN (";
     	
-    	PreparedStatement ps = connection.prepareStatement( "SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';')" );
+    	for (String district : districts)
+    	{
+    		request+="'"+district+"',";
+    	}
+    	
+    	request.substring(0, request.length());
+    	request += ") AND COLUMN1 IN (";
+    	for (String type : types)
+    	{
+    		request+="'"+type+"',";
+    	}
+    	request += ")";
+    	System.out.println(request);
+    	PreparedStatement ps = connection.prepareStatement( request );
 
     	ps.executeQuery();
     	return null;
