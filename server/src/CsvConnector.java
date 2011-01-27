@@ -41,30 +41,51 @@ public class CsvConnector {
         setHierarchie();
     }
         
-    public Array getLocations(String[] districts, String[]  typeOfLocation) throws SQLException
+    @Override
+    protected void finalize() throws Throwable {
+    	// TODO Auto-generated method stub
+    	connection.close();
+    	super.finalize();
+    }
+    
+    public Array getLocations(int[] districts, String[]  typeOfLocation) throws SQLException
     {
     	
     	Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
  
     	
-    	String request="SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';') WHERE 'S_GEST' IN (";
+    	String request="EXPLAIN SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';') WHERE 'S_gest' IN (";
     	
-    	for (String district : districts)
+    	for (int district : districts)
     	{
-    		request+="'"+district+"',";
+    		request+="'MAIRIE DU  "  +district+"E";
+    		
+    		if (district ==1) request +="R";
+    		request+= "',";
     	}
     	
-    	request.substring(0, request.length());
-    	request += ") AND COLUMN1 IN (";
-    	for (String type : types)
-    	{
-    		request+="'"+type+"',";
-    	}
+    	if (districts.length!=0)//we have a ',' in the end
+    		request = request.substring(0, request.length()-1);
+
+//    	request += ") AND COLUMN1 IN (";
+//    	for (String type : types)
+//    	{
+//    		request+="'"+type+"',";
+//    	}
+//
+//    	if (types.size()!=0)//we have a ',' in the end
+//    		request = request.substring(0, request.length()-1);
+//
     	request += ")";
     	System.out.println(request);
     	PreparedStatement ps = connection.prepareStatement( request );
 
-    	ps.executeQuery();
+    	ResultSet rs = ps.executeQuery();
+    	printResults(rs);
+    	rs.close();
+        
+        
+    	
     	return null;
     }
     
@@ -80,6 +101,23 @@ public class CsvConnector {
     			result.add(type);
     	}
 		return result;
+    }
+    
+    public void printResults(ResultSet rs) throws SQLException
+    {
+    	ResultSetMetaData meta = rs.getMetaData();
+        int j=0;
+        while (rs.next()) {
+        	j++;
+        	System.out.println("id "+j);
+            for (int i = 0; i < meta.getColumnCount(); i++) {
+                System.out.println(
+                    meta.getColumnLabel(i + 1) + ": " +
+                    rs.getString(i + 1));
+            }
+            System.out.println();
+        }
+        
     }
     
     // cree l'objet consolidation à partir d'un fichier de config
