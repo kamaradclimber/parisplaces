@@ -1,0 +1,28 @@
+/*------ HEADER ----------------------------*/
+
+header
+{
+	float:left;
+	width:100%;
+	color:white;
+	background:black;
+	border-bottom:1px solid #444444;
+}
+
+#header_container
+{
+	width:850px;
+	margin:auto;
+	padding-top:12px;
+	padding-bottom:12px;
+}
+
+#header_container h1
+{
+	font-size:32px;
+}
+
+#header_container h2
+{
+	font-size:15px;
+}

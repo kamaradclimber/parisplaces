@@ -1,0 +1,125 @@
+/*------- FILTER ZONE ----------------------*/
+
+#filter_zone
+{
+	float:left;
+	padding:12px;
+	width:100%;
+	background:#F0EFE7;
+	border: 1px solid #E5E1C8;
+}
+
+#filter_zone h3
+{
+	float:left;
+	width:100%;
+	font-size:28px;
+	color: #C30202;
+	text-transform: uppercase;
+	letter-spacing: -2px;
+}
+
+#filter_zone h4
+{
+	float:left;
+	padding-top:6px;
+	padding-bottom:6px;
+	width:100%;
+	color:black;
+}
+
+	/* ---- DISTRICTS -------*/
+
+	#districts 
+	{
+		float:left;
+		width:21%;
+		border-right: 1px solid #E5E1C8;
+	}
+	
+	#districts ul
+	{
+		padding-left:4px;
+		margin-bottom:6px;
+		float:left;
+		width:100%;
+	}
+	
+	#districts li
+	{
+		float:left;
+		padding-top:2px;
+		padding-bottom:2px;
+		width:100%;
+	}
+	
+	#districts input
+	{
+		margin-top:1px;
+		margin-right:4px;
+		float:left;
+	}
+
+	/* ---- PLACES -------*/
+	
+	#places
+	{
+		float:left;
+		padding-left:12px;
+		width:77%;
+	}
+	
+	.category
+	{
+		float:left;
+		width:33%;
+	}
+
+	.category h5
+	{
+		float:left;
+		padding-top:2px;
+		padding-bottom:2px;
+		width:100%;
+		font-size:13px;
+	}
+	
+	.category ul
+	{
+		padding-left:8px;
+		margin-bottom:6px;
+		float:left;
+		width:100%;
+	}
+	
+	.category li
+	{
+		float:left;
+		padding-top:2px;
+		padding-bottom:2px;
+		width:100%;
+	}
+	
+	.category input
+	{
+		margin-top:1px;
+		margin-right:4px;
+		float:left;
+	}
+	
+	#places a
+	{
+		display:block;
+		padding-right:70px;
+		float:right;
+	}
+	
+/* ---- FACEBOX ----- */
+
+.popup h4
+{
+	float:left;
+	padding-bottom:6px;
+	width:100%;
+	color:black;
+}

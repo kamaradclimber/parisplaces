@@ -1,0 +1,31 @@
+/* ---- DISTRICTS DIALOG BOX-------*/
+
+#districts-dialog-box 
+{
+	float:left;
+	width:100%;
+}
+
+#districts-dialog-box ul
+{
+	padding-left:4px;
+	margin-bottom:6px;
+	float:left;
+	width:110px;
+}
+
+#districts-dialog-box li
+{
+	float:left;
+	padding-top:2px;
+	padding-bottom:2px;
+	width:100%;
+}
+
+#districts-dialog-box input
+{
+	margin-top:1px;
+	margin-right:4px;
+	float:left;
+}
+

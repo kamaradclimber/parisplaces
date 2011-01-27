@@ -1,0 +1,39 @@
+/* ----- CATEGORY DIALOG BOX ----- */
+
+.category-dialog-box
+{
+	float:left;
+	width:235px;
+}
+
+.category-dialog-box h5
+{
+	float:left;
+	padding-top:2px;
+	padding-bottom:2px;
+	width:100%;
+	font-size:13px;
+}
+
+.category-dialog-box ul
+{
+	padding-left:8px;
+	margin-bottom:12px;
+	float:left;
+	width:96%;
+}
+
+.category-dialog-box li
+{
+	float:left;
+	padding-top:2px;
+	padding-bottom:2px;
+	width:100%;
+}
+
+.category-dialog-box input
+{
+	margin-top:1px;
+	margin-right:4px;
+	float:left;
+}

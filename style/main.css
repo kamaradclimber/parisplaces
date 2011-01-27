@@ -1,0 +1,71 @@
+/* ------- MAIN ----------------------------*/
+
+#main
+{
+	padding-top:12px;
+	float:left;
+	width:100%;
+	min-height:500px;
+}
+
+#main_container
+{
+	margin:auto;
+	width:850px;
+}
+
+/*-------- RESULTS ZONE --------------------*/
+
+#results_zone
+{
+	float:left;
+	margin-top:20px;
+	margin-right:12px;
+	width:38%;
+}
+
+#results_zone h3
+{
+	float:left;
+	width:96%;
+	padding-bottom:6px;
+	padding-left:12px;
+	font-size:17px;
+	text-transform:uppercase;
+	letter-spacing:-1px;
+}
+
+.odd
+{
+	float:left;
+	padding:12px;
+	width:93%;
+	background:#D8ECF9;
+	border-top: 1px solid #E5E1C8;
+	border-bottom:1px solid #E5E1C8;
+}
+
+.even
+{
+	float:left;
+	padding:12px;
+	width:93%;
+}
+
+/*-------- MAP ZONE ------------------------*/
+
+#map_zone
+{
+	margin-top:20px;
+	margin-bottom:20px;
+	float:left;
+	width:60%;
+}
+
+#map_zone iframe
+{
+	float:left;
+	width:106%;
+	height:400px;
+}
+
