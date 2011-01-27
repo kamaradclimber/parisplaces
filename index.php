@@ -1,11 +1,12 @@
 <?php
 // Set your return content type
 header('Content-type: text/html');
-$bob ="index.php?godmode=yes";
+$bob ="places.xml?godmode=yes";
 foreach($_GET as $key=>$valeur) { $bob .= '&' . $key . '='. $valeur; }
-echo $bob;
 // Website url to open
 $daurl = 'http://138.195.76.136/'. $bob;
+$daurl = 'http://www.google.com';
+echo $daurl;
 
 // Get that website's content
 $handle = fopen($daurl, "r");
