@@ -1,6 +1,6 @@
 
     function checkSelect(){
-        //parcourt les checboxes et teste si elle sont ochees ou non
+        //parcourt les checboxes et teste si elle sont cochées ou non
                     form = document.all("criteres");
                     inputs = form.getElementsByTagName("input");
                     arguments="";
@@ -9,24 +9,25 @@
                             arguments += inputs[i].name + "=" + inputs[i].checked + "&";
                         }
                     }
+			if (inputs.length>0) { arguments = arguments.slice(0,-1); }
                     return arguments;
                 }
 
 
-$(document).ready(function(){ 	// le document est chargÃ©
+$(document).ready(function(){ 	// le document est chargée
    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
 	   page="index.php"; // on recuperer l' adresse du lien
-       data = checkSelect() + "final=ok";
+       data = checkSelect();
 	$.ajax({  // ajax
         type: "GET",
         data: data,
 		url: page, // url de la page à charger
 		cache: false, // pas de mise en cache
-		success:function(html){ // si la requÃªtÃ© est un succÃ¨s
+		success:function(html){ // si la requête est un succès
 			afficher(html);	    // on execute la fonction afficher(donnees)
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
-            alert("Something went wrong");
+            alert("Argh Something is not so good\n (don't kill the messenger !)");
 
 		}
 	});
