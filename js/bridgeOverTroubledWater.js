@@ -1,7 +1,6 @@
 
     function checkSelect(){
         //parcourt les checboxes et teste si elle sont ochees ou non
-                    alter('test')
                     form = document.all("criteres");
                     inputs = form.getElementsByTagName("input");
                     arguments="";
@@ -16,7 +15,6 @@
 
 $(document).ready(function(){ 	// le document est chargÃ©
    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-       alert('lets go');
 	   page="index.php"; // on recuperer l' adresse du lien
        data = checkSelect() + "final=ok";
 	$.ajax({  // ajax

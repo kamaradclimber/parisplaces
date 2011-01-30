@@ -61,8 +61,31 @@ function afficher(donnees){ // pour remplacer le contenu du div contenu
 </style>
 </head>
 <body>
-
+<div id="main">
+<div id="main_container">
+<div id="filter_zone">
+<h3>Visualisez les lieux de Paris!</h3>
+<div id="districts">
+<h4>Arrondissements</h4>
+<ul>
     <form name="criteres">
+<li><input type="checkbox" name="arr1"/>Ier</li>
+<li><input type="checkbox"/>IIe</li>
+<li><input type="checkbox"/>IIIe</li>
+<li><input type="checkbox"/>IVe</li>
+<li><input type="checkbox"/>Ve</li>
+<li><input type="checkbox"/>VIe</li>
+       <li> <input type="submit" value="Même pas besoin de cliquer sur ce bouton"/></li>
+    </form>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<h5><input type="checkbox"/>Sport</h5>
+
+    <form name="criteres_bak">
         <input type="checkbox" name="theatre" />Aller au théatre<br />
         <input type="checkbox" name="cinema" />Aller au concert<br />
         <input type="submit" value="Même pas besoin de cliquer sur ce bouton"/>

@@ -7,13 +7,12 @@
         <link rel="stylesheet" type="text/css" href="facebox/facebox.css" />
 		<script language="javascript" src="js/jquery-1.4.4.min.js"></script>
 		<script language="javascript" src="facebox/facebox.js"></script>
-		<script language="javascript" src="js/bridgeOverTroubledWater"></script>
+		<script language="javascript" src="js/bridgeOverTroubledWater.js"></script>
 		<script language="javascript">
 		jQuery(document).ready(function($) {
 			$('a[rel*=facebox]').facebox()
 		})
-
-		</script>
+</script>
 	</head>
 	<body>
 		<header>
@@ -29,12 +28,14 @@
 					<div id="districts">
 						<h4>Arrondissements</h4>
 						<ul>
+						<form name="criteres">
 							<li><input type="checkbox"/>Ier</li>
 							<li><input type="checkbox"/>IIe</li>
 							<li><input type="checkbox"/>IIIe</li>
 							<li><input type="checkbox"/>IVe</li>
 							<li><input type="checkbox"/>Ve</li>
 							<li><input type="checkbox"/>VIe</li>
+						</form>
 						</ul>
 						<a href="districts-dialog-box.html" rel="facebox">Voir plus d'arrondissements</a>
 					</div>
