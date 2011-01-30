@@ -16,7 +16,7 @@
 
 $(document).ready(function(){ 	// le document est chargée
    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-	   page="index.php"; // on recuperer l' adresse du lien
+	   page="connecteur.php"; // on recuperer l' adresse du lien
        data = checkSelect();
 	$.ajax({  // ajax
         type: "GET",
