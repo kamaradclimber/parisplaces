@@ -1,11 +1,21 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- Edited by XMLSpy® -->
-<districts>
-	%{
+<?xml version="1.0"?>
+<data>
+	<districts>
+	{%
 		for (district in districts) {
-	}%	
-	<to>${district}</to>
-	%{
+	%}
+		<to>${district}</to>
+	{%
 		}
-	}%
-</districts>
+	%}
+	</districts>
+	<places>
+	{%
+		for (place in places) {
+	%}
+		<to>${place}</to>
+	{%
+		}
+	%}
+	</places>
+</data>

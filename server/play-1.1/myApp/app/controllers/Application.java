@@ -61,8 +61,15 @@ public class Application extends Controller {
     	for (int i=0;i<formattedDistricts.length;i++) {
     		districtsList.add(formattedDistricts[i]);
     	}
+    	ArrayList<String> typesList = new ArrayList<String>();
+    	for (int i=0;i<formattedTypes.length;i++) {
+    		typesList.add(formattedTypes[i]);
+    	}
+    	
+    	
     	System.out.println(districtsList.size());
     	renderArgs.put("districts",districtsList);
+    	renderArgs.put("places",typesList);
     	render();
     	
     }
