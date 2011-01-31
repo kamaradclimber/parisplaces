@@ -7,11 +7,12 @@
         <link rel="stylesheet" type="text/css" href="facebox/facebox.css" />
 		<script language="javascript" src="js/jquery-1.4.4.min.js"></script>
 		<script language="javascript" src="facebox/facebox.js"></script>
+		<script language="javascript" src="js/bridgeOverTroubledWater.js"></script>
 		<script language="javascript">
 		jQuery(document).ready(function($) {
 			$('a[rel*=facebox]').facebox()
 		})
-		</script>
+</script>
 	</head>
 	<body>
 		<header>
@@ -27,12 +28,14 @@
 					<div id="districts">
 						<h4>Arrondissements</h4>
 						<ul>
-							<li><input type="checkbox"/>Ier</li>
-							<li><input type="checkbox"/>IIe</li>
-							<li><input type="checkbox"/>IIIe</li>
+						<form name="criteres">
+							<li><input name="arr1" type="checkbox"/>Ier</li>
+							<li><input name="arr2" type="checkbox"/>IIe</li>
+							<li><input name="arr3" type="checkbox"/>IIIe</li>
 							<li><input type="checkbox"/>IVe</li>
 							<li><input type="checkbox"/>Ve</li>
 							<li><input type="checkbox"/>VIe</li>
+						</form>
 						</ul>
 						<a href="districts-dialog-box.html" rel="facebox">Voir plus d'arrondissements</a>
 					</div>
@@ -83,6 +86,9 @@
 						<p>91, rue Rambuteau</p>
 						<p>75001 Paris</p>
 					</div>
+                    <div id="contenu"> 
+                        Nothing for now
+                    </div>
 				</div>
 				<div id="map_zone">
 					<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q=Biblioth%C3%A8que+%C3%A0+proximit%C3%A9+de+1er+Arrondissement,+Paris&amp;aq=0&amp;sll=48.851388,2.360172&amp;sspn=0.056365,0.153465&amp;gl=fr&amp;ie=UTF8&amp;hq=Biblioth%C3%A8que&amp;hnear=1er+Arrondissement,+Paris,+Ile-de-France&amp;ll=48.861228,2.344544&amp;spn=0.006295,0.008576&amp;output=embed"></iframe><br /><small><a href="http://maps.google.fr/maps?f=q&amp;source=embed&amp;hl=fr&amp;geocode=&amp;q=Biblioth%C3%A8que+%C3%A0+proximit%C3%A9+de+1er+Arrondissement,+Paris&amp;aq=0&amp;sll=48.851388,2.360172&amp;sspn=0.056365,0.153465&amp;gl=fr&amp;ie=UTF8&amp;hq=Biblioth%C3%A8que&amp;hnear=1er+Arrondissement,+Paris,+Ile-de-France&amp;ll=48.861228,2.344544&amp;spn=0.006295,0.008576" style="color:#0000FF;text-align:left">Agrandir le plan</a></small>
@@ -95,7 +101,7 @@
 					<div class="footer_column">
 						<h3>Description</h3>
 						<p>Le projet "Paris Places" est un projet Web développé par des étudiants de l'option Sciences de l'information à <a href="http://www.ecp.fr">Centrale Paris</a></p>
-						<p><a href="http://twitter.com/johanisma">Johan</a>, Florian, Michaël, <a href="http://twitter.com/kamaradclimber">Grégoire</a>, Lucas et <a href="http://twitter.com/detcherry">Damien</a> ont souhaité créer un moyen de rechercher ultra simplement et rapidement les lieux municipaux de la ville de Paris</p>
+						<p><a href="http://twitter.com/johanisma">Johan</a>, Florent, Michaël, <a href="http://twitter.com/kamaradclimber">Grégoire</a>, Lucas et <a href="http://twitter.com/detcherry">Damien</a> ont souhaité créer un moyen de rechercher ultra simplement et rapidement les lieux municipaux de la ville de Paris</p>
 						<p> Grâce à un compte ouvert par la mairie en alpha testeur, ils ont pu naviguer dans les données de la ville et essayer de créer la meilleure visualisation possible!!</p>
 					</div>
 					<div class="footer_column">

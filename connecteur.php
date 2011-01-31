@@ -8,7 +8,7 @@ foreach($_GET as $key=>$valeur) { $bob .= $key . '='. $valeur . '&'; }
 $daurl = 'http://138.195.76.136/'. $bob;
 //$daurl = 'http://www.google.com';
 // Get that website's content
-
+echo "retour du server distant :<br/> Pour le moment seulement les parametres d'appel mais bientot du xml<br/>";
 
 $handle = fopen($daurl, "r");
 

@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>Paris Places</title>
+<script type="text/javascript" src="./js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+
+
+    function checkSelect(){
+        //parcourt les checboxes et teste si elle sont ochees ou non
+                    form = document.all("criteres");
+                    inputs = form.getElementsByTagName("input");
+                    arguments="";
+                    for(i=0 ; i<inputs.length ; i++){
+                        if(inputs[i].type=="checkbox"){
+                            arguments += inputs[i].name + "=" + inputs[i].checked + "&";
+                        }
+                    }
+                    return arguments;
+                }
+
+
+$(document).ready(function(){ 	// le document est chargÃ©
+   $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
+	   page="index.php"; // on recuperer l' adresse du lien
+       data = checkSelect() + "final=ok";
+	$.ajax({  // ajax
+        type: "GET",
+        data: data,
+		url: page, // url de la page à charger
+		cache: false, // pas de mise en cache
+		success:function(html){ // si la requÃªtÃ© est un succÃ¨s
+			afficher(html);	    // on execute la fonction afficher(donnees)
+		},
+		error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
+            alert("Something went wrong");
+
+		}
+	});
+	return true; // on laisse la case cochée
+   });
+});
+
+function afficher(donnees){ // pour remplacer le contenu du div contenu
+	$("#contenu").empty(); // on vide le div
+	$("#contenu").append(donnees); // on met dans le div le résultat de la requete ajax
+}
+</script>
+<style>
+	a{
+		padding:0px;
+		margin:0px;
+		border: 2px solid #DFDFDF;
+		background: #AFAFAF;
+	}
+	#contenu{
+		width:300px;
+		height:300px;
+		padding:25;
+		border: 2px solid #DFDFDF;
+	}
+</style>
+</head>
+<body>
+<div id="main">
+<div id="main_container">
+<div id="filter_zone">
+<h3>Visualisez les lieux de Paris!</h3>
+<div id="districts">
+<h4>Arrondissements</h4>
+<ul>
+    <form name="criteres">
+<li><input type="checkbox" name="arr1"/>Ier</li>
+<li><input type="checkbox"/>IIe</li>
+<li><input type="checkbox"/>IIIe</li>
+<li><input type="checkbox"/>IVe</li>
+<li><input type="checkbox"/>Ve</li>
+<li><input type="checkbox"/>VIe</li>
+       <li> <input type="submit" value="Même pas besoin de cliquer sur ce bouton"/></li>
+    </form>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<h5><input type="checkbox"/>Sport</h5>
+
+    <form name="criteres_bak">
+        <input type="checkbox" name="theatre" />Aller au théatre<br />
+        <input type="checkbox" name="cinema" />Aller au concert<br />
+        <input type="submit" value="Même pas besoin de cliquer sur ce bouton"/>
+    </form>
+    <h1>Paris Places</h1>
+
+
+<div id="contenu">
+	Contenu par défaut
+</div>
+
+</body>
+</html>
