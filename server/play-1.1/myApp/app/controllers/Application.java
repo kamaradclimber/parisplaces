@@ -45,11 +45,24 @@ public class Application extends Controller {
     	String[] nonFormattedDistricts = districts.split(",");
     	int[] formattedDistricts = new int[nonFormattedDistricts.length];
     	for (int i=0;i<nonFormattedDistricts.length;i++) {
-    		formattedDistricts[i] = Integer.parseInt(nonFormattedDistricts[i]);
+    		if (!nonFormattedDistricts[i].equals("")) {
+    			formattedDistricts[i] = Integer.parseInt(nonFormattedDistricts[i]);
+    		}
     	}
     	
     	String[] formattedTypes = typesOfPlaces.split(",");
     	
+    	
+    	//connector.getLocations(formattedDistricts, formattedTypes);
+    	
+    	Place place = new Place(18);
+    	
+    	ArrayList<Integer> districtsList = new ArrayList<Integer>();
+    	for (int i=0;i<formattedDistricts.length;i++) {
+    		districtsList.add(formattedDistricts[i]);
+    	}
+    	System.out.println(districtsList.size());
+    	renderArgs.put("districts",districtsList);
     	render();
     	
     }
