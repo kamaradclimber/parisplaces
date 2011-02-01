@@ -1,23 +1,37 @@
 <?php
-// Set your return content type
-header('Content-type: text/html');
-$bob ="place.php?";
-foreach($_GET as $key=>$valeur) { $bob .= $key . '='. $valeur . '&'; }
-// Website url to open
+// Set the return content type
+header('Content-type: application/xhtml+xml');
+echo '<xml>';
+//Set the page to connect with.
+$bob ="places.xml" + "?";
+
+// get the arguments to pass to these page
+foreach($_GET as $key=>$valeur) { 
+	//$bob .= $key . '='. $valeur . '&'; 
+	echo $key;
+	}
+
 //if (count($_GET)>0) $bob = substr($bob,0, count($bob)-1);
+
+
+// Website url to open
 $daurl = 'http://138.195.76.136/'. $bob;
 //$daurl = 'http://www.google.com';
-// Get that website's content
-echo "retour du server distant :<br/> Pour le moment seulement les parametres d'appel mais bientot du xml<br/>";
+echo $daurl;
 
-$handle = fopen($daurl, "r");
+//echo "retour du server distant :<br/> Pour le moment seulement les parametres d'appel mais bientot du xml<br/>";
+
+// Get that website's content
+$handle=null;
+//$handle = fopen($daurl, "r");
 
 // If there is something, read and return
 if ($handle) {
-    while (!feof($handle)) {
-        $buffer = fgets($handle, 4096);
-        echo $buffer;
-    }
-    fclose($handle);
+	while (!feof($handle)) {
+		$buffer = fgets($handle, 4096);
+		echo $buffer;
+	}
+	fclose($handle);
 } // */
+echo '</xml>';
 ?>
