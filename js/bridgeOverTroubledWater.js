@@ -29,8 +29,8 @@
 			}
 			if ($districts_list.length>0) { $districts_list = $districts_list.slice(0,-1); }
 			if ($type_list.length>0) { $type_list = $type_list.slice(0,-1); }
-			//return "district=" + $districts_list +"&" + $type_list;
-			return "district=" + $districts_list;
+			return "district=" + $districts_list +"&" + "type="+  $type_list;
+			//return "district=" + $districts_list;
     }
 
 
