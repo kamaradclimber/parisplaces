@@ -29,7 +29,8 @@
 			}
 			if ($districts_list.length>0) { $districts_list = $districts_list.slice(0,-1); }
 			if ($type_list.length>0) { $type_list = $type_list.slice(0,-1); }
-			return $districts_list +"&" + $type_list;
+			//return "district=" + $districts_list +"&" + $type_list;
+			return "district=" + $districts_list;
     }
 
 
@@ -39,7 +40,6 @@ $(document).ready(function(){ 	// le document est chargée
    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
 	   page="connecteur.php"; // on recuperer l' adresse du lien
        data = checkSelect();
-	alert(data);
 	$.ajax({  // ajax
         type: "GET",
         data: data,
@@ -59,5 +59,7 @@ $(document).ready(function(){ 	// le document est chargée
 
 function afficher(donnees){ // pour remplacer le contenu du div contenu
 	$("#contenu").empty(); // on vide le div
-	$("#contenu").append(donnees); // on met dans le div le résultat de la requete ajax
+    for( var i in donnees.getElementsByTagName("to")) {
+        $("#contenu").append(donnees.getElementsByTagName("to")[i].childNodes[0].nodeValue);
+    }
 }
