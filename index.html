@@ -1,101 +1,122 @@
+<!DOCTYPE HTML>
 <html>
-<head>
-<title>Paris Places</title>
-<script type="text/javascript" src="./js/jquery-1.4.4.min.js"></script>
-<script type="text/javascript">
-
-
-    function checkSelect(){
-        //parcourt les checboxes et teste si elle sont ochees ou non
-                    form = document.all("criteres");
-                    inputs = form.getElementsByTagName("input");
-                    arguments="";
-                    for(i=0 ; i<inputs.length ; i++){
-                        if(inputs[i].type=="checkbox"){
-                            arguments += inputs[i].name + "=" + inputs[i].checked + "&";
-                        }
-                    }
-                    return arguments;
-                }
-
-
-$(document).ready(function(){ 	// le document est chargé
-   $("input").click(function(){ 	// on selectionne tous les liens et on d�finit une action quand on clique dessus
-	   page="index.php"; // on recuperer l' adresse du lien
-       data = checkSelect() + "final=ok";
-	$.ajax({  // ajax
-        type: "GET",
-        data: data,
-		url: page, // url de la page � charger
-		cache: false, // pas de mise en cache
-		success:function(html){ // si la requêté est un succès
-			afficher(html);	    // on execute la fonction afficher(donnees)
-		},
-		error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
-            alert("Something went wrong");
-
-		}
-	});
-	return true; // on laisse la case coch�e
-   });
-});
-
-function afficher(donnees){ // pour remplacer le contenu du div contenu
-	$("#contenu").empty(); // on vide le div
-	$("#contenu").append(donnees); // on met dans le div le r�sultat de la requete ajax
-}
+	<head>
+        <title>Paris Places - Open Data Showcase</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" media="screen" type="text/css" title="Design" href="style/style.css" />
+        <link rel="stylesheet" type="text/css" href="facebox/facebox.css" />
+		<script language="javascript" src="js/jquery-1.4.4.min.js"></script>
+		<script language="javascript" src="facebox/facebox.js"></script>
+		<script language="javascript" src="js/bridgeOverTroubledWater.js"></script>
+		<script language="javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+		<script language="javascript" src="js/maps.js"></script> 
+<script language="javascript">
+jQuery(document).ready(function($) {
+		$('a[rel*=facebox]').facebox()
+		})
 </script>
-<style>
-	a{
-		padding:0px;
-		margin:0px;
-		border: 2px solid #DFDFDF;
-		background: #AFAFAF;
-	}
-	#contenu{
-		width:300px;
-		height:300px;
-		padding:25;
-		border: 2px solid #DFDFDF;
-	}
-</style>
 </head>
 <body>
+<header>
+<div id="header_container">
+<h1>Paris Places</h1>
+<h2>Open Data Showcase</h2>
+</div>
+</header>
 <div id="main">
 <div id="main_container">
 <div id="filter_zone">
 <h3>Visualisez les lieux de Paris!</h3>
 <div id="districts">
-<h4>Arrondissements</h4>
-<ul>
-    <form name="criteres">
-<li><input type="checkbox" name="arr1"/>Ier</li>
-<li><input type="checkbox"/>IIe</li>
-<li><input type="checkbox"/>IIIe</li>
-<li><input type="checkbox"/>IVe</li>
-<li><input type="checkbox"/>Ve</li>
-<li><input type="checkbox"/>VIe</li>
-       <li> <input type="submit" value="M�me pas besoin de cliquer sur ce bouton"/></li>
-    </form>
-</ul>
-</div>
-</div>
-</div>
-</div>
-
-<h5><input type="checkbox"/>Sport</h5>
-
-    <form name="criteres_bak">
-        <input type="checkbox" name="theatre" />Aller au th�atre<br />
-        <input type="checkbox" name="cinema" />Aller au concert<br />
-        <input type="submit" value="M�me pas besoin de cliquer sur ce bouton"/>
-    </form>
-    <h1>Paris Places</h1>
-
-
-<div id="contenu">
-	Contenu par d�faut
-</div>
-
-</body>
+						<h4>Arrondissements</h4>
+						<ul>
+						<form name="criteres">
+							<li><input name="arr1" type="checkbox"/>Ier</li>
+							<li><input name="arr2" type="checkbox"/>IIe</li>
+							<li><input name="arr3" type="checkbox"/>IIIe</li>
+							<li><input name="arr4" type="checkbox"/>IVe</li>
+							<li><input name="arr5" type="checkbox"/>Ve</li>
+							<li><input name="arr6" type="checkbox"/>VIe</li>
+						</form>
+						</ul>
+						<a href="districts-dialog-box.html" rel="facebox">Voir plus d'arrondissements</a>
+					</div>
+					<div id="places">
+						<h4>Lieux</h4>
+						<div class="category">
+							<h5><input type="checkbox"/>Jeunesse</h5>
+							<ul>
+								<li><input type="checkbox"/>Crèche collective</li>
+								<li><input type="checkbox"/>Crèche familiale</li>
+								<li><input type="checkbox"/>Ecole élémentaire & annexes</li>
+								<li><input type="checkbox"/>Ecole maternelle & annexes</li>
+								<li><input type="checkbox"/>Ecole polyvalente</li>
+							</ul>
+						</div>
+						<div class="category">
+							<h5><input type="checkbox"/>Sport</h5>
+							<ul>
+								<li><input type="checkbox"/>Aires sportives en accès libre</li>
+								<li><input type="checkbox"/>Gymnase</li>
+								<li><input type="checkbox"/>Piscine</li>
+								<li><input type="checkbox"/>Salle de sport</li>
+								<li><input type="checkbox"/>Terrain de Tennis</li>
+							</ul>
+						</div>
+						<div class="category">
+							<h5><input type="checkbox"/>Autres</h5>
+							<ul>
+								<li><input name="typbiblio" type="checkbox"/>Bibliothèque</li>
+								<li><input type="checkbox"/>Conservatoire</li>
+								<li><input type="checkbox"/>Espace vert</li>
+								<li><input type="checkbox"/>Mairie d’arrondissement</li>
+								<li><input type="checkbox"/>Pigeonnier</li>
+							</ul>
+						</div>
+						<a href="category-dialog-box.html" rel="facebox">Voir d'autres types de lieu</a>
+					</div>
+				</div>
+				<div id="results_zone">
+					<h3>Résultats de la recherche</h3>
+					<div class="odd" name="address" value="4, place du Louvre, 75001 Paris">
+						<h4>Bibliothèque municipale du Louvre</h4>
+						<p>4, place du Louvre</p>
+						<p>75001 Paris</p>
+					</div>
+					<div class="even" name="address" value="91 rue Rambuteau, 75001 Paris">
+						<h4>Bibliothèque municipale La Fontaine</h4>
+						<p>91, rue Rambuteau</p>
+						<p>75001 Paris</p>
+					</div>
+                    <div id="contenu"> 
+                        Nothing for now
+                    </div>
+				</div>
+				<div id="map_zone">
+					<div id="map" style="width: 500px; height: 350px;" >
+					</div>
+					<br /><small><a href="http://maps.google.fr/maps?f=q&amp;source=embed&amp;hl=fr&amp;geocode=&amp;q=Biblioth%C3%A8que+%C3%A0+proximit%C3%A9+de+1er+Arrondissement,+Paris&amp;aq=0&amp;sll=48.851388,2.360172&amp;sspn=0.056365,0.153465&amp;gl=fr&amp;ie=UTF8&amp;hq=Biblioth%C3%A8que&amp;hnear=1er+Arrondissement,+Paris,+Ile-de-France&amp;ll=48.861228,2.344544&amp;spn=0.006295,0.008576" style="color:#0000FF;text-align:left">Agrandir le plan</a></small>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div id="top_footer">
+				<div id="top_footer_container">
+					<div class="footer_column">
+						<h3>Description</h3>
+						<p>Le projet "Paris Places" est un projet Web développé par des étudiants de l'option Sciences de l'information à <a href="http://www.ecp.fr">Centrale Paris</a></p>
+						<p><a href="http://twitter.com/johanisma">Johan</a>, Florent, Michaël, <a href="http://twitter.com/kamaradclimber">Grégoire</a>, Lucas et <a href="http://twitter.com/detcherry">Damien</a> ont souhaité créer un moyen de rechercher ultra simplement et rapidement les lieux municipaux de la ville de Paris</p>
+						<p> Grâce à un compte ouvert par la mairie en alpha testeur, ils ont pu naviguer dans les données de la ville et essayer de créer la meilleure visualisation possible!!</p>
+					</div>
+					<div class="footer_column">
+						<h3>Technologie</h3>
+						<p>Paris Places est développé avec les technologies standardes du Web: HTML5, CSS3, jQuery. Le back-end est en JAVA et repose sur le framework PLAY.</p>
+						<p>Nous utilisons un connecteur CSV car les fichiers fournis par la mairie sont dans ce format!</p>
+						<p>Nous attendons évidemment avec impatience les futurs Web Services qu'elle mettra en place</p>
+					</div>
+				</div>
+			</div>
+			<div id="bottom_footer">Paris Places - Open Data Showcase - 2011</div>
+		</footer>
+	</body>
 </html>
