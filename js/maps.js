@@ -38,7 +38,14 @@ function codeAddress(address) {
 
 function highlight(marker) {
 
-    		alert(marker.address);
+	var addresses = document.all("results_zone");
+	for(i=0; i<document.getElementsByName("address").length; i++) {
+		if (document.getElementsByName("address")[i].getAttribute("value")== marker.address ) {
+				document.getElementsByName("address")[i].setAttribute("class", "odd");
+		} else {
+				document.getElementsByName("address")[i].setAttribute("class", "even");
+		}
+	}
 }
 
 
