@@ -8,24 +8,26 @@
 		<script language="javascript" src="js/jquery-1.4.4.min.js"></script>
 		<script language="javascript" src="facebox/facebox.js"></script>
 		<script language="javascript" src="js/bridgeOverTroubledWater.js"></script>
-		<script language="javascript">
-		jQuery(document).ready(function($) {
-			$('a[rel*=facebox]').facebox()
+		<script language="javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+		<script language="javascript" src="js/maps.js"></script> 
+<script language="javascript">
+jQuery(document).ready(function($) {
+		$('a[rel*=facebox]').facebox()
 		})
 </script>
-	</head>
-	<body>
-		<header>
-			<div id="header_container">
-				<h1>Paris Places</h1>
-				<h2>Open Data Showcase</h2>
-			</div>
-		</header>
-		<div id="main">
-			<div id="main_container">
-				<div id="filter_zone">
-					<h3>Visualisez les lieux de Paris!</h3>
-					<div id="districts">
+</head>
+<body>
+<header>
+<div id="header_container">
+<h1>Paris Places</h1>
+<h2>Open Data Showcase</h2>
+</div>
+</header>
+<div id="main">
+<div id="main_container">
+<div id="filter_zone">
+<h3>Visualisez les lieux de Paris!</h3>
+<div id="districts">
 						<h4>Arrondissements</h4>
 						<ul>
 						<form name="criteres">
@@ -76,12 +78,12 @@
 				</div>
 				<div id="results_zone">
 					<h3>Résultats de la recherche</h3>
-					<div class="odd">
+					<div class="odd" name="address" value="4, place du Louvres, 75001 Paris">
 						<h4>Bibliothèque municipale du Louvre</h4>
 						<p>4, place du Louvre</p>
 						<p>75001 Paris</p>
 					</div>
-					<div class="even">
+					<div class="even" name="address" value="91 rue Rambuteau, 75001 Paris">
 						<h4>Bibliothèque municipale La Fontaine</h4>
 						<p>91, rue Rambuteau</p>
 						<p>75001 Paris</p>
@@ -91,7 +93,9 @@
                     </div>
 				</div>
 				<div id="map_zone">
-					<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q=Biblioth%C3%A8que+%C3%A0+proximit%C3%A9+de+1er+Arrondissement,+Paris&amp;aq=0&amp;sll=48.851388,2.360172&amp;sspn=0.056365,0.153465&amp;gl=fr&amp;ie=UTF8&amp;hq=Biblioth%C3%A8que&amp;hnear=1er+Arrondissement,+Paris,+Ile-de-France&amp;ll=48.861228,2.344544&amp;spn=0.006295,0.008576&amp;output=embed"></iframe><br /><small><a href="http://maps.google.fr/maps?f=q&amp;source=embed&amp;hl=fr&amp;geocode=&amp;q=Biblioth%C3%A8que+%C3%A0+proximit%C3%A9+de+1er+Arrondissement,+Paris&amp;aq=0&amp;sll=48.851388,2.360172&amp;sspn=0.056365,0.153465&amp;gl=fr&amp;ie=UTF8&amp;hq=Biblioth%C3%A8que&amp;hnear=1er+Arrondissement,+Paris,+Ile-de-France&amp;ll=48.861228,2.344544&amp;spn=0.006295,0.008576" style="color:#0000FF;text-align:left">Agrandir le plan</a></small>
+					<div id="map" style="width: 500px; height: 350px;" >
+					</div>
+					<br /><small><a href="http://maps.google.fr/maps?f=q&amp;source=embed&amp;hl=fr&amp;geocode=&amp;q=Biblioth%C3%A8que+%C3%A0+proximit%C3%A9+de+1er+Arrondissement,+Paris&amp;aq=0&amp;sll=48.851388,2.360172&amp;sspn=0.056365,0.153465&amp;gl=fr&amp;ie=UTF8&amp;hq=Biblioth%C3%A8que&amp;hnear=1er+Arrondissement,+Paris,+Ile-de-France&amp;ll=48.861228,2.344544&amp;spn=0.006295,0.008576" style="color:#0000FF;text-align:left">Agrandir le plan</a></small>
 				</div>
 			</div>
 		</div>
