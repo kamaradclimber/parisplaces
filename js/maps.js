@@ -9,7 +9,12 @@ zoom: 13,
       mapTypeId: google.maps.MapTypeId.ROADMAP
 	}
 	map = new google.maps.Map(document.getElementById("map"), myOptions);	
-	codeAddress("76 rue Notre Dame des Champs, Paris");
+	updateAddresses();
+}
+
+function updateAddresses() {
+	// get the addresses displayed in the  results zone 
+	// and then add each point as a marker on the map
 	var address;
 	var addresses = document.all("results_zone");
 	for(i=0; i<document.getElementsByName("address").length; i++) {
@@ -17,6 +22,8 @@ zoom: 13,
 		codeAddress(address);
 	}
 }
+
+
 
 function codeAddress(address) {
     geocoder.geocode( { 'address': address}, function(results, status) {
