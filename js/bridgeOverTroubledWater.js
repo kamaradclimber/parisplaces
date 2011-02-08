@@ -42,11 +42,12 @@ $(document).ready(function(){ 	// le document est chargée
        data = checkSelect();
 	$.ajax({  // ajax
         type: "GET",
+	dataType: "xml",
         data: data,
 		url: page, // url de la page à charger
 		cache: false, // pas de mise en cache
 		success:function(html){ // si la requête est un succès
-			afficher(html);	    // on execute la fonction afficher(donnees)
+			afficher(html);
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
             alert("Argh Something is not so good\n (don't kill the messenger !)");
@@ -57,41 +58,35 @@ $(document).ready(function(){ 	// le document est chargée
    });
 });
 
-var bob = '<?xml version="1.0" encoding="utf-8" ?><places> <place id=”897ff56a2”> <name>Bibliothèque François Mitterrand</name> <address>1, rue Pipo, Paris</address> <coords>874.93879098</coords> </place> <place id=”89ds56”> <name>Mes grands parents</name> <address>76 rue Notre Dame des Champs, Paris</address> <coords>874.93879098</coords> </place></places>'
+var bob = '<?xml version="1.0" encoding="utf-8" ?><places> <place id=”897ff56a2”> <name>Bibliothèque François Mitterrand</name> <address>1 boulevard Pasteur, Paris</address> <coords>874.93879098</coords> </place> <place id=”89ds56”> <name>Mes grands parents</name> <address>76 rue Notre Dame des Champs, Paris</address> <coords>874.93879098</coords> </place></places>'
 
 
 
 
 function afficher(donnees){ // pour remplacer le contenu du div contenu
 	$("#contenu").empty(); // on vide le div
-	
+	$("#results_zone").empty(); // on vide le div
+
+	// on stocke la parité pour pouvoir faire un affichage plus elegant	
 	var even = 0;
 	var class;
+
+	// parcourt du xml
 	$(bob).find('place').each(  function() {
 		even = (even +1) % 2;
 		if (even == 0 ) { class = "even"; } else { class = "odd"; }
 		var id = $(this).attr('id');
 		var name = $(this).find('name').text();
 		var  address = $(this).find('address').text();
+
 		var html = "<h4>" + name + "</h4>";
 		html += "<p>"+  address + "</p>";
-		$('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#contenu');
-} );
-    for( var i in donnees.getElementsByTagName("to")) {
-        $("#contenu").append(donnees.getElementsByTagName("to")[i].childNodes[0].nodeValue);
-    }
+		$('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#results_zone');
+		} );
+
+		updateAddresses();
+    	for( var i in donnees.getElementsByTagName("to")) {
+        	$("#contenu").append(donnees.getElementsByTagName("to")[i].childNodes[0].nodeValue);
+    	}
 }
 
-function convert() {
-	alert('on y va');
-	//var id = $(this).attr('id');
-	var name = $(this).find('name').text();
-	alert( $(this).find('name').text());
-	alert(name);
-	/* var  address = $(this).find('address').text();
-	alert('on y va');
-	var html = "<h4>" + name + "</h4>";
-	html += "<p>"+  address + "</p>";
-	alert('on y va');
-	$('<div class="odd" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#contenu'); */
-}

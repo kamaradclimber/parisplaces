@@ -1,5 +1,8 @@
 var geocoder;
 var map;
+
+var places = new Array();
+
 function initialize() {
 	geocoder = new google.maps.Geocoder();
 	var myLatlng = new google.maps.LatLng(48.8574, 2.3478);
@@ -15,6 +18,14 @@ zoom: 13,
 function updateAddresses() {
 	// get the addresses displayed in the  results zone 
 	// and then add each point as a marker on the map
+	alert('ok');
+
+	//clear the previous marker
+	places.forEach( function(marker) {
+		marker.setMap(null);
+	});
+	places = new Array();
+
 	var address;
 	var addresses = document.all("results_zone");
 	for(i=0; i<document.getElementsByName("address").length; i++) {
@@ -28,11 +39,14 @@ function updateAddresses() {
 function codeAddress(address) {
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-        var marker = new google.maps.Marker({
-            map: map, 
+        var marker = new google.maps.Marker({ 
             position: results[0].geometry.location
         });
 	marker.address = address;
+	
+	places.push(marker);
+	marker.setMap(map);
+
 	google.maps.event.addListener(marker, 'mouseover', function() {
 		highlight(marker);
   	});
