@@ -107,6 +107,6 @@ function findAssociatedMarker(address) {
             result = places[i];
             return result;
         }
-    if (result == null) { alert('not found'); }
     }
+    if (result == null) { alert('not found'); }
 }
