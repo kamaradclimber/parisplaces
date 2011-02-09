@@ -81,7 +81,8 @@ function afficher(donnees){ // pour remplacer le contenu du div contenu
 	// parcourt du xml
 	$(bob).find('place').each(  function() {
 		even = (even +1) % 2;
-		if (even == 0 ) { class = "even"; } else { class = "odd"; }
+        class = "result ";
+		if (even == 0 ) { class += "even"; } else { class += "odd"; }
 		var id = $(this).attr('id');
 		var name = $(this).find('name').text();
 		var  address = $(this).find('address').text();

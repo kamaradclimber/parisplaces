@@ -66,6 +66,7 @@ function putOnTheMap(marker) {
 }
 
 function toggleBounce(marker) {
+    alert(marker.address);
     if (marker.getAnimation() != null) {
         marker.setAnimation(null);
     } else {
