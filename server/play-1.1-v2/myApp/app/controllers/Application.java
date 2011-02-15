@@ -18,19 +18,20 @@ public class Application extends Controller {
     }
     
     public static void getAppropriatePlaces() {
-    	String typesOfPlaces;
-    	String districts;
-    	String offset;
-    	String limit;
+    	String typesOfPlaces ="";
+    	String districts="";
+    	String offset="";
+    	String limit="";
     	
     	if (request.params._contains("district")) {
     		districts = request.params.get("district");
     	}
-    	else districts = "";
+    	
     	
     	if (request.params._contains("type")) {
     		typesOfPlaces = request.params.get("type");
     	}
+    
     	
     	if (request.params._contains("offset")) {
     		offset = request.params.get("offset");
@@ -41,7 +42,6 @@ public class Application extends Controller {
     	}
     	
     	
-    	//implémenter limit et offset
     	else typesOfPlaces = "";
     	
     	/* On vérifie la validité des paramètres */
@@ -65,8 +65,13 @@ public class Application extends Controller {
     	
     	String[] formattedTypes = typesOfPlaces.split(",");
     	
-    	CsvConnector connector = new CsvConnector();
-    	Place[] places = connector.getLocations(formattedDistricts,formattedTypes);
+    	//CsvConnector connector = new CsvConnector();
+    	Place[] places = new Place[2];
+    	
+    	Place one = new Place("ma maison", 5, "rue Raynouard",75016);
+    	Place two = new Place("ma garçonière", 10, "rue de Seine",75006);
+    	places[0] = one;
+    	places[1] = two;
     	
     	//connector.getLocations(formattedDistricts, formattedTypes);
     	

@@ -20,7 +20,7 @@ body
 	color:#444444; 
 }
 
-body a, body a:visited, body a:active
+body a, body a:active
 {
 	text-decoration:none;
 	color:#1AB7EA;

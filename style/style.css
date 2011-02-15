@@ -1,3 +1,4 @@
+@import url("general.css");
 @import url("header.css");
 @import url("main.css");
 @import url("filter.css");
@@ -5,37 +6,10 @@
 @import url("districts-dialog-box.css");
 @import url("category-dialog-box.css");
 
-/*-------CSS properties RESET ---------------*/
 
-body, header, footer, div, p, input, h1, h2, h3, h4, h5, h6, ul, li
-{
-	margin:0px;
-	padding:0px;
-}
 
-ul, li
-{
-	list-style:none;
-}
 
-/*------ MAIN PROPERTIES --------------------*/
 
-body
-{
-	font-size:13px;
-	font-family:Arial, sans-serif;
-	color:#444444; 
-}
 
-body a, body a:visited, body a:active
-{
-	text-decoration:none;
-	color:#1AB7EA;
-}
-
-body a:hover
-{
-	text-decoration:underline;
-}
 
 

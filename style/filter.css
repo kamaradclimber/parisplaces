@@ -123,3 +123,23 @@
 	width:100%;
 	color:black;
 }
+
+a.cancel
+{
+	display:block;
+	float:left;
+	padding:8px;
+	color:#999;
+}
+
+a.search
+{
+	display:block;
+	float:left;
+	padding:8px;
+	color:white;
+	background:#1AB7EA;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
