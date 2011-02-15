@@ -34,30 +34,6 @@ function checkSelect(){
 
 
 
-$(document).ready(function(){ 	// le document est chargé
-    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-        page="connecteur.php"; // on recuperer l' adresse du lien
-        data = checkSelect();
-        $.ajax({  // ajax
-            type: "GET",
-            dataType: "xml",
-            data: data,
-            url: page, // url de la page à charger
-            cache: false, // pas de mise en cache
-            success:function(html){ // si la requête est un succès
-                afficher(html);
-            },
-            error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
-                      alert("Argh Something is not good\n (don't kill the messenger !)");
-
-                  }
-        });
-        return true; // on laisse la case cochée
-    });
-
-    makeThemBouncable();
-
-});
 
 var bob = '<?xml version="1.0" encoding="utf-8" ?><places> <place id=”897ff56a2”> <name>Bibliothèque François Mitterrand</name> <address>1 boulevard Pasteur, Paris</address> <coords>874.93879098</coords> </place> <place id=”89ds56”> <name>Mes grands parents</name> <address>76 rue Notre Dame des Champs, Paris</address> <coords>874.93879098</coords> </place> <place id="8493843dd89"> <name>Un endroit sympa</name><address> Ile de la Cité, Paris</address>  </place>  </places>';
 
@@ -115,3 +91,28 @@ function findAssociatedMarker(address) {
     }
     if (result == null) { alert('not found'); }
 }
+
+$(document).ready(function(){ 	// le document est chargé
+    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
+        page="connecteur.php"; // on recuperer l' adresse du lien
+        data = checkSelect();
+        $.ajax({  // ajax
+            type: "GET",
+            dataType: "xml",
+            data: data,
+            url: page, // url de la page à charger
+            cache: false, // pas de mise en cache
+            success:function(html){ // si la requête est un succès
+                afficher(html);
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
+                      alert("Argh Something is not good\n (don't kill the messenger !)");
+
+                  }
+        });
+        return true; // on laisse la case cochée
+    });
+
+    makeThemBouncable();
+
+});
