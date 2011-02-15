@@ -4,7 +4,9 @@ header('Content-type: application/xhtml+xml');
 $test_mode = false;
 
 
-if ($test_mode) echo '<xml>';
+
+
+
 //Set the page to connect with.
 $bob ="places.xml" . "?";
 
@@ -18,18 +20,7 @@ foreach($_GET as $key=>$valeur) {
 
 // Website url to open
 $daurl = 'http://138.195.76.136/'. $bob;
-//$daurl = 'http://www.google.com';
 
-if ($test_mode) echo "<data>";
-if ($test_mode) echo "<district>";
-if ($test_mode) echo "<to>";
-
-if ($test_mode) echo $daurl;
-
-if ($test_mode) echo "</to>";
-if ($test_mode) echo "</district>";
-if ($test_mode) echo "</data>";
-//echo "retour du server distant :<br/> Pour le moment seulement les parametres d'appel mais bientot du xml<br/>";
 
 // Get that website's content
 $handle=null;
@@ -43,5 +34,4 @@ if ($handle) {
 	}
 	fclose($handle);
 } // */
-if ($test_mode) echo '</xml>';
 ?>

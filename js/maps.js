@@ -8,16 +8,16 @@ function initialize() {
     var myLatlng = new google.maps.LatLng(48.8574, 2.3478);
     var myOptions = 
     {
-zoom: 13,
-      center: myLatlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+        zoom: 13,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     //ajout de la map sur la carte
     map = new google.maps.Map(document.getElementById("map"), myOptions);	
-    updateAddresses();
+    addAddressesOnTheMap();
 }
 
-function updateAddresses() {
+function addAddressesOnTheMap() {
     // get the addresses displayed in the  <div id="results_zone"> 
     // and then add each point as a marker on the map
 
@@ -38,25 +38,25 @@ function updateAddresses() {
 function turnsItToMarker(address) {
     // create a marker linked to the postal address
     geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
+        if (status == google.maps.GeocoderStatus.OK) {
             var marker = new google.maps.Marker({ 
-position: results[0].geometry.location,
-});
+                position: results[0].geometry.location,
+            });
             marker.address = address;
 
             putOnTheMap(marker);
 
-            } else {
+        } else {
             alert("Geocode was not successful for the following reason: " + status);
-            }
-            });
+        }
+    });
 }
 
 function putOnTheMap(marker) {
     //makes the marker respond to mouse hovering 
     google.maps.event.addListener(marker, 'mouseover', function() {
-            highlight(marker);
-            });
+        highlight(marker);
+    });
     //add the marker in the set of marker currently displayed on the map
     places.push(marker);
 
@@ -66,7 +66,6 @@ function putOnTheMap(marker) {
 }
 
 function toggleBounce(marker) {
-    alert(marker.address);
     if (marker.getAnimation() != null) {
         marker.setAnimation(null);
     } else {
