@@ -2,7 +2,7 @@
 function checkSelect(){
     //parcourt les checboxes et teste si elle sont cochées ou non
     // on renvoit dans le format demandé par le serveur :  district=1,2,5,... (du type category=list)
-    form = document.all("criteres");
+    form = document.all("filter_zone");
     inputs = form.getElementsByTagName("input");
     arguments="";
 
@@ -10,7 +10,7 @@ function checkSelect(){
     $type_list	= "";
 
     for(i=0 ; i<inputs.length ; i++){
-        if(inputs[i].type=="checkbox"){
+        if(inputs[i].type=="checkbox") {
             if (inputs[i].checked) {
                 $firstLetters = inputs[i].name.substr(0,3); //on teste le type de la checkbox
                 switch ($firstLetters) {
@@ -18,7 +18,7 @@ function checkSelect(){
                         $districts_list += inputs[i].name.substring(3,inputs[i].name.length) +",";
                         break;
                     case "typ":
-                        $type_list += inputs[i].name.substring(3,inputs[i].name.length-1) +",";
+                        $type_list      += inputs[i].name.substring(3,inputs[i].name.length) +",";
                         break;
                 }
             } else {
@@ -28,7 +28,15 @@ function checkSelect(){
     }
     if ($districts_list.length>0) { $districts_list = $districts_list.slice(0,-1); }
     if ($type_list.length>0) { $type_list = $type_list.slice(0,-1); }
-    return "district=" + $districts_list +"&" + "type="+  $type_list;
+    
+    //construct the url
+    var url = "";
+    if ($districts_list.length>0) { url += "district="+ $districts_list + "&"; }
+    if ($type_list.length>0) { url += "type="+ $type_list + "&"; }
+
+    //remove the trailing &
+    if (url.length>0) { url = url.slice(0,-1); }
+    return url;
 }
 
 
@@ -102,8 +110,8 @@ $(document).ready(function(){ 	// le document est chargé
             data: data,
             url: page, // url de la page à charger
             cache: false, // pas de mise en cache
-            success:function(html){ // si la requête est un succès
-                afficher(html);
+            success:function(result){ // si la requête est un succès
+                afficher(result);
             },
             error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
                       alert("Argh Something is not good\n (don't kill the messenger !)");
