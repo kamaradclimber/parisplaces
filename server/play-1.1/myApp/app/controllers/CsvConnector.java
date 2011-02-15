@@ -13,6 +13,8 @@ import java.util.Hashtable;
 import java.util.TreeSet;
 import java.util.Vector;
 
+import models.Place;
+
 import org.h2.tools.Csv;
 
 
@@ -21,8 +23,11 @@ public class CsvConnector {
 	String file;
 	static Connection connection;
 	String configFile;
+	String districtColumnName;
 	
-	Hashtable<String, Vector<String> > consolidationTable;
+	private String typeColumnName;
+
+	private Categories hierarchy;
 	
 	static {
 		try {
@@ -36,27 +41,28 @@ public class CsvConnector {
 	}
 
     
-    public CsvConnector() throws SQLException
+    public CsvConnector(String aFile) throws SQLException
     {
-        file = "data/Liste_equipements_de_proximite_2011.csv";
-        configFile = "config/hierarchie.xml";
-        setHierarchie();
+        
+        file = aFile;
+        configFile = "config.xml";
+        configure();
     }
         
     @Override
     protected void finalize() throws Throwable {
-    	// TODO Auto-generated method stub
+    	// TODO souci: la connection sera fermée plusieurs fois ou pas du tout si il y a plusieurs instances.
     	connection.close();
     	super.finalize();
     }
     
-    public Array getLocations(int[] districts, String[]  typeOfLocation) throws SQLException
+    public Place[] getLocations(int[] districts, String[]  typeOfLocation) throws SQLException
     {
     	
     	Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
  
     	
-    	String request="EXPLAIN SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';') WHERE 'S_gest' IN (";
+    	String request="SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';') WHERE "+districtColumnName+" IN (";
     	
     	for (int district : districts)
     	{
@@ -69,15 +75,16 @@ public class CsvConnector {
     	if (districts.length!=0)//we have a ',' in the end
     		request = request.substring(0, request.length()-1);
 
-//    	request += ") AND COLUMN1 IN (";
-//    	for (String type : types)
-//    	{
-//    		request+="'"+type+"',";
-//    	}
-//
-//    	if (types.size()!=0)//we have a ',' in the end
-//    		request = request.substring(0, request.length()-1);
-//
+    	request += ") AND "+ typeColumnName +" IN (";
+    	//'S_gest' 'COLUMN1'
+    	for (String type : types)
+    	{
+    		request+="'"+type+"',";
+    	}
+
+    	if (types.size()!=0)//we have a ',' in the end
+    		request = request.substring(0, request.length()-1);
+
     	request += ")";
     	System.out.println(request);
     	PreparedStatement ps = connection.prepareStatement( request );
@@ -86,7 +93,16 @@ public class CsvConnector {
     	printResults(rs);
     	rs.close();
         
+    	ResultSetMetaData meta = rs.getMetaData();
         
+    	while (rs.next()) {
+            for (int i = 0; i < meta.getColumnCount(); i++) {
+            	meta.getColumnName(i);
+                System.out.println(
+                    meta.getColumnLabel(i + 1) + ": " +
+                    rs.getString(i + 1));
+            }
+    	}
     	
     	return null;
     }
@@ -98,7 +114,7 @@ public class CsvConnector {
     	for (String type : types)
     	{
     		if (result.contains(type)) 
-    			result.addAll(consolidationTable.get(type));
+    			result.addAll(hierarchy.findSubCategories(type));
     		else
     			result.add(type);
     	}
@@ -123,7 +139,8 @@ public class CsvConnector {
     }
     
     // cree l'objet consolidation à partir d'un fichier de config
-    public void setHierarchie()
+    public void configure()
+    //lie le fichier de config.
     {
     	
     }
