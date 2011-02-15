@@ -30,7 +30,6 @@ function addAddressesOnTheMap() {
         address = document.getElementsByName("address")[i].getAttribute("value");
         turnsItToMarker(address);
     }
-    //fitTheMap();
 }
 
 
@@ -59,7 +58,7 @@ function putOnTheMap(marker) {
     });
     //add the marker in the set of marker currently displayed on the map
     places.push(marker);
-
+    fitTheMap();
     //add the marker on the map
     marker.setMap(map);
 
@@ -90,12 +89,13 @@ function highlight(marker) {
 
 function fitTheMap() {
     var sw =  new google.maps.LatLng(48.8574, 2.3478);
-    var ne =  new google.maps.LatLng(48.8574, 2.3478);
+    var ne =  new google.maps.LatLng(48.8575, 2.3479);
     var bounds = new google.maps.LatLngBounds(sw,ne);
 
-    places.forEach( function(marker) { 
-        bounds.extend(marker.getPosition());
-    });
+    for(i=0;i<places.length;i++) { 
+        //alert(bounds);
+         bounds = bounds.extend(places[i].getPosition());
+    };
     map.fitBounds(bounds); 
 }
 
