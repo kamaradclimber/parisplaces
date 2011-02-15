@@ -3,15 +3,19 @@
 #districts-dialog-box 
 {
 	float:left;
-	width:100%;
+	width:436px;
 }
 
 #districts-dialog-box ul
 {
 	padding-left:4px;
-	margin-bottom:6px;
 	float:left;
 	width:110px;
+}
+
+#districts-dialog-box ul:last-child
+{
+	width:200px;
 }
 
 #districts-dialog-box li
@@ -29,3 +33,9 @@
 	float:left;
 }
 
+#districts-search-options
+{
+	float:left;
+	margin-top:6px;
+	margin-left:50px;
+}
