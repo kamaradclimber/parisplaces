@@ -17,9 +17,11 @@ public class Application extends Controller {
     	render();
     }
     
-    public static void getAppropriatePlaces(String arr, String placeCategories) {
+    public static void getAppropriatePlaces() {
     	String typesOfPlaces;
     	String districts;
+    	String offset;
+    	String limit;
     	
     	if (request.params._contains("district")) {
     		districts = request.params.get("district");
@@ -29,6 +31,17 @@ public class Application extends Controller {
     	if (request.params._contains("type")) {
     		typesOfPlaces = request.params.get("type");
     	}
+    	
+    	if (request.params._contains("offset")) {
+    		offset = request.params.get("offset");
+    	}
+    	
+    	if (request.params._contains("limit")) {
+    		limit = request.params.get("limit");
+    	}
+    	
+    	
+    	//implémenter limit et offset
     	else typesOfPlaces = "";
     	
     	/* On vérifie la validité des paramètres */
@@ -53,7 +66,7 @@ public class Application extends Controller {
     	String[] formattedTypes = typesOfPlaces.split(",");
     	
     	CsvConnector connector = new CsvConnector();
-    	connector
+    	Place[] places = connector.getLocations(formattedDistricts,formattedTypes);
     	
     	//connector.getLocations(formattedDistricts, formattedTypes);
     	
@@ -68,9 +81,11 @@ public class Application extends Controller {
     	}
     	*/
     	
-    	System.out.println(districtsList.size());
-    	renderArgs.put("districts",districtsList);
-    	renderArgs.put("places",typesList);
+    	
+    	
+    	renderArgs.put("places",places);
+    	renderArgs.put("limit", limit);
+    	renderArgs.put("offset",offset);
     	render();
     	
     }

@@ -2,8 +2,7 @@
 function checkSelect(){
     //parcourt les checboxes et teste si elle sont cochées ou non
     // on renvoit dans le format demandé par le serveur :  district=1,2,5,... (du type category=list)
-    form = document.all("filter_zone");
-    inputs = form.getElementsByTagName("input");
+    inputs = $("filter_zone input").toArray(); 
     arguments="";
 
     $districts_list	= "";
@@ -122,5 +121,4 @@ $(document).ready(function(){ 	// le document est chargé
     });
 
     makeThemBouncable();
-
 });
