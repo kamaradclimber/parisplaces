@@ -12,7 +12,7 @@ function initialize() {
         center: myLatlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
-    //ajout de la map sur la carte
+    //ajout des adresses sur la carte
     map = new google.maps.Map(document.getElementById("map"), myOptions);	
     addAddressesOnTheMap();
 }
@@ -31,6 +31,7 @@ function addAddressesOnTheMap() {
         address = document.getElementsByName("address")[i].getAttribute("value");
         turnsItToMarker(address);
     }
+    //fitTheMap();
 }
 
 
@@ -88,7 +89,20 @@ function highlight(marker) {
     }
 }
 
+function fitTheMap() {
+    var sw =  new google.maps.LatLng(48.8574, 2.3478);
+    var ne =  new google.maps.LatLng(48.8574, 2.3478);
+    var bounds = new google.maps.LatLngBounds(sw,ne);
 
+    places.forEach( function(marker) { 
+        bounds.extend(marker.getPosition());
+    });
+    map.fitBounds(bounds); 
+}
+
+
+
+//load the map when the page is loading
 google.maps.event.addDomListener(window, 'load', initialize);
 
 
