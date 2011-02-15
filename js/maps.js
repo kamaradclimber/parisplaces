@@ -26,7 +26,6 @@ function addAddressesOnTheMap() {
     places = new Array();
     var marker;
     var address;
-    var addresses = document.all("results_zone");
     for(i=0; i<document.getElementsByName("address").length; i++) {
         address = document.getElementsByName("address")[i].getAttribute("value");
         turnsItToMarker(address);
