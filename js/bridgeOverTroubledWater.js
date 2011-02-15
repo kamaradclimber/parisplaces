@@ -103,6 +103,7 @@ $(document).ready(function(){ 	// le document est chargé
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
         page="connecteur.php"; // on recuperer l' adresse du lien
         data = checkSelect();
+        data['destination'] = 'getPlaces';
         $.ajax({  // ajax
             type: "GET",
             dataType: "xml",
