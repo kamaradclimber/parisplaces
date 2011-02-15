@@ -7,10 +7,17 @@ import models.Place;
 
 public abstract class DataSource {
 
-	String file;
+	//configFile = "config.xml";
+    
 	Categories hierarchy;
+	
+	public DataSource()
+	{
+		
+	}
 	
 	abstract public Place[] getLocations(int[] districts, String[]  typeOfLocation) throws SQLException;
 	
-	
+	abstract public void configure();
+	//initialise hierarchy
 }
