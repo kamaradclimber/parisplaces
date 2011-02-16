@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>6ème : Luxembourg</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/areta/271640802/"><img width="180" height="240" src="http://farm1.static.flickr.com/106/271640802_ad83a726d8_m.jpg"></a><br>
+Saint-Germain-Des-Prés <br>
+<i>Photo : Areta</i>]]></description>
+	<styleUrl>#style18</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.316469,48.846851,0 2.31904,48.847851,0 2.32412,48.850311,0 2.32704,48.851608,0 2.32866,48.851952,0 2.331599,48.85633900000001,0 2.33386,48.85918000000001,0 2.337499,48.85849,0 2.340592,48.85675,0 2.342512,48.855247,0 2.344465,48.853992,0 2.34425,48.853767,0 2.342639,48.850349,0 2.33652,48.83963,0 2.31999,48.8451,0 2.316469,48.846851,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

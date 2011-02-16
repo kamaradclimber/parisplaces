@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>18ème : Butte-Montmartre</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/burge5000/104914508/"><img width="240" height="180" src="http://farm1.static.flickr.com/37/104914508_0045d191b7_m.jpg"></a><br>
+Basilique du Sacré Cœur<br>
+<i>Photo : burge5000</i>]]></description>
+	<styleUrl>#style19</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.370379,48.900719,0 2.370379,48.896709,0 2.37184,48.89535899999999,0 2.370289,48.894459,0 2.367081,48.887592,0 2.36663,48.88660399999999,0 2.36472,48.884411,0 2.358789,48.884411,0 2.34952,48.883678,0 2.339739,48.88187,0 2.337254,48.88228600000001,0 2.32953,48.88443,0 2.32792,48.883526,0 2.327192,48.88341500000001,0 2.325603,48.887619,0 2.33021,48.900829,0 2.353209,48.901279,0 2.370379,48.900719,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

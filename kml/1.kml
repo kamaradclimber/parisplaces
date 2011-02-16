@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>1er : Louvre</name>
+	<description><![CDATA[<A href="http://flickr.com/photos/absolutwade/191883836/"><IMG width="240" height="180" src="http://farm1.static.flickr.com/63/191883836_3f15c4fb6c_m.jpg"></A> <BR>Le 1<SUP>er</SUP> arrondissement <BR> <I>Photo : absolutwade</I><BR>]]></description>
+	<styleUrl>#style17</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.320769,48.863037,0 2.325229,48.868938,0 2.325149,48.869419,0 2.328018,48.869949,0 2.330302,48.86828599999999,0 2.350944,48.863407,0 2.347351,48.857124,0 2.34691,48.856972,0 2.345966,48.855373,0 2.344529,48.854012,0 2.3424,48.855247,0 2.340469,48.8568,0 2.33725,48.858467,0 2.331459,48.85968,0 2.320769,48.863037,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

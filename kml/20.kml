@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>20ème : Ménilmontant</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/damouns/28517043/"><img width="180" height="240" src="http://farm1.static.flickr.com/23/28517043_6321c5f918_m.jpg"></a><br>
+La rue de Ménilmontant dans le 20<sup>e</sup> arrondissement<br><i>Photo : Damouns</i>]]></description>
+	<styleUrl>#style14</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.4133,48.865269,0 2.414149,48.859058,0 2.41398,48.85380900000001,0 2.41527,48.85104,0 2.41441,48.84680899999999,0 2.399049,48.84811,0 2.399309,48.848789,0 2.398359,48.851269,0 2.39441,48.856522,0 2.389654,48.858475,0 2.387379,48.862961,0 2.383509,48.86618,0 2.383195,48.867142,0 2.376822,48.872238,0 2.38497,48.87396999999999,0 2.386519,48.874699,0 2.38789,48.874531,0 2.390379,48.875549,0 2.395297,48.87521699999999,0 2.402219,48.87595,0 2.40858,48.87785699999999,0 2.410979,48.87431,0 2.41338,48.87109,0 2.4133,48.865269,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

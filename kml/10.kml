@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>10ème : Enclos-St-Laurent</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/celesteh/396428858/"><img width="240" height="180" src="http://farm1.static.flickr.com/172/396428858_044efcd130_m.jpg"></a><br>
+La gare du Nord dans le 10<sup>e</sup> arrondissement<br>
+<i>Photo : celesteh</i>]]></description>
+	<styleUrl>#style3</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.368755,48.884079,0 2.369142,48.883289,0 2.370213,48.882637,0 2.370257,48.878632,0 2.370814,48.87812400000001,0 2.370601,48.87756,0 2.376952,48.872108,0 2.372917,48.870644,0 2.364205,48.86779,0 2.363477,48.867226,0 2.362404,48.867905,0 2.354293,48.869286,0 2.347941,48.870728,0 2.347812,48.873943,0 2.348155,48.875751,0 2.348971,48.877277,0 2.349272,48.879223,0 2.349873,48.880692,0 2.349486,48.88379700000001,0 2.359227,48.884472,0 2.364806,48.884361,0 2.368755,48.884079,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

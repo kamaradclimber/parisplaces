@@ -15,6 +15,18 @@ function initialize() {
     //ajout des adresses sur la carte
     map = new google.maps.Map(document.getElementById("map"), myOptions);	
     addAddressesOnTheMap();
+	
+					
+	arGeo = new Array();
+	for (i=1; i<=6; i++) {
+		geoXml = new geoXML3.parser({
+			map: map,
+			singleInfoWindow: true,
+			zoom: false
+			});
+		geoXml.parse('kml/'+i+'.kml');
+		arGeo.push(geoXml);
+		}
 }
 
 function addAddressesOnTheMap() {
@@ -100,6 +112,20 @@ function fitTheMap() {
     map.panToBounds(bounds); 
 }
 
+
+function hilightZones()
+{
+	for(i=1; i<=6; i ++)
+	{
+		//window.setTimeout(hilightZones,50);
+
+		arGeo[i-1].hideDocument();
+		if(document.getElementById('arr'+i).checked) 
+		{
+			arGeo[i-1].showDocument(); 
+		}
+	}
+}
 
 
 //load the map when the page is loading

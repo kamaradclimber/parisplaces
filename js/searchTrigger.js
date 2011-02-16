@@ -1,45 +1,38 @@
 //Cette fonction est appelée quand l'utilisateur clique sur "Rechercher" dans la boite de dialogue
 function dialogBoxFiltersManager(){
 	var checkedFilters = []; 
+	var nonCheckedFilters = [];
 	$("#districts-dialog-box li").each(function(){
-		//Obtenir la balise input à afficher coché sur la balise principale
-		var input = $(this).children()[0];
+		var li = $(this);
+		var input = li.children()[0];
 		if(input.checked){
-			var li = $(this);
 			//On coche l'élément du DOM 'input'
-			li.children()[0].setAttribute('checked',true);
+			input.setAttribute('checked',true);
 			checkedFilters.push(li);
+		}
+		else{
+			nonCheckedFilters.push(li);
 		}	
 	});	
 	
+	var totalFilters = checkedFilters.concat(nonCheckedFilters);
+	
 	//Changer la page principale lorsque l'évènement se termine
-	changeHomePageFilters(checkedFilters);
+	changeHomePageFilters(totalFilters);
     alert(checkSelect());
 	$(document).trigger('close.facebox');
 }
 
-function changeHomePageFilters(checkedFilters){
-	var remainingFiltersHTML = "";
-	var existing2 = [];
-	$("#districts form li").each(function(){
-		existing2.push("<li>"+ $(this).html()+ "</li>");
-	})
-		
+function changeHomePageFilters(totalFilters){
+	var filterListHTML ='';
 	for(i=0;i<6;i++) {
-		if(i<checkedFilters.length){
-			remainingFiltersHTML += '<li>'+checkedFilters[i].html()+'</li>'; 
-		}
-		else{
-			remainingFiltersHTML += existing2[i-checkedFilters.length];
-		}
+		filterListHTML += '<li>'+totalFilters[i].html()+'</li>'; 
+	}
+	for(i=7, c = totalFilters.length;i<c; i++){
+		filterListHTML += '<li style="display:none;">'+totalFilters[i].html()+'</li>'; 
 	}
 	
-	$("#districts form").html(remainingFiltersHTML);
-
-	/*$("#results_zone input").each(function() {
-		$(this).attr('checked', 'checked');
-	});
-	*/	
+	$("#districts form").html(filterListHTML);
 }
 
 
