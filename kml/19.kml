@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>19ème : Buttes-Chaumont</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/omaromar/11735609/"><img width="240" height="180" src="http://farm1.static.flickr.com/8/11735609_3ee4cb8135_m.jpg"></a><br>
+Le bassin de la Villette<br>
+<i>Photo : Omar Omar</i>]]></description>
+	<styleUrl>#style4</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.408749,48.87785699999999,0 2.402309,48.875999,0 2.395255,48.875259,0 2.39021,48.875549,0 2.387719,48.874531,0 2.386519,48.874649,0 2.38472,48.873859,0 2.376819,48.872219,0 2.370379,48.87809,0 2.37021,48.882771,0 2.36892,48.883339,0 2.368669,48.88413200000001,0 2.364742,48.884403,0 2.366781,48.886688,0 2.368348,48.890202,0 2.370289,48.89450800000001,0 2.37175,48.89547,0 2.370279,48.896648,0 2.370379,48.90078,0 2.3769,48.90026900000001,0 2.38849,48.90066099999999,0 2.392009,48.899818,0 2.39381,48.898239,0 2.39725,48.88588,0 2.401879,48.88176,0 2.4066,48.880119,0 2.408749,48.87785699999999,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>14ème : Observatoire</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/robertpaulyoung/297156437/"><img width="240" height="180" src="http://farm1.static.flickr.com/108/297156437_a7391ebaef_m.jpg"></a><br>
+La Tour Maine-Montparnasse<br>
+<i>Photo : Robert Paul Young</i>]]></description>
+	<styleUrl>#style2</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.301464,48.825428,0 2.321032,48.841503,0 2.321547,48.84099599999999,0 2.324594,48.843651,0 2.336396,48.839695,0 2.342105,48.838284,0 2.341117,48.831982,0 2.341504,48.82879299999999,0 2.341632,48.8256,0 2.341504,48.823254,0 2.34249,48.821304,0 2.344036,48.82011799999999,0 2.344551,48.81935500000001,0 2.344164,48.81757399999999,0 2.344078,48.816502,0 2.33571,48.81681100000001,0 2.332878,48.81847799999999,0 2.301464,48.825428,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

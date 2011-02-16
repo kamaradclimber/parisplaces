@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>11ème : Popincourt</name>
+	<description><![CDATA[<a href="http://en.wikipedia.org/wiki/XIe_arrondissement"><img width="280" height="210" src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Le_cirque_d%27hiver_Paris_01.jpg/280px-Le_cirque_d%27hiver_Paris_01.jpg"></a><br>
+Le Cirque d'hiver de Paris<br>
+<i>Photo : Pol</i>]]></description>
+	<styleUrl>#style13</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.383175,48.867115,0 2.383776,48.86607,0 2.387465,48.862823,0 2.389654,48.858444,0 2.39223,48.857571,0 2.394321,48.856548,0 2.398398,48.85133,0 2.399214,48.848709,0 2.399064,48.848103,0 2.395899,48.848351,0 2.384291,48.85017,0 2.379999,48.850483,0 2.371544,48.852459,0 2.370257,48.853222,0 2.369184,48.853081,0 2.366737,48.86319,0 2.36472,48.866409,0 2.363477,48.86725600000001,0 2.364205,48.86779,0 2.376866,48.872108,0 2.383175,48.867115,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

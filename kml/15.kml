@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>15ème : Vaugirard</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/ivalladt/151174636/"><img width="240" height="180" src="http://farm1.static.flickr.com/46/151174636_76bdfca9a1_m.jpg"></a><br>
+Rue de Vaugirard<br>
+<i>Photo : ivalladt</i>]]></description>
+	<styleUrl>#style7</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.292365,48.827492,0 2.277001,48.83376300000001,0 2.274255,48.830429,0 2.275027,48.829807,0 2.272797,48.82896,0 2.270564,48.828114,0 2.267818,48.828171,0 2.267303,48.831108,0 2.27065,48.833591,0 2.269191,48.835342,0 2.266188,48.834724,0 2.264127,48.83517499999999,0 2.278204,48.849014,0 2.287644,48.855679,0 2.289963,48.858276,0 2.309274,48.845852,0 2.311335,48.84528699999999,0 2.316483,48.846813,0 2.320003,48.845173,0 2.324552,48.843594,0 2.321633,48.841049,0 2.320948,48.841618,0 2.301464,48.825512,0 2.292365,48.827492,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

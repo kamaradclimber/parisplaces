@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>7ème : Palais-Bourbon</name>
+	<description><![CDATA[<a href="http://en.wikipedia.org/wiki/Tour_Montparnasse"><img width="280" height="190" src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Paris.wiki.800pix.eiffelview.jpg/280px-Paris.wiki.800pix.eiffelview.jpg"></a>
+<br>Le 7<sup>e</sup> arrondissement vu de la Tour Montparnasse<br> <i>Photo : Adrian Pingstone</i>]]></description>
+	<styleUrl>#style1</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.309531,48.84581,0 2.307342,48.847153,0 2.289877,48.858192,0 2.294769,48.861862,0 2.300219,48.863499,0 2.31833,48.863838,0 2.331462,48.859676,0 2.333844,48.85918000000001,0 2.33159,48.856258,0 2.33041,48.854424,0 2.329295,48.852673,0 2.328479,48.85182600000001,0 2.327106,48.851601,0 2.319274,48.847801,0 2.313651,48.845909,0 2.311355,48.845215,0 2.309531,48.84581,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

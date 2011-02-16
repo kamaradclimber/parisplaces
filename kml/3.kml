@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>3ème : Temple</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/nouknouk/318001380/"><img src="http://farm1.static.flickr.com/140/318001380_8998b34252_m.jpg" width="240" height="159"></a><br>
+Place des Vosges
+<br><i>Photo : nouknouk</i>]]></description>
+	<styleUrl>#style5</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.36236,48.867905,0 2.364764,48.866436,0 2.366694,48.86319,0 2.368454,48.85581999999999,0 2.364335,48.856441,0 2.361631,48.85726200000001,0 2.358626,48.858757,0 2.356825,48.860111,0 2.353391,48.861214,0 2.350172,48.86203399999999,0 2.354249,48.869286,0 2.36236,48.867905,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>
