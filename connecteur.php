@@ -9,7 +9,7 @@ $test_mode = false;
 
 //Set the page to connect with.
 $bob ="places.xml" . "?";  //default value
-if ($GET['destination']) {
+if (array_key_exists('destination', $_GET)) {
     //we could avoid these switch and put directly the value associated to destination as the beginning of the url but it would be a flaw
     if ($_GET['destination'] == 'getPlaces') {
         $bob = "places.xml?";
