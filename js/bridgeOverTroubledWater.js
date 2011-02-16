@@ -2,32 +2,27 @@
 function checkSelect(){
     //parcourt les checboxes et teste si elle sont cochées ou non
     // on renvoit dans le format demandé par le serveur :  district=1,2,5,... (du type category=list)
-    inputs = $("filter_zone input").toArray(); 
-    arguments="";
-
     $districts_list	= "";
     $type_list	= "";
-
-    for(i=0 ; i<inputs.length ; i++){
-        if(inputs[i].type=="checkbox") {
-            if (inputs[i].checked) {
-                $firstLetters = inputs[i].name.substr(0,3); //on teste le type de la checkbox
+	$("#filter_zone li").each(function(){
+		var input = $(this).children()[0];
+		if(input.checked){
+                $firstLetters = input.name.substr(0,3); //on teste le type de la checkbox
                 switch ($firstLetters) {
                     case "arr" :
-                        $districts_list += inputs[i].name.substring(3,inputs[i].name.length) +",";
+                        $districts_list += input.name.substring(3,input.name.length) +",";
                         break;
                     case "typ":
-                        $type_list      += inputs[i].name.substring(3,inputs[i].name.length) +",";
+                        $type_list      += input.name.substring(3,input.name.length) +",";
                         break;
                 }
-            } else {
-                //do nothing since the checkbox isnt checked	
-            }
-        }
-    }
+		}	
+	});	
+    arguments="";
+
+
     if ($districts_list.length>0) { $districts_list = $districts_list.slice(0,-1); }
     if ($type_list.length>0) { $type_list = $type_list.slice(0,-1); }
-    
     //construct the url
     var url = "";
     if ($districts_list.length>0) { url += "district="+ $districts_list + "&"; }
@@ -35,6 +30,7 @@ function checkSelect(){
 
     //remove the trailing &
     if (url.length>0) { url = url.slice(0,-1); }
+    alert(url);
     return url;
 }
 
@@ -66,7 +62,7 @@ function afficher(donnees){ // pour remplacer le contenu du div contenu
     var class;
 
     // parcours du xml
-    $(bob).find('place').each(  function() {
+    $(donnees).find('place').each(  function() {
         even = (even +1) % 2;
         class = "result ";                                              //permet de rendre les résultats bouncable 
         if (even == 0 ) { class += "even"; } else { class += "odd"; }   //permet de rendre l'affichage plus élégant
