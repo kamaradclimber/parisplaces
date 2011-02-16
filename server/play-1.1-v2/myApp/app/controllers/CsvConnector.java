@@ -18,16 +18,16 @@ import models.Place;
 import org.h2.tools.Csv;
 
 
-public class CsvConnector {
+public abstract class CsvConnector extends DataSource{
 
 	String file;
 	static Connection connection;
-	String configFile;
-	String districtColumnName;
 	
-	private String typeColumnName;
+	protected String districtColumnName;
+	
+	protected String typeColumnName;
 
-	private Categories hierarchy;
+	protected Categories hierarchy;
 	
 	static {
 		try {
@@ -45,7 +45,8 @@ public class CsvConnector {
     {
         
         file = aFile;
-        configFile = "config.xml";
+        typeColumnName = "type";
+        districtColumnName = "arrondissement";
         configure();
     }
         
@@ -59,15 +60,14 @@ public class CsvConnector {
     public Place[] getLocations(int[] districts, String[]  typeOfLocation) throws SQLException
     {
     	
-    	Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
- 
+    	//Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
+    	Collection<String> types = hierarchy.findSubCategories(Arrays.asList(typeOfLocation));
     	
     	String request="SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';') WHERE "+districtColumnName+" IN (";
     	
     	for (int district : districts)
     	{
-    		request+="'MAIRIE DU  "  +district+"E";
-    		
+    		request += districtName(district);
     		if (district ==1) request +="R";
     		request+= "',";
     	}
@@ -107,18 +107,17 @@ public class CsvConnector {
     	return null;
     }
     
-    public Collection<String> consolidate(Collection<String> types) 
+    public abstract String districtName(int district);
+    
+    
+	public Collection<String> consolidate(Collection<String> types) 
     {
+		
     	TreeSet<String> result = new TreeSet<String>();
     	
-    	for (String type : types)
-    	{
-    		if (result.contains(type)) 
-    			result.addAll(hierarchy.findSubCategories(type));
-    		else
-    			result.add(type);
-    	}
-		return result;
+    	result.addAll(hierarchy.findSubCategories(types));
+    	
+    	return result;
     }
     
     public void printResults(ResultSet rs) throws SQLException

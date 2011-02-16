@@ -99,11 +99,8 @@ function findAssociatedMarker(address) {
     if (result == null) { alert('not found'); }
 }
 
-$(document).ready(function(){ 	// le document est chargé
-    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-        page="connecteur.php"; // on recuperer l' adresse du lien
-        data = checkSelect();
-        $.ajax({  // ajax
+function getPlaces(data){
+	$.ajax({  // ajax
             type: "GET",
             dataType: "xml",
             data: data,
@@ -117,8 +114,16 @@ $(document).ready(function(){ 	// le document est chargé
 
                   }
         });
+}
+
+$(document).ready(function(){ 	// le document est chargé
+    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
+        page="connecteur.php"; // on recuperer l' adresse du lien
+        data = checkSelect();
+        getPlaces(data);
         return true; // on laisse la case cochée
     });
 
     makeThemBouncable();
+
 });

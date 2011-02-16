@@ -186,6 +186,7 @@
       preload.slice(-1).src = $(this).css('background-image').replace(/url\((.+)\)/, '$1')
     })
 
+
     $('#facebox .close').click($.facebox.close)
     $('#facebox .close_image').attr('src', $.facebox.settings.closeImage)
   }
@@ -305,5 +306,13 @@
     })
     hideOverlay()
   })
+  
+  $(document).bind('reveal.facebox',function(){
+  	$("a.search")
+		.click(function(){
+			dialogBoxFiltersManager();
+		});		
+  })
+
 
 })(jQuery);
