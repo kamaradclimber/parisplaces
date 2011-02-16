@@ -78,18 +78,18 @@ public class Application extends Controller {
     	//connector.getLocations(formattedDistricts, formattedTypes);
 
     	//CsvConnector connector = new CsvConnector();
-    	Place[] places;// 
+    	ArrayList<Place> places;// 
    
     	Place one = new Place("ma maison", 5, "rue Raynouard",75016);
     	Place two = new Place("ma garçonière", 10, "rue de Seine",75006);
     	try {
     		DataSource connector = new Liste_equipements_de_proximite_2011();
-    		places = (Place[]) connector.getLocations(formattedDistricts, formattedTypes).toArray();
+    		places = connector.getLocations(formattedDistricts, formattedTypes);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			places = new Place[2];
-			places[0] = one;
-	    	places[1] = two;
+			places = new ArrayList<Place>();
+			places.add(one);
+	    	places.add(two);
 	    	
 			e.printStackTrace();
 		}
