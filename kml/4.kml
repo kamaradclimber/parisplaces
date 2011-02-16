@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>4ème : Hôtel-de-Ville</name>
+	<description><![CDATA[<A href="http://flickr.com/photos/sheta/14926917/"><IMG src="http://farm1.static.flickr.com/12/14926917_916d085620_m.jpg" width="240" height="180"></A><BR>
+Île de la Cité<BR>
+ <I>Photo : Sheta</I>]]></description>
+	<styleUrl>#style15</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.36465,48.845989,0 2.366299,48.84695800000001,0 2.3692,48.85281,0 2.36836,48.85586899999999,0 2.364329,48.856407,0 2.36167,48.857258,0 2.358579,48.85874900000001,0 2.35678,48.860161,0 2.353299,48.86124,0 2.350169,48.86203,0 2.347329,48.857147,0 2.346986,48.856964,0 2.345966,48.855396,0 2.344551,48.854027,0 2.34695,48.853298,0 2.35013,48.851978,0 2.35467,48.850849,0 2.360899,48.84864,0 2.36465,48.845989,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

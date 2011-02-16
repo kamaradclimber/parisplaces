@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>16ème : Passy</name>
+	<description><![CDATA[<a href="http://en.wikipedia.org/wiki/XVIe_arrondissement"><img width="250" height="188" src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Parc_des_Princes.jpg/250px-Parc_des_Princes.jpg"></a><br>
+Le Parc des Princes<br>
+<i>Photo : El Mostrito</i>]]></description>
+	<styleUrl>#style8</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.28007,48.878292,0 2.294939,48.873859,0 2.297387,48.87119300000001,0 2.299039,48.868427,0 2.29991,48.865269,0 2.301571,48.864574,0 2.3018,48.863361,0 2.29408,48.86165999999999,0 2.28893,48.85759,0 2.28601,48.854321,0 2.277429,48.84798800000001,0 2.26404,48.835121,0 2.257859,48.83567799999999,0 2.253909,48.839298,0 2.25477,48.845398,0 2.2503,48.845509,0 2.241719,48.848328,0 2.2273,48.84856,0 2.225929,48.85545,0 2.23159,48.86651999999999,0 2.23932,48.87046800000001,0 2.2467,48.876339,0 2.25511,48.874199,0 2.258199,48.88052,0 2.28007,48.878292,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>5ème : Panthéon</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/antizim/178599118/"><img width="203" height="240" src="http://farm1.static.flickr.com/58/178599118_93d9fd5449_m.jpg"></a>
+<br>Le Panthéon
+dans le 5<sup>e</sup> arrondissement<br> <i>Photo : The Anti-ZIM</i>]]></description>
+	<styleUrl>#style11</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.351799,48.83675,0 2.361839,48.84,0 2.36493,48.844379,0 2.366,48.844997,0 2.36098,48.84861,0 2.3548,48.850788,0 2.350169,48.851997,0 2.346859,48.853298,0 2.3445,48.854038,0 2.344199,48.85376000000001,0 2.342576,48.850258,0 2.336462,48.839622,0 2.345489,48.83760100000001,0 2.351799,48.83675,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

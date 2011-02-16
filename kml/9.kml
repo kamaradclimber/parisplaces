@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>9ème : Opéra</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/denislander/8902214/"><img width="180" height="240" src="http://farm1.static.flickr.com/4/8902214_5cf241296a_m.jpg"></a><br>
+Le boulevard Haussmann<br>
+<i>Photo : denisparis</i>]]></description>
+	<styleUrl>#style9</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.339599,48.88201100000001,0 2.34952,48.883781,0 2.34987,48.880692,0 2.349209,48.87888,0 2.349,48.87721999999999,0 2.348139,48.87566,0 2.34785,48.87387099999999,0 2.34789,48.870689,0 2.34004,48.87196,0 2.32579,48.86957200000001,0 2.326519,48.872471,0 2.326309,48.872589,0 2.32688,48.873341,0 2.326979,48.873779,0 2.32663,48.875439,0 2.32682,48.87595,0 2.32717,48.883419,0 2.327929,48.88362100000001,0 2.32948,48.88465100000001,0 2.337406,48.882271,0 2.339599,48.88201100000001,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>
