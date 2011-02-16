@@ -1,3 +1,10 @@
+function displayMessage(string) {
+    $("#message").empty(); // on vide le div
+    $("#message").html(string);
+    
+}
+
+
 
 function checkSelect(){
     //parcourt les checboxes et teste si elle sont cochées ou non
@@ -106,7 +113,7 @@ function getPlaces(data){
                 afficher(result);
             },
             error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
-                      alert("Argh Something is not good\n (don't kill the messenger !)");
+                      displayMessage("Argh Something is not good\n (don't kill the messenger !)");
 
                   }
         });
