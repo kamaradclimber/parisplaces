@@ -8,11 +8,21 @@ $test_mode = false;
 
 
 //Set the page to connect with.
-$bob ="places.xml" . "?";
+$bob ="places.xml" . "?";  //default value
+if ($GET['destination']) {
+    //we could avoid these switch and put directly the value associated to destination as the beginning of the url but it would be a flaw
+    if ($_GET['destination'] == 'getPlaces') {
+        $bob = "places.xml?";
+    } else if  ($_GET['destination'] == 'getPlaceCategories') {
+        $bob = "getplacecategories.xml?";
+    } else {
+        $bob = "places.xml?";
+    }
+}
 
 // get the arguments to pass to these page
 foreach($_GET as $key=>$valeur) { 
-    if ($key != '_')
+    if ($key != '_' and $key != 'destination')
     	$bob = $bob . $key . '='.$valeur . '&amp;' ; 
 }
 // this does not work, but i dont understand why
