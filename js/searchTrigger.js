@@ -1,14 +1,19 @@
+//Cette fonction est appelée quand l'utilisateur clique sur "Rechercher" dans la boite de dialogue
 function dialogBoxFiltersManager(){
 	var checkedFilters = []; 
 	$("#districts-dialog-box li").each(function(){
+		//Obtenir la balise input à afficher ccoché sur la balise principale
 		var input = $(this).children()[0];
 		if(input.checked){
-			checkedFilters.push($(this));
+			var li = $(this);
+			//On coche l'élément du DOM 'input'
+			li.children()[0].setAttribute('checked',true);
+			checkedFilters.push(li);
 		}	
 	});	
 	
+	//Changer la page principale lorsque l'évènement se termine
 	changeHomePageFilters(checkedFilters);
-	//$("#results_zone").html("blabla");
 	$(document).trigger('close.facebox');
 }
 
@@ -32,6 +37,7 @@ function changeHomePageFilters(checkedFilters){
 	/*$("#results_zone input").each(function() {
 		$(this).attr('checked', 'checked');
 	});
-	*/
-	
+	*/	
 }
+
+
