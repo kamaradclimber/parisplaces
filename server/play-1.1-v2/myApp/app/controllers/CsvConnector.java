@@ -18,7 +18,7 @@ import models.Place;
 import org.h2.tools.Csv;
 
 
-public class CsvConnector {
+public class CsvConnector extends DataSource {
 
 	String file;
 	static Connection connection;

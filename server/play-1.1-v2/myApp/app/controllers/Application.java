@@ -65,14 +65,14 @@ public class Application extends Controller {
     	
     	String[] formattedTypes = typesOfPlaces.split(",");
     	
-    	//CsvConnector connector = new CsvConnector();
     	Place[] places = new Place[2];
     	
+    	/*
     	Place one = new Place("ma maison", 5, "rue Raynouard",75016);
     	Place two = new Place("ma garçonière", 10, "rue de Seine",75006);
     	places[0] = one;
     	places[1] = two;
-    	
+    	*/
     	//connector.getLocations(formattedDistricts, formattedTypes);
     	
     	/*
@@ -87,6 +87,10 @@ public class Application extends Controller {
     	*/
     	
     	
+    	
+    	//TODO : appeler toutes les DataSouce static instanciés à l'allumage du serveur et merger tous les résultats
+    	
+    	//TODO : gérer le offset
     	
     	renderArgs.put("places",places);
     	renderArgs.put("limit", limit);
