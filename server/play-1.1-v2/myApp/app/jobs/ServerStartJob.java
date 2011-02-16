@@ -12,6 +12,7 @@ public class ServerStartJob extends Job {
 	
     public void doJob() {
     	ListDataSource listSources = new ListDataSource();
+    	System.out.println("job executé");
     }
 
 }
