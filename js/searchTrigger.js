@@ -2,7 +2,7 @@
 function dialogBoxFiltersManager(){
 	var checkedFilters = []; 
 	$("#districts-dialog-box li").each(function(){
-		//Obtenir la balise input à afficher ccoché sur la balise principale
+		//Obtenir la balise input à afficher coché sur la balise principale
 		var input = $(this).children()[0];
 		if(input.checked){
 			var li = $(this);
