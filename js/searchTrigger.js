@@ -19,6 +19,7 @@ function dialogBoxFiltersManager(){
 	
 	//Changer la page principale lorsque l'évènement se termine
 	changeHomePageFilters(totalFilters);
+    alert(checkSelect());
 	$(document).trigger('close.facebox');
 }
 
@@ -32,7 +33,6 @@ function changeHomePageFilters(totalFilters){
 	}
 	
 	$("#districts form").html(filterListHTML);
-	
 }
 
 

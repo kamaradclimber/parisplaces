@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>13ème : Gobelins</name>
+	<description><![CDATA[<a href="http://en.wikipedia.org/wiki/XIIIe_arrondissement"><img width="280" height="181" src="http://upload.wikimedia.org/wikipedia/commons/a/a9/Bibliotheque_nationale_de_France_%28MAE%29.jpg"></a><br>
+La Bibliothèque Nationale de France<br>
+<i>Photo : Ministère des Affaires Étrangères</i>]]></description>
+	<styleUrl>#style12</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.342039,48.838322,0 2.34111,48.83194699999999,0 2.34131,48.831429,0 2.34165,48.826408,0 2.34146,48.823658,0 2.34242,48.821461,0 2.343939,48.82027800000001,0 2.34459,48.819382,0 2.3441,48.817631,0 2.34405,48.816441,0 2.346839,48.81641,0 2.351669,48.817989,0 2.3544,48.817501,0 2.356799,48.816441,0 2.363339,48.816132,0 2.37881,48.82148,0 2.385269,48.825298,0 2.38856,48.82648100000001,0 2.365959,48.844997,0 2.36493,48.844379,0 2.36193,48.840031,0 2.35189,48.836731,0 2.348927,48.837067,0 2.345431,48.837605,0 2.342039,48.838322,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

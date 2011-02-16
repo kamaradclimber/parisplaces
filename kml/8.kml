@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>8ème : Élysée</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/62904109@N00/312463080/"><img width="240" height="144" src="http://farm1.static.flickr.com/100/312463080_af21b52771_m.jpg"></a><br>
+L'Arc de Triomphe<br>
+<i>Photo : Palindrome6996</i>]]></description>
+	<styleUrl>#style16</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.30155,48.864601,0 2.299869,48.865131,0 2.298799,48.86868999999999,0 2.297299,48.87115099999999,0 2.295539,48.87326,0 2.29457,48.873192,0 2.294029,48.873669,0 2.294399,48.87429,0 2.295409,48.874317,0 2.297769,48.87774999999999,0 2.297639,48.878029,0 2.298049,48.87846,0 2.298799,48.87824999999999,0 2.309009,48.880459,0 2.316609,48.88134,0 2.32721,48.88345,0 2.326849,48.875908,0 2.326611,48.875404,0 2.326976,48.873825,0 2.326869,48.873329,0 2.32629,48.872597,0 2.326505,48.872471,0 2.325819,48.86953400000001,0 2.325152,48.869392,0 2.32526,48.869019,0 2.320769,48.863098,0 2.31828,48.86381099999999,0 2.30167,48.863522,0 2.30155,48.864601,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

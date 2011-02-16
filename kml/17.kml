@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>17ème : Batignolles-Monceau</name>
+	<description><![CDATA[<a href="http://flickr.com/photos/daquellamanera/194371541/"><img width="240" height="180" src="http://farm1.static.flickr.com/63/194371541_754ad04093_m.jpg"></a><br>
+Palais des Congrès<br>
+<i>Photo : Daquella manera</i>]]></description>
+	<styleUrl>#style10</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.279999,48.878368,0 2.283259,48.882771,0 2.29185,48.88842,0 2.29768,48.88966,0 2.30575,48.895081,0 2.321889,48.900612,0 2.330131,48.90081000000001,0 2.325625,48.887592,0 2.32721,48.88345,0 2.31691,48.88131,0 2.30867,48.880402,0 2.298074,48.878151,0 2.295027,48.873917,0 2.279999,48.878368,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>

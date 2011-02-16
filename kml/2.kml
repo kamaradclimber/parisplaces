@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark>
+	<name>2ème : Bourse</name>
+	<description><![CDATA[<A href="http://en.wikipedia.org/wiki/Op%C3%A9ra-Comique"><IMG src="http://upload.wikimedia.org/wikipedia/en/thumb/2/2a/SalleFavart_1840.jpg/300px-SalleFavart_1840.jpg" width="300" height="204"></A><BR>Opéra-Comique <br>
+<i>Photo : Wikipedia</i>]]></description>
+	<styleUrl>#style6</styleUrl>
+	<Polygon>
+		<outerBoundaryIs>
+			<LinearRing>
+				<tessellate>1</tessellate>
+				<coordinates>
+					2.339999,48.87196,0 2.34789,48.870689,0 2.35433,48.869308,0 2.350979,48.863411,0 2.330292,48.868294,0 2.328211,48.86972,0 2.328072,48.869923,0 2.339999,48.87196,0 
+				</coordinates>
+			</LinearRing>
+		</outerBoundaryIs>
+	</Polygon>
+</Placemark>
+</kml>
