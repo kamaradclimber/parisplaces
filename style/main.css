@@ -14,6 +14,14 @@
 	width:850px;
 }
 
+#message
+{
+	float:left;
+	padding-bottom:12px;
+	width:100%;
+	color:red;
+}
+
 /*-------- RESULTS ZONE --------------------*/
 
 #results_zone
