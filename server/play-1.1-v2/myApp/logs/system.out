@@ -1,0 +1,3 @@
+21:22:20,103 INFO  ~ Starting /var/www/parisplaces/server/play-1.1-v2/myApp
+21:22:21,291 WARN  ~ You're running Play! in DEV mode
+21:22:21,691 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
