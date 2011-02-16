@@ -6,6 +6,8 @@ import play.mvc.*;
 import java.sql.SQLException;
 import java.util.*;
 
+import jobs.ListDataSource;
+
 import models.*;
 
 public class Application extends Controller {
@@ -64,50 +66,33 @@ public class Application extends Controller {
     		}
     	}
     	
+    	
+		
+    	
     	String[] formattedTypes = typesOfPlaces.split(",");
     	
-
-
-    	
-    	/*
-    	Place one = new Place("ma maison", 5, "rue Raynouard",75016);
-    	Place two = new Place("ma garçonière", 10, "rue de Seine",75006);
-    	places[0] = one;
-    	places[1] = two;
-    	*/
-    	//connector.getLocations(formattedDistricts, formattedTypes);
-
-    	//CsvConnector connector = new CsvConnector();
-    	Place[] places;// 
+    	ArrayList<Place> places;
    
-    	Place one = new Place("ma maison", 5, "rue Raynouard",75016);
-    	Place two = new Place("ma garçonière", 10, "rue de Seine",75006);
+    	Place one = new Place("Grégoire est un alcolo", 5, "rue Raynouard",75016);
+    	Place two = new Place("Damien est un homo", 10, "rue de Seine",75006);
+    	
+    	
+    	
+    	ArrayList<DataSource> list = ListDataSource.getList();
     	try {
-    		DataSource connector = new Liste_equipements_de_proximite_2011();
-    		places = (Place[]) connector.getLocations(formattedDistricts, formattedTypes).toArray();
+    		
+    		places = list.get(0).getLocations(formattedDistricts, formattedTypes);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			places = new Place[2];
-			places[0] = one;
-	    	places[1] = two;
+			
+			places = new ArrayList<Place>();
+			places.add(one);
+	    	places.add(two);
 	    	
 			e.printStackTrace();
 		}
-
-    	
-    	/*
-    	ArrayList<Integer> districtsList = new ArrayList<Integer>();
-    	for (int i=0;i<formattedDistricts.length;i++) {
-    		districtsList.add(formattedDistricts[i]);
-    	}
-    	ArrayList<String> typesList = new ArrayList<String>();
-    	for (int i=0;i<formattedTypes.length;i++) {
-    		typesList.add(formattedTypes[i]);
-    	}
-    	*/
-    	
-    	
-    	
+    	 
+		
     	//TODO : appeler toutes les DataSouce static instanciés à l'allumage du serveur et merger tous les résultats
     	
     	//TODO : gérer le offset
