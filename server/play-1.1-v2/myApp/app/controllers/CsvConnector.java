@@ -34,6 +34,7 @@ public abstract class CsvConnector extends DataSource{
 			Class.forName("org.h2.Driver");
 			connection = DriverManager.
 			    getConnection("jdbc:h2:~/test", "sa", "");
+			System.out.println("connection org.h2 etablie");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,7 +64,7 @@ public abstract class CsvConnector extends DataSource{
     	//Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
     	Collection<String> types = hierarchy.findSubCategories(Arrays.asList(typeOfLocation));
     	
-    	String request="SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';')";//WHERE "+districtColumnName+" IN (";
+    	String request="SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';')";// WHERE "+districtColumnName+" IN (";
     	
 //    	for (int district : districts)
 //    	{
@@ -86,7 +87,9 @@ public abstract class CsvConnector extends DataSource{
 //    		request = request.substring(0, request.length()-1);
 //
 //    	request += ")";
+    	System.out.println("debut de la requete");
     	System.out.println(request);
+    	System.out.println("fin de la requete");
     	PreparedStatement ps = connection.prepareStatement( request );
 
     	ResultSet rs = ps.executeQuery();
@@ -99,7 +102,9 @@ public abstract class CsvConnector extends DataSource{
 //                    rs.getString(i + 1));
 //            }
 //    	}
-//    	
+//    	System.out.println("affichage des resultat...");
+//    	printResults(rs);
+//    	System.out.println("fin d'affichage des resultat...");
     	return generateLocation(rs);
     }
     
