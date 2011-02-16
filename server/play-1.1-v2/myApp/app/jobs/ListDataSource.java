@@ -15,6 +15,7 @@ public class ListDataSource {
 	public ListDataSource() {
 		list = new ArrayList<DataSource>();
 		try {
+		//CsvConnector csv = new Liste_equipements_de_proximite_2011();
 			Liste_equipements_de_proximite_2011 csv = new Liste_equipements_de_proximite_2011();
 			list.add(csv);
 		} catch (SQLException e) {

@@ -18,7 +18,7 @@ function initialize() {
 	
 					
 	arGeo = new Array();
-	for (i=1; i<=6; i++) {
+	for (i=1; i<=20; i++) {
 		geoXml = new geoXML3.parser({
 			map: map,
 			singleInfoWindow: true,
@@ -27,6 +27,10 @@ function initialize() {
 		geoXml.parse('kml/'+i+'.kml');
 		arGeo.push(geoXml);
 		}
+		
+	$(".caseArr").click(function(){
+		hilightZones();
+	});
 }
 
 function addAddressesOnTheMap() {
@@ -115,12 +119,12 @@ function fitTheMap() {
 
 function hilightZones()
 {
-	for(i=1; i<=6; i ++)
+	for(i=1; i<=20; i ++)
 	{
 		//window.setTimeout(hilightZones,50);
 
 		arGeo[i-1].hideDocument();
-		if(document.getElementById('arr'+i).checked) 
+		if(document.getElementById('arr'+i) != null && document.getElementById('arr'+i).checked) 
 		{
 			arGeo[i-1].showDocument(); 
 		}

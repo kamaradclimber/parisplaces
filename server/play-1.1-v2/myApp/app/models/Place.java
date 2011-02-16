@@ -30,6 +30,9 @@ public class Place {
 		this.AP_cp = AP_cp;
 	}
 	
+	
+
+
 	public Place(String aName, int ar, String type, String des, int num, int cp, String voie)
 	{
 		name = aName;
@@ -50,4 +53,11 @@ public class Place {
 		return name;
 	}
 	
+	@Override
+	public String toString() {
+		return "Place [arrondissement=" + arrondissement + ", designation="
+				+ designation + ", name=" + name + ", typeDePlace="
+				+ typeDePlace + ", Address=" + getAddress() + "]";
+	}
+
 }
