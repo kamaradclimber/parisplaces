@@ -77,7 +77,7 @@ function toggleBounce(marker) {
 
 function highlight(marker) {
 
-    var addresses = document.all("results_zone");
+    var addresses = $("results_zone");
     for(i=0; i<document.getElementsByName("address").length; i++) {
         if (document.getElementsByName("address")[i].getAttribute("value")== marker.address ) {
             document.getElementsByName("address")[i].setAttribute("class", "odd");
