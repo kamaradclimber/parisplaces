@@ -308,6 +308,12 @@
   })
   
   $(document).bind('reveal.facebox',function(){
+  	$("a.cancel")
+		.click(function(){
+			$(document).trigger('close.facebox');
+		});		
+  })
+  $(document).bind('reveal.facebox',function(){
   	$("a.search")
 		.click(function(){
 			dialogBoxFiltersManager();
