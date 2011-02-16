@@ -3,6 +3,7 @@ package controllers;
 import play.*;
 import play.mvc.*;
 
+import java.sql.SQLException;
 import java.util.*;
 
 import models.*;
@@ -66,14 +67,21 @@ public class Application extends Controller {
     	String[] formattedTypes = typesOfPlaces.split(",");
     	
     	//CsvConnector connector = new CsvConnector();
-    	Place[] places = new Place[2];
-    	
+    	Place[] places;// 
+   
     	Place one = new Place("ma maison", 5, "rue Raynouard",75016);
     	Place two = new Place("ma garçonière", 10, "rue de Seine",75006);
-    	places[0] = one;
-    	places[1] = two;
-    	
-    	//connector.getLocations(formattedDistricts, formattedTypes);
+    	try {
+    		DataSource connector = new Liste_equipements_de_proximite_2011();
+    		places = (Place[]) connector.getLocations(formattedDistricts, formattedTypes).toArray();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			places = new Place[2];
+			places[0] = one;
+	    	places[1] = two;
+	    	
+			e.printStackTrace();
+		}
     	
     	/*
     	ArrayList<Integer> districtsList = new ArrayList<Integer>();
