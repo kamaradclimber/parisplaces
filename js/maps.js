@@ -96,7 +96,8 @@ function fitTheMap() {
         //alert(bounds);
          bounds = bounds.extend(places[i].getPosition());
     };
-    map.fitBounds(bounds); 
+    //map.fitBounds(bounds); 
+    map.panToBounds(bounds); 
 }
 
 
