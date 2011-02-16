@@ -1,3 +1,10 @@
+function displayMessage(string) {
+    $("#message").empty(); // on vide le div
+    $("#message").html(string);
+    
+}
+
+
 
 function checkSelect(){
     //parcourt les checboxes et teste si elle sont cochées ou non
@@ -30,7 +37,6 @@ function checkSelect(){
 
     //remove the trailing &
     if (url.length>0) { url = url.slice(0,-1); }
-    alert(url);
     return url;
 }
 
@@ -96,6 +102,7 @@ function findAssociatedMarker(address) {
 }
 
 function getPlaces(data){
+        page="connecteur.php"; // on recuperer l' adresse du lien
 	$.ajax({  // ajax
             type: "GET",
             dataType: "xml",
@@ -106,7 +113,7 @@ function getPlaces(data){
                 afficher(result);
             },
             error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
-                      alert("Argh Something is not good\n (don't kill the messenger !)");
+                      displayMessage("Argh Something is not good\n (don't kill the messenger !)");
 
                   }
         });
@@ -114,7 +121,6 @@ function getPlaces(data){
 
 $(document).ready(function(){ 	// le document est chargé
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-        page="connecteur.php"; // on recuperer l' adresse du lien
         data = checkSelect();
         getPlaces(data);
         return true; // on laisse la case cochée

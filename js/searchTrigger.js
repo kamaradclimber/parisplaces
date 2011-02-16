@@ -19,7 +19,8 @@ function dialogBoxFiltersManager(){
 	
 	//Changer la page principale lorsque l'évènement se termine
 	changeHomePageFilters(totalFilters);
-    alert(checkSelect());
+    var data = checkSelect();
+    getPlaces(data);
 	$(document).trigger('close.facebox');
 }
 
