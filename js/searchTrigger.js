@@ -21,7 +21,7 @@ function changeHomePageFilters(checkedFilters){
 	var remainingFiltersHTML = "";
 	var existing2 = [];
 	$("#districts form li").each(function(){
-		existing2.push($(this).html());
+		existing2.push("<li>"+ $(this).html()+ "</li>");
 	})
 		
 	for(i=0;i<6;i++) {
@@ -33,7 +33,7 @@ function changeHomePageFilters(checkedFilters){
 		}
 	}
 	
-	$("#results_zone").html(remainingFiltersHTML);
+	$("#districts form").html(remainingFiltersHTML);
 	/*$("#results_zone input").each(function() {
 		$(this).attr('checked', 'checked');
 	});
