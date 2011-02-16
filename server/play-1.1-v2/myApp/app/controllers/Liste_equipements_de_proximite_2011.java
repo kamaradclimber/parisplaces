@@ -36,16 +36,27 @@ public class Liste_equipements_de_proximite_2011 extends CsvConnector {
 	public ArrayList<Place> generateLocation(ResultSet rs) throws SQLException {
 		ArrayList<Place> places = new ArrayList<Place>();
 		Place currentPlace;
+		String description;
+		String type;
+		String voie;
 		while (rs.next()){
-			//System.out.println("place:"+rs.getString(1)+"/"+rs.getString(2)+"/"+rs.getString(3)+"/"+rs.getString(4)+"/"+rs.getString(5)+"/"+rs.getString(6)+"/"+rs.getString(7));
+			System.out.println("place:"+rs.getString(1)+"/"+rs.getString(2)+"/"+rs.getString(3)+"/"+rs.getString(4)+"/"+rs.getString(5)+"/"+rs.getString(6)+"/"+rs.getString(7));
 			if (rs.getString(1)==null) continue;
-			String dis = rs.getString(1).substring(11, rs.getString(1).length()-2 );
+			String dis = rs.getString(1).substring(10, rs.getString(1).length()-1 );
 			int district;
-			if (dis.length()==0) 
-				district = 1;
-			else
+			try{
 				district = Integer.parseInt(dis);
-			currentPlace = new Place(rs.getString(3), district, rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(6), rs.getString(7));
+			}catch (NumberFormatException e) {
+				district = 1;
+			}
+			description = rs.getString(3);
+			if (description != null) description = description.replace("&", "et");
+			type = rs.getString(2);
+			if (type != null) type = type.replace("&", "et");
+			voie = rs.getString(7);
+			if (voie != null) voie = voie.replace("&", "et");
+			//TODO: pas ici qu'il faut remplacer, et de plus d'autres caractères interdits
+			currentPlace = new Place(description, district, type, description, rs.getInt(4), rs.getInt(6), voie);
 			places.add(currentPlace);
 			System.out.println(currentPlace);
 		}
