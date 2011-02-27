@@ -1,3 +1,8 @@
+//these variables are meant to get where we are in the pagination
+var currentOffset =0;
+var currentLimit = 10;
+
+
 function displayMessage(string) {
     $("#message").empty(); // on vide le div
     $("#message").html(string);
@@ -90,6 +95,8 @@ function afficher(donnees){ // pour remplacer le contenu du div contenu
         $('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#results_zone');
     } );
 
+    addPagination();
+
     addAddressesOnTheMap();
     makeThemBouncable();
 }
@@ -127,11 +134,45 @@ function getPlaces(data){
         });
 }
 
-$(document).ready(function(){ 	// le document est chargé
-    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-        loading();
+function addPagination() {
+
+    $('#contenu').append('<div id="next"> Suivant<div>');
+    $('#next').click(function() {
+        currentOffset += currentLimit;
+        getResults(currentOffset,currentLimit);
+    });
+    $('#contenu').append('<div id="prev"> Precedent<div>');
+    $('#prev').click(function() {
+        currentOffset = max(currentOffset - currentLimit,0);
+        getResults(currentOffset,currentLimit);
+    });
+}
+
+function requestConstructor(offset, limit) {
+        //construit la requete et vérfiie au passage que les arguments ont bien été donnés.
         data = checkSelect();
+        if (offset != null) {data += "&offset="+offset;}
+        if (limit != null) {data += "&limit="+limit;}
+        return data;
+}
+
+function getResults(offset, limit) {
+        //fonction qui va chercher les résultats.
+        //commence par mettre en chargement, puis construit une requete et enfin l'exécute
+        loading();
+        data = requestConstructor(offset,limit);
+
         getPlaces(data);
+
+}
+
+
+$(document).ready(function(){ 	// le document est chargé
+    addPagination();
+    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
+        currentLimit = 10;
+        currentOffset = 0;
+        getResults(currentOffset,currentLimit);
         return true; // on laisse la case cochée
     });
 
