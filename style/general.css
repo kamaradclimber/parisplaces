@@ -30,3 +30,5 @@ body a:hover
 {
 	text-decoration:underline;
 }
+
+#results_zone_loading { display:none; }

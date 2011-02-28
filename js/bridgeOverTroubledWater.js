@@ -4,7 +4,14 @@ function displayMessage(string) {
     
 }
 
-
+function loading() {
+    $("#results_zone_loading").show();
+    $("#results_zone_notloading").hide();
+}
+function notLoading() {
+    $("#results_zone_notloading").show();
+    $("#results_zone_loading").hide();
+}
 
 function checkSelect(){
     //parcourt les checboxes et teste si elle sont cochées ou non
@@ -111,6 +118,7 @@ function getPlaces(data){
             cache: false, // pas de mise en cache
             success:function(result){ // si la requête est un succès
                 afficher(result);
+                notLoading();
             },
             error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
                       displayMessage("Argh Something is not good\n (don't kill the messenger !)");
@@ -121,6 +129,7 @@ function getPlaces(data){
 
 $(document).ready(function(){ 	// le document est chargé
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
+        loading();
         data = checkSelect();
         getPlaces(data);
         return true; // on laisse la case cochée
