@@ -321,6 +321,8 @@
 			dialogBoxFiltersManager();
 		});		
   })
+  
+  // Check les checkbox en cliquant sur texte associé
    $(document).bind('reveal.facebox',function(){
    $("li").click(function(){
 		var li = $(this);
@@ -335,4 +337,18 @@
 	});
 	})
 
+	   $(document).bind('reveal.facebox',function(){
+   $("#category-dialog-box h5 input").click(function(){
+		/* var li = $(this);
+		var input = li.children()[0];
+				
+		if(input.checked){
+		input.checked=false;
+		}
+		else{
+			input.checked=true;
+		}	*/
+	});
+	})
+	
 })(jQuery);
