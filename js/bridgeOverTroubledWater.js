@@ -181,6 +181,10 @@ function getResults(offset, limit) {
 }
 
 
+
+// Pour checker les checkbox en cliquant sur le texte associé
+	
+	
 $(document).ready(function(){ 	// le document est chargé
     addPagination();
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
@@ -190,26 +194,26 @@ $(document).ready(function(){ 	// le document est chargé
         return true; // on laisse la case cochée
     });
 
-    makeThemBouncable();
-
-});
-
-  $(document).ready(function(){
-   $("li").click(function(){
-		var li = $(this);
-		var input = li.children()[0];
-				
+ $("li span").click(function(){
+		var span= $(this);
+		var li = span.parent();
+		var input = li.children()[0];	
 		if(input.checked){
 		input.checked=false;
 		}
 		else{
 			input.checked=true;
+			currentLimit = 10;
+			currentOffset = 0;
+			getResults(currentOffset,currentLimit);
+		return true;
 		}	
 	});
-	})
+    
+   makeThemBouncable();
 
-
-
+});
+	
 function properCap(str) {
     //var string = str.toLowerCase();
     //return string.charAt(0).toUpperCase() + string.slice(1);
