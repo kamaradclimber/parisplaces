@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<places total="${places.size()}" limit="${limit}" offset="${offset}">
+	{%
+		for (int i=0;i<places.size();i++) {
+	%}
+	<place>
+		<name>${places.get(i).getName()}</name>
+		<address>${places.get(i).getAddress() }</address>
+	</place>
+	{%
+		}
+	%}
+	
+</places>
