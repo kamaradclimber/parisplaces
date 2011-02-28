@@ -2,6 +2,19 @@
 var currentOffset =0;
 var currentLimit = 10;
 
+//list of the word not to capitalize
+//mainly common words like le, las, les, du 
+
+var commonWords= {"rue":1,
+    "du":1, 
+    "la":1,
+    "les":1,
+    "des":1,
+    "place":1,
+    "boulevard":1
+};
+
+
 
 function displayMessage(string) {
     $("#message").empty(); // on vide le div
@@ -88,8 +101,8 @@ function afficher(donnees){ // pour remplacer le contenu du div contenu
         var  address = $(this).find('address').text();
 
         // construction du html à afficher pour cette adresse.
-        var html = "<h4>" + name + "</h4>";
-        html += "<p>"+  address + "</p>";
+        var html = "<h4>" + properCap(name) + "</h4>";
+        html += "<p>"+  properCap(address) + "</p>";
         //affichage du html dans la bonne zone
         $('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#results_zone');
     } );
@@ -196,3 +209,22 @@ $(document).ready(function(){ 	// le document est chargé
 		}	
 	});
 	})
+
+
+
+function properCap(str) {
+    //var string = str.toLowerCase();
+    //return string.charAt(0).toUpperCase() + string.slice(1);
+    val = str;
+    newVal = '';
+    val = val.split(' ');
+    for(var c=0; c < val.length; c++) {
+        var upp = val[c].toLowerCase();
+        if (!( upp in commonWords)) {
+            newVal += upp.charAt(0).toUpperCase() + upp.slice(1) + ' ';
+        } else {
+            newVal += upp+ ' ';
+        }
+    }
+    return newVal;
+}
