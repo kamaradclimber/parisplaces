@@ -1,7 +1,7 @@
 <?php
 // Set the return content type
 header('Content-type: application/xhtml+xml');
-$test_mode = true;
+$test_mode = false;
 
 
 if ($test_mode) {

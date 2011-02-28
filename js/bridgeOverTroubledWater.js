@@ -86,24 +86,31 @@ function makeThemBouncable() {
 function afficher(donnees){ 
     $("#results_zone").empty(); // on vide le div
 
+
     // on stocke la parité pour pouvoir faire un affichage plus elegant	
     var even = 0;
     var class;
+
+    //we dont want to display more than currentLimitItems, even if the server does not work as expected (else the geocoder is the bottleneck of the application)
+    var i=0;
 
     // parcours du xml
     $(donnees).find('place').each(  function() {
         even = (even +1) % 2;
         class = "result ";                                              //permet de rendre les résultats bouncable 
         if (even == 0 ) { class += "even"; } else { class += "odd"; }   //permet de rendre l'affichage plus élégant
-        var id = $(this).attr('id');
-        var name = $(this).find('name').text();
-        var  address = $(this).find('address').text();
+        if (i<currentLimit) {
+            var id = $(this).attr('id');
+            var name = $(this).find('name').text();
+            var  address = $(this).find('address').text();
 
-        // construction du html à afficher pour cette adresse.
-        var html = "<h4>" + properCap(name) + "</h4>";
-        html += "<p>"+  properCap(address) + "</p>";
-        //affichage du html dans la bonne zone
-        $('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#results_zone');
+            // construction du html à afficher pour cette adresse.
+            var html = "<h4>" + properCap(name) + "</h4>";
+            html += "<p>"+  properCap(address) + "</p>";
+            //affichage du html dans la bonne zone
+            $('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#results_zone');
+        }
+        i = i+1;
     } );
 
 
@@ -130,34 +137,35 @@ function findAssociatedMarker(address) {
 }
 
 function getPlaces(data){
-        page="connecteur.php"; // on recuperer l' adresse du lien
-	$.ajax({  // ajax
-            type: "GET",
-            dataType: "xml",
-            data: data,
-            url: page, // url de la page à charger
-            cache: false, // pas de mise en cache
-            success:function(result){ // si la requête est un succès
-                afficher(result);
-                displayMessage("");
-                notLoading();
-                addPagination();
-            },
-            error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
-                      displayMessage("Argh Something is not good\n (don't kill the messenger !)");
+    page="connecteur.php"; // on recuperer l' adresse du lien
+    displayMessage(data);
+    $.ajax({  // ajax
+        type: "GET",
+        dataType: "xml",
+        data: data,
+        url: page, // url de la page à charger
+        cache: false, // pas de mise en cache
+        success:function(result){ // si la requête est un succès
+            afficher(result);
+            displayMessage("");
+            notLoading();
+            addPagination();
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
+                  displayMessage("Argh Something is not good\n (don't kill the messenger !)");
 
-                  }
-        });
+              }
+    });
 }
 
 function addPagination() {
     $('#pagination').html("");
     if (currentOffset > 0) {
-    $('#pagination').append('<div id="prev"><a>Precedent</a><div>');
-    $('#prev a').click(function() {
-        currentOffset = Math.max(currentOffset - currentLimit,0);
-        getResults(currentOffset,currentLimit);
-    });
+        $('#pagination').append('<div id="prev"><a>Precedent</a><div>');
+        $('#prev a').click(function() {
+            currentOffset = Math.max(currentOffset - currentLimit,0);
+            getResults(currentOffset,currentLimit);
+        });
     }
     $('#pagination').append('<div id="next"><a>Suivant</a><div>');
     $('#next a').click(function() {
@@ -168,26 +176,26 @@ function addPagination() {
 }
 
 function requestConstructor(offset, limit) {
-        //construit la requete et vérfiie au passage que les arguments ont bien été donnés.
-        data = checkSelect();
-        if (offset != null) {data += "&offset="+offset;}
-        if (limit != null) {data += "&limit="+limit;}
-        return data;
+    //construit la requete et vérfiie au passage que les arguments ont bien été donnés.
+    data = checkSelect();
+    if (offset != null) {data += "&offset="+offset;}
+    if (limit != null) {data += "&limit="+limit;}
+    return data;
 }
 
 function getResults(offset, limit) {
-        //fonction qui va chercher les résultats.
-        //commence par mettre en chargement, puis construit une requete et enfin l'exécute
-        loading();
-        data = requestConstructor(offset,limit);
-        getPlaces(data);
+    //fonction qui va chercher les résultats.
+    //commence par mettre en chargement, puis construit une requete et enfin l'exécute
+    loading();
+    data = requestConstructor(offset,limit);
+    getPlaces(data);
 }
 
 
 
 // Pour checker les checkbox en cliquant sur le texte associé
-	
-	
+
+
 $(document).ready(function(){ 	// le document est chargé
     addPagination();
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
