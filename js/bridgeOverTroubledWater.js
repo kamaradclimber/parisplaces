@@ -130,7 +130,7 @@ function findAssociatedMarker(address) {
 }
 
 function getPlaces(data){
-        page="localhost/connecteur.php"; // on recuperer l' adresse du lien
+        page="connecteur.php"; // on recuperer l' adresse du lien
 	$.ajax({  // ajax
             type: "GET",
             dataType: "xml",
