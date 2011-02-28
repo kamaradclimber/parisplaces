@@ -141,6 +141,7 @@ function getPlaces(data){
                 afficher(result);
                 displayMessage("");
                 notLoading();
+                addPagination();
             },
             error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
                       displayMessage("Argh Something is not good\n (don't kill the messenger !)");
@@ -151,17 +152,19 @@ function getPlaces(data){
 
 function addPagination() {
     $('#pagination').html("");
-    $('#pagination').append('<div id="next"><a>Suivant</a><div>');
-    $('#next a').click(function() {
-        currentOffset += currentLimit;
-        getResults(currentOffset,currentLimit);
-
-    });
+    if (currentOffset > 0) {
     $('#pagination').append('<div id="prev"><a>Precedent</a><div>');
     $('#prev a').click(function() {
         currentOffset = Math.max(currentOffset - currentLimit,0);
         getResults(currentOffset,currentLimit);
     });
+    }
+    $('#pagination').append('<div id="next"><a>Suivant</a><div>');
+    $('#next a').click(function() {
+        currentOffset += currentLimit;
+        getResults(currentOffset,currentLimit);
+    });
+
 }
 
 function requestConstructor(offset, limit) {
