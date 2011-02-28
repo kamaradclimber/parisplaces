@@ -1,3 +1,8 @@
+//these variables are meant to get where we are in the pagination
+var currentOffset =0;
+var currentLimit = 10;
+
+
 function displayMessage(string) {
     $("#message").empty(); // on vide le div
     $("#message").html(string);
@@ -51,7 +56,6 @@ function checkSelect(){
 
 
 
-var bob = '<?xml version="1.0" encoding="utf-8" ?><places> <place id=”897ff56a2”> <name>Bibliothèque François Mitterrand</name> <address>1 boulevard Pasteur, Paris</address> <coords>874.93879098</coords> </place> <place id=”89ds56”> <name>Mes grands parents</name> <address>76 rue Notre Dame des Champs, Paris</address> <coords>874.93879098</coords> </place> <place id="8493843dd89"> <name>Un endroit sympa</name><address> Ile de la Cité, Paris</address>  </place>  </places>';
 
 function makeThemBouncable() {
     //makes the marker be able to react on the mouse hovering on the associated address
@@ -67,7 +71,7 @@ function makeThemBouncable() {
 
 
 function afficher(donnees){ // pour remplacer le contenu du div contenu
-    $("#contenu").empty(); // on vide le div
+    //$("#contenu").empty(); // on vide le div
     $("#results_zone").empty(); // on vide le div
 
     // on stocke la parité pour pouvoir faire un affichage plus elegant	
@@ -90,6 +94,7 @@ function afficher(donnees){ // pour remplacer le contenu du div contenu
         $('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#results_zone');
     } );
 
+
     addAddressesOnTheMap();
     makeThemBouncable();
 }
@@ -105,7 +110,11 @@ function findAssociatedMarker(address) {
             return result;
         }
     }
-    if (result == null) { alert('not found'); }
+    if (result == null) {
+        //previously we alert but this leads to an error if we try to over a result too soon
+        //so we silently fail
+        return null;
+    }
 }
 
 function getPlaces(data){
@@ -118,6 +127,7 @@ function getPlaces(data){
             cache: false, // pas de mise en cache
             success:function(result){ // si la requête est un succès
                 afficher(result);
+                displayMessage("");
                 notLoading();
             },
             error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
@@ -127,11 +137,45 @@ function getPlaces(data){
         });
 }
 
-$(document).ready(function(){ 	// le document est chargé
-    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-        loading();
+function addPagination() {
+    $('#contenu').html("");
+    $('#contenu').append('<div id="next"> Suivant<div>');
+    $('#next').click(function() {
+        currentOffset += currentLimit;
+        getResults(currentOffset,currentLimit);
+    });
+    $('#contenu').append('<div id="prev"> Precedent<div>');
+    $('#prev').click(function() {
+        currentOffset = max(currentOffset - currentLimit,0);
+        getResults(currentOffset,currentLimit);
+    });
+}
+
+function requestConstructor(offset, limit) {
+        //construit la requete et vérfiie au passage que les arguments ont bien été donnés.
         data = checkSelect();
+        if (offset != null) {data += "&offset="+offset;}
+        if (limit != null) {data += "&limit="+limit;}
+        return data;
+}
+
+function getResults(offset, limit) {
+        //fonction qui va chercher les résultats.
+        //commence par mettre en chargement, puis construit une requete et enfin l'exécute
+        loading();
+        data = requestConstructor(offset,limit);
+
         getPlaces(data);
+
+}
+
+
+$(document).ready(function(){ 	// le document est chargé
+    addPagination();
+    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
+        currentLimit = 10;
+        currentOffset = 0;
+        getResults(currentOffset,currentLimit);
         return true; // on laisse la case cochée
     });
 
