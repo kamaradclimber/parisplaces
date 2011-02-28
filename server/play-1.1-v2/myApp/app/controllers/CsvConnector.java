@@ -64,17 +64,15 @@ public abstract class CsvConnector extends DataSource{
     	//Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
     	Collection<String> types = hierarchy.findSubCategories(Arrays.asList(typeOfLocation));
     	
-    	String request="SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';')";// WHERE "+districtColumnName+" IN (";
+    	String request="SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';')WHERE '"+districtColumnName+"' IN (";
     	
-//    	for (int district : districts)
-//    	{
-//    		request += districtName(district);
-//    		if (district ==1) request +="R";
-//    		request+= "',";
-//    	}
-//    	
-//    	if (districts.length!=0)//we have a ',' in the end
-//    		request = request.substring(0, request.length()-1);
+    	for (int district : districts)
+    	{
+    		request += "'"+districtName(district)+"',";
+    	}
+
+    	if (districts.length!=0)//we have a ',' in the end
+    		request = request.substring(0, request.length()-1);
 //
 //    	request += ") AND "+ typeColumnName +" IN (";
 //    	//'S_gest' 'COLUMN1'
@@ -85,8 +83,8 @@ public abstract class CsvConnector extends DataSource{
 //
 //    	if (types.size()!=0)//we have a ',' in the end
 //    		request = request.substring(0, request.length()-1);
-//
-//    	request += ")";
+
+    	request += ")";
     	System.out.println("debut de la requete");
     	System.out.println(request);
     	System.out.println("fin de la requete");
