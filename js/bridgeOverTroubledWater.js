@@ -83,8 +83,7 @@ function makeThemBouncable() {
 }
 
 
-function afficher(donnees){ // pour remplacer le contenu du div contenu
-    //$("#contenu").empty(); // on vide le div
+function afficher(donnees){ 
     $("#results_zone").empty(); // on vide le div
 
     // on stocke la parité pour pouvoir faire un affichage plus elegant	
@@ -151,15 +150,16 @@ function getPlaces(data){
 }
 
 function addPagination() {
-    $('#contenu').html("");
-    $('#contenu').append('<div id="next"> Suivant<div>');
-    $('#next').click(function() {
+    $('#pagination').html("");
+    $('#pagination').append('<div id="next"><a>Suivant</a><div>');
+    $('#next a').click(function() {
         currentOffset += currentLimit;
         getResults(currentOffset,currentLimit);
+
     });
-    $('#contenu').append('<div id="prev"> Precedent<div>');
-    $('#prev').click(function() {
-        currentOffset = max(currentOffset - currentLimit,0);
+    $('#pagination').append('<div id="prev"><a>Precedent</a><div>');
+    $('#prev a').click(function() {
+        currentOffset = Math.max(currentOffset - currentLimit,0);
         getResults(currentOffset,currentLimit);
     });
 }
@@ -177,9 +177,7 @@ function getResults(offset, limit) {
         //commence par mettre en chargement, puis construit une requete et enfin l'exécute
         loading();
         data = requestConstructor(offset,limit);
-
         getPlaces(data);
-
 }
 
 
