@@ -127,6 +127,7 @@ function getPlaces(data){
             cache: false, // pas de mise en cache
             success:function(result){ // si la requête est un succès
                 afficher(result);
+                displayMessage("");
                 notLoading();
             },
             error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
