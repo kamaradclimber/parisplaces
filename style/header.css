@@ -17,6 +17,10 @@ header
 	padding-bottom:12px;
 }
 
+#header_container a{
+    color:white;
+}
+
 #header_container h1
 {
 	font-size:32px;
