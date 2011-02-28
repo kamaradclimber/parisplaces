@@ -62,7 +62,7 @@ function turnsItToMarker(address) {
             putOnTheMap(marker);
 
         } else {
-            alert("Geocode was not successful for the following reason: " + status);
+            displayMessage("Geocode was not successful for the following reason: " + status);
         }
     });
 }
