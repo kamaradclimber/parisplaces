@@ -18,7 +18,9 @@ public class Liste_equipements_de_proximite_2011 extends CsvConnector {
 	public Liste_equipements_de_proximite_2011()
 			throws SQLException {
 		super("data/Liste_equipements_de_proximite_2011.csv");
-		super.hierarchy = new Categories("Ecole Maternelle");				
+		super.hierarchy = new Categories("Ecole Maternelle");
+		super.typeColumnName = ;
+		super.districtColumnName = "S_guest";
 		}
 
 	@Override
@@ -29,7 +31,9 @@ public class Liste_equipements_de_proximite_2011 extends CsvConnector {
 
 	@Override
 	public String districtName(int district) {
-		return "MAIRIE DU  "  +district+"E";
+		String name = "MAIRIE DU  "  +district+"E";
+		if (district ==1) name +="R";
+		return name;
 	}
 
 	@Override
