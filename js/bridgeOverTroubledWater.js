@@ -71,7 +71,7 @@ function makeThemBouncable() {
 
 
 function afficher(donnees){ // pour remplacer le contenu du div contenu
-    $("#contenu").empty(); // on vide le div
+    //$("#contenu").empty(); // on vide le div
     $("#results_zone").empty(); // on vide le div
 
     // on stocke la parité pour pouvoir faire un affichage plus elegant	
@@ -94,7 +94,6 @@ function afficher(donnees){ // pour remplacer le contenu du div contenu
         $('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#results_zone');
     } );
 
-    addPagination();
 
     addAddressesOnTheMap();
     makeThemBouncable();
@@ -138,7 +137,7 @@ function getPlaces(data){
 }
 
 function addPagination() {
-
+    $('#contenu').html("");
     $('#contenu').append('<div id="next"> Suivant<div>');
     $('#next').click(function() {
         currentOffset += currentLimit;
