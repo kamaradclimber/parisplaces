@@ -199,7 +199,7 @@ $(document).ready(function(){ 	// le document est chargé
 		var li = span.parent();
 		var input = li.children()[0];	
 		if(input.checked){
-		input.checked=false;
+		    input.checked=false;
 		}
 		else{
 			input.checked=true;
