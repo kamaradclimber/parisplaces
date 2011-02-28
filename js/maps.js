@@ -81,6 +81,14 @@ function putOnTheMap(marker) {
 }
 
 function toggleBounce(marker) {
+    if (marker ==null) {
+    //it's mean the marker has not been found in the array of marker, so 2 cases :
+    //  - we have a pretty nice bug : too bad
+    //  - the whole thing is not fully loaded yet
+    //
+    //in both case we silently fail but do nothing that can alert the user
+    return;
+    }
     if (marker.getAnimation() != null) {
         marker.setAnimation(null);
     } else {

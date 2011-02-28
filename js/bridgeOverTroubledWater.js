@@ -56,7 +56,6 @@ function checkSelect(){
 
 
 
-var bob = '<?xml version="1.0" encoding="utf-8" ?><places> <place id=”897ff56a2”> <name>Bibliothèque François Mitterrand</name> <address>1 boulevard Pasteur, Paris</address> <coords>874.93879098</coords> </place> <place id=”89ds56”> <name>Mes grands parents</name> <address>76 rue Notre Dame des Champs, Paris</address> <coords>874.93879098</coords> </place> <place id="8493843dd89"> <name>Un endroit sympa</name><address> Ile de la Cité, Paris</address>  </place>  </places>';
 
 function makeThemBouncable() {
     //makes the marker be able to react on the mouse hovering on the associated address
@@ -112,7 +111,11 @@ function findAssociatedMarker(address) {
             return result;
         }
     }
-    if (result == null) { alert('not found'); }
+    if (result == null) {
+        //previously we alert but this leads to an error if we try to over a result too soon
+        //so we silently fail
+        return null;
+    }
 }
 
 function getPlaces(data){
