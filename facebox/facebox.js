@@ -313,12 +313,26 @@
 			$(document).trigger('close.facebox');
 		});		
   })
+
+
   $(document).bind('reveal.facebox',function(){
   	$("a.search")
 		.click(function(){
 			dialogBoxFiltersManager();
 		});		
   })
-
+   $(document).bind('reveal.facebox',function(){
+   $("li").click(function(){
+		var li = $(this);
+		var input = li.children()[0];
+				
+		if(input.checked){
+		input.checked=false;
+		}
+		else{
+			input.checked=true;
+		}	
+	});
+	})
 
 })(jQuery);

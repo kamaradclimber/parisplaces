@@ -138,3 +138,17 @@ $(document).ready(function(){ 	// le document est chargé
     makeThemBouncable();
 
 });
+
+  $(document).ready(function(){
+   $("li").click(function(){
+		var li = $(this);
+		var input = li.children()[0];
+				
+		if(input.checked){
+		input.checked=false;
+		}
+		else{
+			input.checked=true;
+		}	
+	});
+	})
