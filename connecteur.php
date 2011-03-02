@@ -1,7 +1,7 @@
 <?php
 // Set the return content type
 header('Content-type: application/xhtml+xml');
-$test_mode = true;
+$test_mode = false;
 
 
 if ($test_mode) {
@@ -14,15 +14,15 @@ echo '<?xml version="1.0"?><places total="2193" limit="5" offset="">         <pl
 
 if (!$test_mode) {
     //Set the page to connect with.
-    $bob ="places.xml" . "?";  //default value
+    $bob ="places" . "?";  //default value
     if (array_key_exists('destination', $_GET)) {
         //we could avoid these switch and put directly the value associated to destination as the beginning of the url but it would be a flaw
         if ($_GET['destination'] == 'getPlaces') {
-            $bob = "places.xml?";
+            $bob = "places?";
         } else if  ($_GET['destination'] == 'getPlaceCategories') {
             $bob = "getplacecategories.xml?";
         } else {
-            $bob = "places.xml?";
+            $bob = "places?";
         }
     }
 
