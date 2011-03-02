@@ -27,15 +27,10 @@ function initialize() {
 		geoXml.parse('kml/'+i+'.kml');
 		arGeo.push(geoXml);
 		}
-		
-	$(".caseArr").click(function(){
-		hilightedZones = new Array();
-		$(".caseArr:checked").each(function(index){
-			hilightedZones.push($(this).attr('id').substr(3));
-		});
-	hilightZones();
-	});
 	
+	$(".caseArr, .caseAr").click(function(){
+		hilightZones();
+	});	
 }
 
 function addAddressesOnTheMap() {
@@ -129,22 +124,63 @@ function fitTheMap() {
     map.panToBounds(bounds); 
 }
 
-function hilightZones()
+function fillZoneArrays()
 {
+	hilightedZones = new Array();
 	for(i=1; i<=20; i ++)
 	{
-		arGeo[i-1].hideDocument();	
+		if($('#arr'+i).is(':checked'))
+		{
+			hilightedZones.push(i);
+		}
+		if($('#ar'+i).length && $('#ar'+i).is(':checked'))
+		{
+			hilightedZones.push(i);
+		}
+	}
+	hilightedZones = unique(hilightedZones);
+	//alert(hilightedZones);
+}
+
+function doHilightZones()
+{
+	fillZoneArrays();
+	for(i=1; i<=20; i ++)
+	{
+		arGeo[i-1].hideDocument();
 	}
 	for each(x in hilightedZones)
 	{
-		arGeo[x].showDocument(); 
+		arGeo[x-1].showDocument();
 	}
 }
 
+$(document).ready(function () {
+	setTimeout(hilightZones, 1000);
+});
+
+function hilightZones()
+{
+	doHilightZones();
+}
 
 //load the map when the page is loading
 google.maps.event.addDomListener(window, 'load', initialize);
 
+
+function unique(ar) {
+    var a = [];
+    var l = ar.length;
+    for(var i=0; i<l; i++) {
+      for(var j=i+1; j<l; j++) {
+        // If this[i] is found later in the array
+        if (ar[i] === ar[j])
+          j = ++i;
+      }
+      a.push(ar[i]);
+    }
+    return a;
+  };
 
 
 
