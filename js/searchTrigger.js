@@ -2,17 +2,24 @@
 function dialogBoxFiltersManager(){
 	var checkedFilters = []; 
 	var nonCheckedFilters = [];
+
 	$("#districts-dialog-box li").each(function(){
 		var li = $(this);
 		var input = li.children()[0];
+		var zoneNumber = $(this).attr('name');
+		zoneNumber = zoneNumber.substr(3);	
 		if(input.checked){
 			//On coche l'élément du DOM 'input'
 			input.setAttribute('checked',true);
 			checkedFilters.push(li);
+
+			input.setAttribute('id','arr'+zoneNumber);		
 		}
 		else{
 			nonCheckedFilters.push(li);
-		}	
+			input.setAttribute('id','arr'+zoneNumber);	
+		}
+
 	});	
 	
 	var totalFilters = checkedFilters.concat(nonCheckedFilters);
@@ -34,6 +41,10 @@ function changeHomePageFilters(totalFilters){
 	}
 	
 	$("#districts form").html(filterListHTML);
+	
+	$(".caseArr, .caseAr").click(function(){
+		hilightZones();
+	});	
 }
 
 
