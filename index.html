@@ -23,24 +23,25 @@
 	<!-- bonjou -->
         <header>
         <div id="header_container">
-            <h1>Paris Places</h1>
+            <a href=""><h1>Paris Places</h1></a>
             <h2>Open Data Showcase</h2>
         </div>
         </header>
         <div id="main">
             <div id="main_container">
+            <div id="message"> </div>
                 <div id="filter_zone">
                     <h3>Visualisez les lieux de Paris!</h3>
                     <div id="districts">
                         <h4>Arrondissements</h4>
                         <ul>
                             <form name="criteres">
-                                <li><input name="arr1" type="checkbox" id="arr1" class="caseArr" />Ier</li>
-                                <li><input name="arr2" type="checkbox" id="arr2" class="caseArr" />IIe</li>
-                                <li><input name="arr3" type="checkbox" id="arr3" class="caseArr" />IIIe</li>
-                                <li><input name="arr4" type="checkbox" id="arr4" class="caseArr" />IVe</li>
-                                <li><input name="arr5" type="checkbox" id="arr5" class="caseArr" />Ve</li>
-                                <li><input name="arr6" type="checkbox" id="arr6" class="caseArr" />VIe</li>
+                                <li><input name="arr1" type="checkbox" id="arr1" class="caseArr" /><span>Ier</span></li>
+                                <li><input name="arr2" type="checkbox" id="arr2" class="caseArr" /><span>IIe</span></li>
+                                <li><input name="arr3" type="checkbox" id="arr3" class="caseArr" /><span>IIIe</span></li>
+                                <li><input name="arr4" type="checkbox" id="arr4" class="caseArr" /><span>IVe</span></li>
+                                <li><input name="arr5" type="checkbox" id="arr5" class="caseArr" /><span>Ve</span></li>
+                                <li><input name="arr6" type="checkbox" id="arr6" class="caseArr" /><span>VIe</span></li>
                             </form>
                         </ul>
                         <a href="districts-dialog-box.html" rel="facebox">Voir plus d'arrondissements</a>
@@ -50,54 +51,61 @@
                         <div class="category">
                             <h5><input type="checkbox"/>Jeunesse</h5>
                             <ul>
-                                <li><input type="checkbox" name="typ1" />Crèche collective</li>
-                                <li><input type="checkbox" name="typ2" />Crèche familiale</li>
-                                <li><input type="checkbox"/>Ecole élémentaire & annexes</li>
-                                <li><input type="checkbox"/>Ecole maternelle & annexes</li>
-                                <li><input type="checkbox"/>Ecole polyvalente</li>
+                                <li><input type="checkbox" name="typ1" /><span>Crèche collective</span></li>
+                                <li><input type="checkbox" name="typ2" /><span>Crèche familiale</span></li>
+                                <li><input type="checkbox"/><span>Ecole élémentaire & annexes</span></li>
+                                <li><input type="checkbox"/><span>Ecole maternelle & annexes</span></li>
+                                <li><input type="checkbox"/><span>Ecole polyvalente</span></li>
                             </ul>
                         </div>
                         <div class="category">
                             <h5><input type="checkbox"/>Sport</h5>
                             <ul>
-                                <li><input type="checkbox"/>Aires sportives en accès libre</li>
-                                <li><input type="checkbox"/>Gymnase</li>
-                                <li><input type="checkbox"/>Piscine</li>
-                                <li><input type="checkbox"/>Salle de sport</li>
-                                <li><input type="checkbox"/>Terrain de Tennis</li>
+                                <li><input type="checkbox"/><span>Aires sportives en accès libre</span></li>
+                                <li><input type="checkbox"/><span>Gymnase</span></li>
+                                <li><input type="checkbox"/><span>Piscine</span></li>
+                                <li><input type="checkbox"/><span>Salle de sport</span></li>
+                                <li><input type="checkbox"/><span>Terrain de Tennis</span></li>
                             </ul>
                         </div>
                         <div class="category">
                             <h5><input type="checkbox"/>Autres</h5>
                             <ul>
-                                <li><input name="typbiblio" type="checkbox"/>Bibliothèque</li>
-                                <li><input type="checkbox"/>Conservatoire</li>
-                                <li><input type="checkbox"/>Espace vert</li>
-                                <li><input type="checkbox"/>Mairie d’arrondissement</li>
-                                <li><input type="checkbox"/>Pigeonnier</li>
+                                <li><input name="typbiblio" type="checkbox"/><span>Bibliothèque</span></li>
+                                <li><input type="checkbox"/><span>Conservatoire</span></li>
+                                <li><input type="checkbox"/><span>Espace vert</span></li>
+                                <li><input type="checkbox"/><span>Mairie d’arrondissement</span></li>
+                                <li><input type="checkbox"/><span>Pigeonnier</span></li>
                             </ul>
                         </div>
                         <a href="category-dialog-box.html" rel="facebox">Voir d'autres types de lieu</a>
                     </div>
                 </div>
-                <div id="results_zone">
-                    <h3>Résultats de la recherche</h3>
-                    <div class="result odd" name="address" value="4, place du Louvre, 75001 Paris">
-                        <h4>Bibliothèque municipale du Louvre</h4>
-                        <p>4, place du Louvre</p>
-                        <p>75001 Paris</p>
+                <div id="left_column">
+                    <div id="results_title">
+                        <div id="results_zone_loading"><h3>Résultats de la recherche &nbsp;&nbsp;  <img src="style/loading.gif"/> </h3></div>
+                        <div id="results_zone_notloading"><h3>Résultats de la recherche &nbsp;&nbsp; </h3></div>
                     </div>
-                    <div class="result even" name="address" value="91 rue Rambuteau, 75001 Paris">
-                        <h4>Bibliothèque municipale La Fontaine</h4>
-                        <p>91, rue Rambuteau</p>
-                        <p>75001 Paris</p>
+                    <div id="results_zone">
+                        <div class="result odd" name="address" value="4, place du Louvre, 75001 Paris">
+                            <h4>Bibliothèque municipale du Louvre</h4>
+                            <p>4, place du Louvre</p>
+                            <p>75001 Paris</p>
+                        </div>
+                        <div class="result even" name="address" value="91 rue Rambuteau, 75001 Paris">
+                            <h4>Bibliothèque municipale La Fontaine</h4>
+                            <p>91, rue Rambuteau</p>
+                            <p>75001 Paris</p>
+                        </div>
                     </div>
-                    <div id="contenu"> 
-                        Nothing for now
+                    <div id="pagination_container">
+                        <div id="pagination"> 
+                            Nothing for now
+                        </div>
                     </div>
                 </div>
                 <div id="map_zone">
-                    <div id="map" style="width: 500px; height: 350px;" >
+                    <div id="map" style="width: 550px; height: 350px;" >
                     </div>
                     <br /><small><a href="http://maps.google.fr/maps?f=q&amp;source=embed&amp;hl=fr&amp;geocode=&amp;q=Biblioth%C3%A8que+%C3%A0+proximit%C3%A9+de+1er+Arrondissement,+Paris&amp;aq=0&amp;sll=48.851388,2.360172&amp;sspn=0.056365,0.153465&amp;gl=fr&amp;ie=UTF8&amp;hq=Biblioth%C3%A8que&amp;hnear=1er+Arrondissement,+Paris,+Ile-de-France&amp;ll=48.861228,2.344544&amp;spn=0.006295,0.008576" style="color:#0000FF;text-align:left">Agrandir le plan</a></small>
                 </div>

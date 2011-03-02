@@ -1,3 +1,35 @@
+//these variables are meant to get where we are in the pagination
+var currentOffset =0;
+var currentLimit = 10;
+
+//list of the word not to capitalize
+//mainly common words like le, las, les, du 
+
+var commonWords= {"rue":1,
+    "du":1, 
+    "la":1,
+    "les":1,
+    "des":1,
+    "place":1,
+    "boulevard":1
+};
+
+
+
+function displayMessage(string) {
+    $("#message").empty(); // on vide le div
+    $("#message").html(string);
+    
+}
+
+function loading() {
+    $("#results_zone_loading").show();
+    $("#results_zone_notloading").hide();
+}
+function notLoading() {
+    $("#results_zone_notloading").show();
+    $("#results_zone_loading").hide();
+}
 
 function checkSelect(){
     //parcourt les checboxes et teste si elle sont cochées ou non
@@ -37,7 +69,6 @@ function checkSelect(){
 
 
 
-var bob = '<?xml version="1.0" encoding="utf-8" ?><places> <place id=”897ff56a2”> <name>Bibliothèque François Mitterrand</name> <address>1 boulevard Pasteur, Paris</address> <coords>874.93879098</coords> </place> <place id=”89ds56”> <name>Mes grands parents</name> <address>76 rue Notre Dame des Champs, Paris</address> <coords>874.93879098</coords> </place> <place id="8493843dd89"> <name>Un endroit sympa</name><address> Ile de la Cité, Paris</address>  </place>  </places>';
 
 function makeThemBouncable() {
     //makes the marker be able to react on the mouse hovering on the associated address
@@ -52,29 +83,36 @@ function makeThemBouncable() {
 }
 
 
-function afficher(donnees){ // pour remplacer le contenu du div contenu
-    $("#contenu").empty(); // on vide le div
+function afficher(donnees){ 
     $("#results_zone").empty(); // on vide le div
+
 
     // on stocke la parité pour pouvoir faire un affichage plus elegant	
     var even = 0;
     var class;
+
+    //we dont want to display more than currentLimitItems, even if the server does not work as expected (else the geocoder is the bottleneck of the application)
+    var i=0;
 
     // parcours du xml
     $(donnees).find('place').each(  function() {
         even = (even +1) % 2;
         class = "result ";                                              //permet de rendre les résultats bouncable 
         if (even == 0 ) { class += "even"; } else { class += "odd"; }   //permet de rendre l'affichage plus élégant
-        var id = $(this).attr('id');
-        var name = $(this).find('name').text();
-        var  address = $(this).find('address').text();
+        if (i<currentLimit) {
+            var id = $(this).attr('id');
+            var name = $(this).find('name').text();
+            var  address = $(this).find('address').text();
 
-        // construction du html à afficher pour cette adresse.
-        var html = "<h4>" + name + "</h4>";
-        html += "<p>"+  address + "</p>";
-        //affichage du html dans la bonne zone
-        $('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#results_zone');
+            // construction du html à afficher pour cette adresse.
+            var html = "<h4>" + properCap(name) + "</h4>";
+            html += "<p>"+  properCap(address) + "</p>";
+            //affichage du html dans la bonne zone
+            $('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#results_zone');
+        }
+        i = i+1;
     } );
+
 
     addAddressesOnTheMap();
     makeThemBouncable();
@@ -91,34 +129,115 @@ function findAssociatedMarker(address) {
             return result;
         }
     }
-    if (result == null) { alert('not found'); }
+    if (result == null) {
+        //previously we alert but this leads to an error if we try to over a result too soon
+        //so we silently fail
+        return null;
+    }
 }
 
 function getPlaces(data){
-        page="connecteur.php"; // on recuperer l' adresse du lien
-	$.ajax({  // ajax
-            type: "GET",
-            dataType: "xml",
-            data: data,
-            url: page, // url de la page à charger
-            cache: false, // pas de mise en cache
-            success:function(result){ // si la requête est un succès
-                afficher(result);
-            },
-            error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
-                      alert("Argh Something is not good\n (don't kill the messenger !)");
+    page="connecteur.php"; // on recuperer l' adresse du lien
+    displayMessage(data);
+    $.ajax({  // ajax
+        type: "GET",
+        dataType: "xml",
+        data: data,
+        url: page, // url de la page à charger
+        cache: false, // pas de mise en cache
+        success:function(result){ // si la requête est un succès
+            afficher(result);
+            displayMessage("");
+            notLoading();
+            addPagination();
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
+                  displayMessage("Argh Something is not good\n (don't kill the messenger !)");
 
-                  }
-        });
+              }
+    });
 }
 
+function addPagination() {
+    $('#pagination').html("");
+    if (currentOffset > 0) {
+        $('#pagination').append('<div id="prev"><a>Precedent</a><div>');
+        $('#prev a').click(function() {
+            currentOffset = Math.max(currentOffset - currentLimit,0);
+            getResults(currentOffset,currentLimit);
+        });
+    }
+    $('#pagination').append('<div id="next"><a>Suivant</a><div>');
+    $('#next a').click(function() {
+        currentOffset += currentLimit;
+        getResults(currentOffset,currentLimit);
+    });
+
+}
+
+function requestConstructor(offset, limit) {
+    //construit la requete et vérfiie au passage que les arguments ont bien été donnés.
+    data = checkSelect();
+    if (offset != null) {data += "&offset="+offset;}
+    if (limit != null) {data += "&limit="+limit;}
+    return data;
+}
+
+function getResults(offset, limit) {
+    //fonction qui va chercher les résultats.
+    //commence par mettre en chargement, puis construit une requete et enfin l'exécute
+    loading();
+    data = requestConstructor(offset,limit);
+    getPlaces(data);
+}
+
+
+
+// Pour checker les checkbox en cliquant sur le texte associé
+
+
 $(document).ready(function(){ 	// le document est chargé
+    addPagination();
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-        data = checkSelect();
-        getPlaces(data);
+        currentLimit = 10;
+        currentOffset = 0;
+        getResults(currentOffset,currentLimit);
         return true; // on laisse la case cochée
     });
 
-    makeThemBouncable();
+ $("li span").click(function(){
+		var span= $(this);
+		var li = span.parent();
+		var input = li.children()[0];	
+		if(input.checked){
+		    input.checked=false;
+		}
+		else{
+			input.checked=true;
+			currentLimit = 10;
+			currentOffset = 0;
+			getResults(currentOffset,currentLimit);
+		return true;
+		}	
+	});
+    
+   makeThemBouncable();
 
 });
+	
+function properCap(str) {
+    //var string = str.toLowerCase();
+    //return string.charAt(0).toUpperCase() + string.slice(1);
+    val = str;
+    newVal = '';
+    val = val.split(' ');
+    for(var c=0; c < val.length; c++) {
+        var upp = val[c].toLowerCase();
+        if (!( upp in commonWords)) {
+            newVal += upp.charAt(0).toUpperCase() + upp.slice(1) + ' ';
+        } else {
+            newVal += upp+ ' ';
+        }
+    }
+    return newVal;
+}

@@ -14,21 +14,34 @@
 	width:850px;
 }
 
+#message
+{
+	float:left;
+	padding-bottom:12px;
+	width:100%;
+	color:red;
+}
+
 /*-------- RESULTS ZONE --------------------*/
+
+#left_column{
+    float:left;
+	width:38%;
+}
+
 
 #results_zone
 {
 	float:left;
-	margin-top:20px;
 	margin-right:12px;
-	width:38%;
 }
 
-#results_zone h3
+#results_title h3
 {
 	float:left;
 	width:96%;
-	padding-bottom:6px;
+	margin-top:20px;
+	padding-bottom:12px;
 	padding-left:12px;
 	font-size:17px;
 	text-transform:uppercase;
@@ -69,3 +82,27 @@
 	height:400px;
 }
 
+/*--------- PAGINATION ------------*/
+
+#pagination_container{
+    margin:auto;
+    width:120px;
+}
+
+#pagination
+{
+    margin-top:10px;
+    float:left;
+    width:100%;
+    text-align:center;
+}
+
+#next{
+    float:left;
+    width:50%;
+}
+
+#prev{
+    float:left;
+    width:50%;
+}
