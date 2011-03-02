@@ -27,20 +27,9 @@ function initialize() {
 		geoXml.parse('kml/'+i+'.kml');
 		arGeo.push(geoXml);
 		}
-<<<<<<< HEAD
-		
-	$(".caseArr").click(function(){
-		highlightedZones = new Array();
-		$(".caseArr:checked").each(function(index){
-			highlightedZones.push($(this).attr('id').substr(3));
-		});
-	highlightZones();
-	});
-=======
->>>>>>> ece3c413e246b77c2a6e8fd99caf5065fe9a4dcf
-	
+
 	$(".caseArr, .caseAr").click(function(){
-		hilightZones();
+		highlightZones();
 	});	
 }
 
@@ -177,29 +166,25 @@ function fitTheMap() {
     //pour le moment cette fonction renvoit de temps en temps des zones fausses pour une raison bizarre
 }
 
-<<<<<<< HEAD
-function highlightZones()
-=======
 function fillZoneArrays()
 {
-	hilightedZones = new Array();
+	highlightedZones = new Array();
 	for(i=1; i<=20; i ++)
 	{
 		if($('#arr'+i).is(':checked'))
 		{
-			hilightedZones.push(i);
+			highlightedZones.push(i);
 		}
 		if($('#ar'+i).length && $('#ar'+i).is(':checked'))
 		{
-			hilightedZones.push(i);
+			highlightedZones.push(i);
 		}
 	}
-	hilightedZones = unique(hilightedZones);
-	//alert(hilightedZones);
+	highlightedZones = unique(highlightedZones);
+	//alert(highlightedZones);
 }
 
-function doHilightZones()
->>>>>>> ece3c413e246b77c2a6e8fd99caf5065fe9a4dcf
+function dohighlightZones()
 {
 	fillZoneArrays();
 
@@ -207,24 +192,20 @@ function doHilightZones()
 	{
 		arGeo[i-1].hideDocument();
 	}
-<<<<<<< HEAD
-	for each(x in highlightedZones)
-=======
 
-	for (i=0;i<hilightedZones.length;i++)
->>>>>>> ece3c413e246b77c2a6e8fd99caf5065fe9a4dcf
+	for (i=0;i<highlightedZones.length;i++)
 	{
-		arGeo[hilightedZones[i]-1].showDocument();
+		arGeo[highlightedZones[i]-1].showDocument();
 	}
 }
 
 $(document).ready(function () {
-	setTimeout(hilightZones, 1000);
+	setTimeout(highlightZones, 1000);
 });
 
-function hilightZones()
+function highlightZones()
 {
-	doHilightZones();
+	dohighlightZones();
 }
 
 //load the map when the page is loading

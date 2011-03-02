@@ -47,7 +47,7 @@ function changeHomePageFilters(totalFilters){
     });
 	
 	$(".caseArr, .caseAr").click(function(){
-		hilightZones();
+		highlightZones();
 	});	
 }
 
