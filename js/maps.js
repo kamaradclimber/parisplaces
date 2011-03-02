@@ -28,6 +28,7 @@ function initialize() {
 		arGeo.push(geoXml);
 		}
 		
+	hilightedZones = new Array();
 	$(".caseArr").click(function(){
 		hilightZones();
 	});
@@ -116,18 +117,15 @@ function fitTheMap() {
     map.panToBounds(bounds); 
 }
 
-
 function hilightZones()
 {
 	for(i=1; i<=20; i ++)
 	{
-		//window.setTimeout(hilightZones,50);
-
-		arGeo[i-1].hideDocument();
-		if(document.getElementById('arr'+i) != null && document.getElementById('arr'+i).checked) 
-		{
-			arGeo[i-1].showDocument(); 
-		}
+		arGeo[i-1].hideDocument();	
+	}
+	for each(x in hilightedZones)
+	{
+		arGeo[x].showDocument(); 
 	}
 }
 
