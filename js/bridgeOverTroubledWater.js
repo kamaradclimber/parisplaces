@@ -11,7 +11,8 @@ var commonWords= {"rue":1,
     "les":1,
     "des":1,
     "place":1,
-    "boulevard":1
+    "boulevard":1,
+    "rues":1
 };
 
 
@@ -103,7 +104,7 @@ function afficher(donnees){
             var id = $(this).attr('id');
             var name = $(this).find('name').text();
             var  address = $(this).find('address').text();
-
+            name = cleanifyer(name,address);
             // construction du html à afficher pour cette adresse.
             var html = "<h4>" + properCap(name) + "</h4>";
             html += "<p>"+  properCap(address) + "</p>";
@@ -227,7 +228,19 @@ $(document).ready(function(){ 	// le document est chargé
    makeThemBouncable();
 
 });
-	
+
+function cleanifyer(name,address) {
+   //try to suppress the address contained in the name if it is !
+
+    var cleanadd = address.substr(0,address.length-6);
+    if (name.substr(name.length - cleanadd.length ,  cleanadd.length) == cleanadd)
+    {
+            name = name.substr(0, cleanadd.length);
+    }
+   return name; 
+}
+
+
 function properCap(str) {
     //var string = str.toLowerCase();
     //return string.charAt(0).toUpperCase() + string.slice(1);
