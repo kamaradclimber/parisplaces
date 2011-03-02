@@ -29,13 +29,8 @@ function initialize() {
 		}
 		
 	$(".caseArr").click(function(){
-		hilightedZones = new Array();
-		$(".caseArr:checked").each(function(index){
-			hilightedZones.push($(this).attr('id').substr(3));
-		});
-	hilightZones();
+		hilightZones();
 	});
-	
 }
 
 function addAddressesOnTheMap() {
@@ -129,15 +124,18 @@ function fitTheMap() {
     map.panToBounds(bounds); 
 }
 
+
 function hilightZones()
 {
 	for(i=1; i<=20; i ++)
 	{
-		arGeo[i-1].hideDocument();	
-	}
-	for each(x in hilightedZones)
-	{
-		arGeo[x].showDocument(); 
+		//window.setTimeout(hilightZones,50);
+
+		arGeo[i-1].hideDocument();
+		if(document.getElementById('arr'+i) != null && document.getElementById('arr'+i).checked) 
+		{
+			arGeo[i-1].showDocument(); 
+		}
 	}
 }
 

@@ -1,6 +1,6 @@
 //these variables are meant to get where we are in the pagination
 var currentOffset =0;
-var currentLimit = 10;
+var currentLimit = 5;
 
 //list of the word not to capitalize
 //mainly common words like le, las, les, du 
@@ -141,13 +141,13 @@ function getPlaces(data){
     displayMessage(data);
     $.ajax({  // ajax
         type: "GET",
-        dataType: "xml",
+        dataType: "html",
         data: data,
         url: page, // url de la page à charger
         cache: false, // pas de mise en cache
         success:function(result){ // si la requête est un succès
-            afficher(result);
             displayMessage("");
+            afficher(result);
             notLoading();
             addPagination();
         },
@@ -199,7 +199,7 @@ function getResults(offset, limit) {
 $(document).ready(function(){ 	// le document est chargé
     addPagination();
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-        currentLimit = 10;
+        currentLimit = 5;
         currentOffset = 0;
         getResults(currentOffset,currentLimit);
         return true; // on laisse la case cochée
@@ -214,7 +214,7 @@ $(document).ready(function(){ 	// le document est chargé
 		}
 		else{
 			input.checked=true;
-			currentLimit = 10;
+			currentLimit = 5;
 			currentOffset = 0;
 			getResults(currentOffset,currentLimit);
 		return true;
