@@ -27,10 +27,10 @@ function initialize() {
 		geoXml.parse('kml/'+i+'.kml');
 		arGeo.push(geoXml);
 		}
-		
-	$(".caseArr").click(function(){
+	
+	$(".caseArr, .caseAr").click(function(){
 		hilightZones();
-	});
+	});	
 }
 
 function addAddressesOnTheMap() {
@@ -38,7 +38,7 @@ function addAddressesOnTheMap() {
     // and then add each point as a marker on the map
 
     //clear the previous marker
-    places.forEach( function(marker) { marker.setMap(null); });
+    places.forEach(function(marker) { marker.setMap(null); });
     places = new Array();
     var marker;
     var address;
@@ -112,6 +112,7 @@ function highlight(marker) {
 }
 
 function fitTheMap() {
+    /*
     var sw =  new google.maps.LatLng(48.8574, 2.3478);
     var ne =  new google.maps.LatLng(48.8575, 2.3479);
     var bounds = new google.maps.LatLngBounds(sw,ne);
@@ -119,30 +120,72 @@ function fitTheMap() {
     for(i=0;i<places.length;i++) { 
         //alert(bounds);
          bounds = bounds.extend(places[i].getPosition());
+         alert( places[i].getPosition());
     };
     //map.fitBounds(bounds); 
     map.panToBounds(bounds); 
+    */
+    //pour le moment cette fonction renvoit de temps en temps des zones fausses pour une raison bizarre
 }
 
-
-function hilightZones()
+function fillZoneArrays()
 {
+	hilightedZones = new Array();
 	for(i=1; i<=20; i ++)
 	{
-		//window.setTimeout(hilightZones,50);
-
-		arGeo[i-1].hideDocument();
-		if(document.getElementById('arr'+i) != null && document.getElementById('arr'+i).checked) 
+		if($('#arr'+i).is(':checked'))
 		{
-			arGeo[i-1].showDocument(); 
+			hilightedZones.push(i);
 		}
+		if($('#ar'+i).length && $('#ar'+i).is(':checked'))
+		{
+			hilightedZones.push(i);
+		}
+	}
+	hilightedZones = unique(hilightedZones);
+	//alert(hilightedZones);
+}
+
+function doHilightZones()
+{
+	fillZoneArrays();
+	for(i=1; i<=20; i ++)
+	{
+		arGeo[i-1].hideDocument();
+	}
+
+	for (i=0;i<hilightedZones.length;i++)
+	{
+		arGeo[i].showDocument();
 	}
 }
 
+$(document).ready(function () {
+	setTimeout(hilightZones, 1000);
+});
+
+function hilightZones()
+{
+	doHilightZones();
+}
 
 //load the map when the page is loading
 google.maps.event.addDomListener(window, 'load', initialize);
 
+
+function unique(ar) {
+    var a = [];
+    var l = ar.length;
+    for(var i=0; i<l; i++) {
+      for(var j=i+1; j<l; j++) {
+        // If this[i] is found later in the array
+        if (ar[i] === ar[j])
+          j = ++i;
+      }
+      a.push(ar[i]);
+    }
+    return a;
+  };
 
 
 

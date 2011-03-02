@@ -1,6 +1,6 @@
 //these variables are meant to get where we are in the pagination
 var currentOffset =0;
-var currentLimit = 10;
+var currentLimit = 5;
 
 //list of the word not to capitalize
 //mainly common words like le, las, les, du 
@@ -39,13 +39,13 @@ function checkSelect(){
 	$("#filter_zone li").each(function(){
 		var input = $(this).children()[0];
 		if(input.checked){
-                $firstLetters = input.name.substr(0,3); //on teste le type de la checkbox
+                $firstLetters = input.id.substr(0,3); //on teste le type de la checkbox
                 switch ($firstLetters) {
                     case "arr" :
-                        $districts_list += input.name.substring(3,input.name.length) +",";
+                        $districts_list += input.id.substring(3,input.id.length) +",";
                         break;
                     case "typ":
-                        $type_list      += input.name.substring(3,input.name.length) +",";
+                        $type_list      += input.id.substring(3,input.id.length) +",";
                         break;
                 }
 		}	
@@ -141,13 +141,13 @@ function getPlaces(data){
     displayMessage(data);
     $.ajax({  // ajax
         type: "GET",
-        dataType: "xml",
+        dataType: "html",
         data: data,
         url: page, // url de la page à charger
         cache: false, // pas de mise en cache
         success:function(result){ // si la requête est un succès
-            afficher(result);
             displayMessage("");
+            afficher(result);
             notLoading();
             addPagination();
         },
@@ -191,6 +191,12 @@ function getResults(offset, limit) {
     getPlaces(data);
 }
 
+function reactToClickOnForm() {
+        currentLimit = 5;
+        currentOffset = 0;
+        getResults(currentOffset,currentLimit);
+        return true; // on laisse la case cochée
+}
 
 
 // Pour checker les checkbox en cliquant sur le texte associé
@@ -199,10 +205,7 @@ function getResults(offset, limit) {
 $(document).ready(function(){ 	// le document est chargé
     addPagination();
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-        currentLimit = 10;
-        currentOffset = 0;
-        getResults(currentOffset,currentLimit);
-        return true; // on laisse la case cochée
+        reactToClickOnForm();
     });
 
  $("li span").click(function(){
@@ -214,7 +217,7 @@ $(document).ready(function(){ 	// le document est chargé
 		}
 		else{
 			input.checked=true;
-			currentLimit = 10;
+			currentLimit = 5;
 			currentOffset = 0;
 			getResults(currentOffset,currentLimit);
 		return true;
