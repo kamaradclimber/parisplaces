@@ -191,7 +191,8 @@ function getResults(offset, limit) {
 $(document).ready(function(){ 	// le document est chargé
     addPagination();
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-        currentLimit = 10;
+var class= this.className;     
+	   currentLimit = 10;
         currentOffset = 0;
         getResults(currentOffset,currentLimit);
         return true; // on laisse la case cochée
@@ -212,7 +213,16 @@ $(document).ready(function(){ 	// le document est chargé
 		return true;
 		}	
 	});
-    
+     
+  $(".Checkall").click(function(){
+	var id= this.id;
+	var checked_status = this.checked;
+	$("input[class="+id+"]").each(function()
+		{
+		this.checked = checked_status;
+		});
+	});
+	
    makeThemBouncable();
 
 });

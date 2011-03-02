@@ -324,8 +324,10 @@
   
   // Check les checkbox en cliquant sur texte associé
    $(document).bind('reveal.facebox',function(){
-   $("li").click(function(){
-		var li = $(this);
+   $("li span").click(function(){
+		//alert("test");
+		var span= $(this);
+		var li = span.parent();
 		var input = li.children()[0];
 				
 		if(input.checked){
@@ -337,17 +339,17 @@
 	});
 	})
 
-	   $(document).bind('reveal.facebox',function(){
-   $("#category-dialog-box h5 input").click(function(){
-		/* var li = $(this);
-		var input = li.children()[0];
-				
-		if(input.checked){
-		input.checked=false;
-		}
-		else{
-			input.checked=true;
-		}	*/
+		// Check all function
+	$(document).bind('reveal.facebox',function(){
+   $(".category-dialog-box h5 input").click(function(){
+	var parentInput= $(this);
+	var div= parentInput.parent().parent();
+	var ul= div.children[1];
+	var checked_status = this.checked;
+	$("input[class="+id+"]").each(function()
+		{
+		this.checked = checked_status;
+		});
 	});
 	})
 	
