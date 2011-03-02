@@ -38,14 +38,15 @@ function checkSelect(){
     $type_list	= "";
 	$("#filter_zone li").each(function(){
 		var input = $(this).children()[0];
+        alert(input.id);
 		if(input.checked){
-                $firstLetters = input.name.substr(0,3); //on teste le type de la checkbox
+                $firstLetters = input.id.substr(0,3); //on teste le type de la checkbox
                 switch ($firstLetters) {
                     case "arr" :
-                        $districts_list += input.name.substring(3,input.name.length) +",";
+                        $districts_list += input.id.substring(3,input.name.length) +",";
                         break;
                     case "typ":
-                        $type_list      += input.name.substring(3,input.name.length) +",";
+                        $type_list      += input.id.substring(3,input.name.length) +",";
                         break;
                 }
 		}	
@@ -191,6 +192,12 @@ function getResults(offset, limit) {
     getPlaces(data);
 }
 
+function reactToClickOnForm() {
+        currentLimit = 5;
+        currentOffset = 0;
+        getResults(currentOffset,currentLimit);
+        return true; // on laisse la case cochée
+}
 
 
 // Pour checker les checkbox en cliquant sur le texte associé
@@ -199,10 +206,7 @@ function getResults(offset, limit) {
 $(document).ready(function(){ 	// le document est chargé
     addPagination();
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-        currentLimit = 5;
-        currentOffset = 0;
-        getResults(currentOffset,currentLimit);
-        return true; // on laisse la case cochée
+        reactToClickOnForm();
     });
 
  $("li span").click(function(){

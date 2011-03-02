@@ -43,6 +43,9 @@ function changeHomePageFilters(totalFilters){
 	}
 	
 	$("#districts form").html(filterListHTML);
+    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
+        reactToClickOnForm();
+    });
 	
 	$(".caseArr, .caseAr").click(function(){
 		hilightZones();
