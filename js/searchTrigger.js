@@ -4,6 +4,7 @@ function dialogBoxFiltersManager(){
 	var nonCheckedFilters = [];
 	highlightedZones = new Array();
 	
+	//Répartir les filtres cochés et les filtres non cochés dans les tableaux correspondants
 	$("#districts-dialog-box li").each(function(){
 		var li = $(this);
 		var input = li.children()[0];
@@ -19,10 +20,9 @@ function dialogBoxFiltersManager(){
 		else{
 			nonCheckedFilters.push(li);
 		}
-
-		
 	});	
 	
+	//Concaténer le tableau des filtres non-cochés au tableau des filtres cochés
 	var totalFilters = checkedFilters.concat(nonCheckedFilters);
 	
 	//Changer la page principale lorsque l'évènement se termine
@@ -31,6 +31,7 @@ function dialogBoxFiltersManager(){
     getPlaces(data);
 	$(document).trigger('close.facebox');
 	
+	//Mettre les événements Google Maps
 	highlightZones();
 }
 
