@@ -112,6 +112,7 @@ function highlight(marker) {
 }
 
 function fitTheMap() {
+    /*
     var sw =  new google.maps.LatLng(48.8574, 2.3478);
     var ne =  new google.maps.LatLng(48.8575, 2.3479);
     var bounds = new google.maps.LatLngBounds(sw,ne);
@@ -119,9 +120,12 @@ function fitTheMap() {
     for(i=0;i<places.length;i++) { 
         //alert(bounds);
          bounds = bounds.extend(places[i].getPosition());
+         alert( places[i].getPosition());
     };
     //map.fitBounds(bounds); 
     map.panToBounds(bounds); 
+    */
+    //pour le moment cette fonction renvoit de temps en temps des zones fausses pour une raison bizarre
 }
 
 function fillZoneArrays()

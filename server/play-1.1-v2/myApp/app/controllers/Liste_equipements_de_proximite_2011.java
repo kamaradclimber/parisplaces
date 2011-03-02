@@ -18,9 +18,10 @@ public class Liste_equipements_de_proximite_2011 extends CsvConnector {
 	public Liste_equipements_de_proximite_2011()
 			throws SQLException {
 		super("data/Liste_equipements_de_proximite_2011.csv");
-		super.hierarchy = new Categories("Ecole Maternelle");
-		super.typeColumnName = ;
-		super.districtColumnName = "S_guest";
+		super.hierarchy = new Categories("Halte-garderie");
+		super.typeColumnName = "COLUMN1";
+		super.districtColumnName = "S_gest";
+		super.encoding = "ISO-8859-1";
 		}
 
 	@Override
@@ -31,7 +32,9 @@ public class Liste_equipements_de_proximite_2011 extends CsvConnector {
 
 	@Override
 	public String districtName(int district) {
-		String name = "MAIRIE DU  "  +district+"E";
+		String name = "MAIRIE DU ";
+		if (district<10) name+=" ";
+		name+=district+"E";
 		if (district ==1) name +="R";
 		return name;
 	}
@@ -44,14 +47,29 @@ public class Liste_equipements_de_proximite_2011 extends CsvConnector {
 		String type;
 		String voie;
 		while (rs.next()){
-			System.out.println("place:"+rs.getString(1)+"/"+rs.getString(2)+"/"+rs.getString(3)+"/"+rs.getString(4)+"/"+rs.getString(5)+"/"+rs.getString(6)+"/"+rs.getString(7));
 			if (rs.getString(1)==null) continue;
+			int district=0;
+			if (rs.getString(1).endsWith("R"))
+			{
+				district = 1;
+			}
+			else
+			{
 			String dis = rs.getString(1).substring(10, rs.getString(1).length()-1 );
-			int district;
+			
 			try{
+				//dis = " 3" or "13"
 				district = Integer.parseInt(dis);
 			}catch (NumberFormatException e) {
-				district = 1;
+				//dis = " 3"
+				dis = dis.substring(1);
+				try {
+					district = Integer.parseInt(dis);
+				}
+				catch (NumberFormatException e2) {
+					e2.printStackTrace();
+				}
+			}
 			}
 			description = rs.getString(3);
 			if (description != null) description = description.replace("&", "et");
@@ -62,7 +80,7 @@ public class Liste_equipements_de_proximite_2011 extends CsvConnector {
 			//TODO: pas ici qu'il faut remplacer, et de plus d'autres caractères interdits
 			currentPlace = new Place(description, district, type, description, rs.getInt(4), rs.getInt(6), voie);
 			places.add(currentPlace);
-			System.out.println(currentPlace);
+			//System.out.println(currentPlace);
 		}
 		return places;
 	}
