@@ -27,17 +27,10 @@ function initialize() {
 		geoXml.parse('kml/'+i+'.kml');
 		arGeo.push(geoXml);
 		}
-<<<<<<< HEAD
-		
-	$(".caseArr").click(function(){
-		hilightZones();
-	});
-=======
 	
 	$(".caseArr, .caseAr").click(function(){
 		hilightZones();
 	});	
->>>>>>> b9eaa846a7a72b2fb7798fcfebc7bec49c5fce4d
 }
 
 function addAddressesOnTheMap() {
@@ -131,25 +124,11 @@ function fitTheMap() {
     map.panToBounds(bounds); 
 }
 
-<<<<<<< HEAD
-
-function hilightZones()
-=======
 function fillZoneArrays()
->>>>>>> b9eaa846a7a72b2fb7798fcfebc7bec49c5fce4d
 {
 	hilightedZones = new Array();
 	for(i=1; i<=20; i ++)
 	{
-<<<<<<< HEAD
-		//window.setTimeout(hilightZones,50);
-
-		arGeo[i-1].hideDocument();
-		if(document.getElementById('arr'+i) != null && document.getElementById('arr'+i).checked) 
-		{
-			arGeo[i-1].showDocument(); 
-		}
-=======
 		if($('#arr'+i).is(':checked'))
 		{
 			hilightedZones.push(i);
@@ -170,10 +149,10 @@ function doHilightZones()
 	{
 		arGeo[i-1].hideDocument();
 	}
-	for each(x in hilightedZones)
+
+	for (i=0;i<hilightedZones.length;i++)
 	{
 		arGeo[x-1].showDocument();
->>>>>>> b9eaa846a7a72b2fb7798fcfebc7bec49c5fce4d
 	}
 }
 
