@@ -322,7 +322,7 @@
 		});		
   })
   
-  // Check les checkbox en cliquant sur texte associé
+  // Check les checkbox en cliquant sur texte associŽ
    $(document).bind('reveal.facebox',function(){
    $("li").click(function(){
 		var li = $(this);

@@ -29,11 +29,11 @@ function initialize() {
 		}
 		
 	$(".caseArr").click(function(){
-		hilightedZones = new Array();
+		highlightedZones = new Array();
 		$(".caseArr:checked").each(function(index){
-			hilightedZones.push($(this).attr('id').substr(3));
+			highlightedZones.push($(this).attr('id').substr(3));
 		});
-	hilightZones();
+	highlightZones();
 	});
 	
 }
@@ -129,13 +129,13 @@ function fitTheMap() {
     map.panToBounds(bounds); 
 }
 
-function hilightZones()
+function highlightZones()
 {
 	for(i=1; i<=20; i ++)
 	{
 		arGeo[i-1].hideDocument();	
 	}
-	for each(x in hilightedZones)
+	for each(x in highlightedZones)
 	{
 		arGeo[x].showDocument(); 
 	}
