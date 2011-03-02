@@ -145,6 +145,7 @@ function fillZoneArrays()
 function doHilightZones()
 {
 	fillZoneArrays();
+
 	for(i=1; i<=20; i ++)
 	{
 		arGeo[i-1].hideDocument();
@@ -152,7 +153,7 @@ function doHilightZones()
 
 	for (i=0;i<hilightedZones.length;i++)
 	{
-		arGeo[i].showDocument();
+		arGeo[hilightedZones[i]-1].showDocument();
 	}
 }
 
