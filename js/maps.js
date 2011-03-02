@@ -149,9 +149,10 @@ function doHilightZones()
 	{
 		arGeo[i-1].hideDocument();
 	}
-	for each(x in hilightedZones)
+
+	for (i=0;i<hilightedZones.length;i++)
 	{
-		arGeo[x-1].showDocument();
+		arGeo[i-1].showDocument();
 	}
 }
 
