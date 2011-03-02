@@ -27,15 +27,10 @@ function initialize() {
 		geoXml.parse('kml/'+i+'.kml');
 		arGeo.push(geoXml);
 		}
-		
-	$(".caseArr").click(function(){
-		hilightedZones = new Array();
-		$(".caseArr:checked").each(function(index){
-			hilightedZones.push($(this).attr('id').substr(3));
-		});
-	hilightZones();
-	});
 	
+	$(".caseArr, .caseAr").click(function(){
+		hilightZones();
+	});	
 }
 
 function addAddressesOnTheMap() {
@@ -43,25 +38,63 @@ function addAddressesOnTheMap() {
     // and then add each point as a marker on the map
 
     //clear the previous marker
-    places.forEach( function(marker) { marker.setMap(null); });
+    places.forEach(function(marker) { marker.setMap(null); });
     places = new Array();
     var marker;
     var address;
+    var category;
     for(i=0; i<document.getElementsByName("address").length; i++) {
         address = document.getElementsByName("address")[i].getAttribute("value");
-        turnsItToMarker(address);
+        category = document.getElementsByName("address")[i].getAttribute("category");
+        turnsItToMarker(address, category);
     }
 }
 
 
 
-function turnsItToMarker(address) {
+function turnsItToMarker(address, category) {
+	var icoUrl = null;
+	
+	if(category != null)
+	{
+	if(category.search(/jardi/i) > -1 || category.search(/promena/i) > -1)
+		icoUrl = "icos/arbre.png";
+	if(category.search(/biblio/i) > -1)
+		icoUrl = "icos/biblio.png";
+	if(category.search(/ecole/i) > -1 || category.search(/crèche/i) > -1)
+		icoUrl = "icos/ecole.png";
+	if(category.search(/mairie/i) > -1)
+		icoUrl = "icos/fr.png";
+	if(category.search(/pigeo/i) > -1)
+		icoUrl = "icos/pigeon.png";
+	if(category.search(/piscin/i) > -1)
+		icoUrl = "icos/piscine.png";
+	if(category.search(/gymn/i) > -1)
+		icoUrl = "icos/sport.png";
+	if(category.search(/tennis/i) > -1)
+		icoUrl = "icos/tennis.png";
+	if(category.search(/conserva/i) > -1)
+		icoUrl = "icos/violon.png";
+	}
+		
     // create a marker linked to the postal address
     geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-            var marker = new google.maps.Marker({ 
-                position: results[0].geometry.location,
-            });
+			var marker;
+			if(icoUrl != null)
+			{
+				//var image = 'images/parkIcon.png';
+				marker = new google.maps.Marker({ 
+						position: results[0].geometry.location,
+						icon: icoUrl,
+					});	
+			}
+			else
+			{
+				marker = new google.maps.Marker({ 
+					position: results[0].geometry.location,
+				});	
+			}
             marker.address = address;
 
             putOnTheMap(marker);
@@ -117,6 +150,7 @@ function highlight(marker) {
 }
 
 function fitTheMap() {
+    /*
     var sw =  new google.maps.LatLng(48.8574, 2.3478);
     var ne =  new google.maps.LatLng(48.8575, 2.3479);
     var bounds = new google.maps.LatLngBounds(sw,ne);
@@ -124,27 +158,73 @@ function fitTheMap() {
     for(i=0;i<places.length;i++) { 
         //alert(bounds);
          bounds = bounds.extend(places[i].getPosition());
+         alert( places[i].getPosition());
     };
     //map.fitBounds(bounds); 
     map.panToBounds(bounds); 
+    */
+    //pour le moment cette fonction renvoit de temps en temps des zones fausses pour une raison bizarre
 }
+
+function fillZoneArrays()
+{
+	hilightedZones = new Array();
+	for(i=1; i<=20; i ++)
+	{
+		if($('#arr'+i).is(':checked'))
+		{
+			hilightedZones.push(i);
+		}
+		if($('#ar'+i).length && $('#ar'+i).is(':checked'))
+		{
+			hilightedZones.push(i);
+		}
+	}
+	hilightedZones = unique(hilightedZones);
+	//alert(hilightedZones);
+}
+
+function doHilightZones()
+{
+	fillZoneArrays();
+
+	for(i=1; i<=20; i ++)
+	{
+		arGeo[i-1].hideDocument();
+	}
+
+	for (i=0;i<hilightedZones.length;i++)
+	{
+		arGeo[hilightedZones[i]-1].showDocument();
+	}
+}
+
+$(document).ready(function () {
+	setTimeout(hilightZones, 1000);
+});
 
 function hilightZones()
 {
-	for(i=1; i<=20; i ++)
-	{
-		arGeo[i-1].hideDocument();	
-	}
-	for each(x in hilightedZones)
-	{
-		arGeo[x].showDocument(); 
-	}
+	doHilightZones();
 }
-
 
 //load the map when the page is loading
 google.maps.event.addDomListener(window, 'load', initialize);
 
+
+function unique(ar) {
+    var a = [];
+    var l = ar.length;
+    for(var i=0; i<l; i++) {
+      for(var j=i+1; j<l; j++) {
+        // If this[i] is found later in the array
+        if (ar[i] === ar[j])
+          j = ++i;
+      }
+      a.push(ar[i]);
+    }
+    return a;
+  };
 
 
 

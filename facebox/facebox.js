@@ -346,7 +346,7 @@ $(document).bind('reveal.facebox',function(){
 		var parentInput= this;
 		var h5= this.parentNode;
 		var htmlObj=h5.nextSibling;
-		while(true)
+		while(htmlObj!=null)
 		{
 			htmlObj= h5.nextSibling;
 			while (htmlObj.nodeType==3){htmlObj=htmlObj.nextSibling;}

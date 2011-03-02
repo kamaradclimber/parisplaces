@@ -1,6 +1,6 @@
 //these variables are meant to get where we are in the pagination
 var currentOffset =0;
-var currentLimit = 10;
+var currentLimit = 5;
 
 //list of the word not to capitalize
 //mainly common words like le, las, les, du 
@@ -11,7 +11,8 @@ var commonWords= {"rue":1,
     "les":1,
     "des":1,
     "place":1,
-    "boulevard":1
+    "boulevard":1,
+    "rues":1
 };
 
 
@@ -39,13 +40,13 @@ function checkSelect(){
 	$("#filter_zone li").each(function(){
 		var input = $(this).children()[0];
 		if(input.checked){
-                $firstLetters = input.name.substr(0,3); //on teste le type de la checkbox
+                $firstLetters = input.id.substr(0,3); //on teste le type de la checkbox
                 switch ($firstLetters) {
                     case "arr" :
-                        $districts_list += input.name.substring(3,input.name.length) +",";
+                        $districts_list += input.id.substring(3,input.id.length) +",";
                         break;
                     case "typ":
-                        $type_list      += input.name.substring(3,input.name.length) +",";
+                        $type_list      += input.id.substring(3,input.id.length) +",";
                         break;
                 }
 		}	
@@ -104,11 +105,14 @@ function afficher(donnees){
             var name = $(this).find('name').text();
             var  address = $(this).find('address').text();
 
+            name = cleanifyer(name,address);
+            var  category = $(this).find('category').text();
+
             // construction du html à afficher pour cette adresse.
             var html = "<h4>" + properCap(name) + "</h4>";
             html += "<p>"+  properCap(address) + "</p>";
             //affichage du html dans la bonne zone
-            $('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address"></div>').html(html).appendTo('#results_zone');
+            $('<div class="'+class +'" id="place_' + id + '" value="' + address  + '" name="address" category="' + category + '"></div>').html(html).appendTo('#results_zone');
         }
         i = i+1;
     } );
@@ -141,13 +145,13 @@ function getPlaces(data){
     displayMessage(data);
     $.ajax({  // ajax
         type: "GET",
-        dataType: "xml",
+        dataType: "html",
         data: data,
         url: page, // url de la page à charger
         cache: false, // pas de mise en cache
         success:function(result){ // si la requête est un succès
-            afficher(result);
             displayMessage("");
+            afficher(result);
             notLoading();
             addPagination();
         },
@@ -191,6 +195,12 @@ function getResults(offset, limit) {
     getPlaces(data);
 }
 
+function reactToClickOnForm() {
+        currentLimit = 5;
+        currentOffset = 0;
+        getResults(currentOffset,currentLimit);
+        return true; // on laisse la case cochée
+}
 
 
 // Pour checker les checkbox en cliquant sur le texte associé
@@ -199,11 +209,13 @@ function getResults(offset, limit) {
 $(document).ready(function(){ 	// le document est chargé
     addPagination();
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
+
 var class= this.className;     
 	   currentLimit = 10;
         currentOffset = 0;
         getResults(currentOffset,currentLimit);
         return true; // on laisse la case cochée
+        reactToClickOnForm();
     });
 
  $("li span").click(function(){
@@ -215,7 +227,7 @@ var class= this.className;
 		}
 		else{
 			input.checked=true;
-			currentLimit = 10;
+			currentLimit = 5;
 			currentOffset = 0;
 			getResults(currentOffset,currentLimit);
 		return true;
@@ -227,7 +239,7 @@ var class= this.className;
 		var parentInput= this;
 		var h5= this.parentNode;
 		var htmlObj=h5.nextSibling;
-		while(true)
+		while(htmlObj!=null)
 		{
 			htmlObj= h5.nextSibling;
 			while (htmlObj.nodeType==3){htmlObj=htmlObj.nextSibling;}
@@ -250,7 +262,19 @@ var class= this.className;
    makeThemBouncable();
 
 });
-	
+
+function cleanifyer(name,address) {
+   //try to suppress the address contained in the name if it is !
+
+    var cleanadd = address.substr(0,address.length-6);
+    if (name.substr(name.length - cleanadd.length ,  cleanadd.length) == cleanadd)
+    {
+            name = name.substr(0, cleanadd.length);
+    }
+   return name; 
+}
+
+
 function properCap(str) {
     //var string = str.toLowerCase();
     //return string.charAt(0).toUpperCase() + string.slice(1);
