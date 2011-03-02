@@ -38,7 +38,7 @@ function addAddressesOnTheMap() {
     // and then add each point as a marker on the map
 
     //clear the previous marker
-    places.forEach( function(marker) { marker.setMap(null); });
+    places.forEach(function(marker) { marker.setMap(null); });
     places = new Array();
     var marker;
     var address;
