@@ -38,15 +38,14 @@ function checkSelect(){
     $type_list	= "";
 	$("#filter_zone li").each(function(){
 		var input = $(this).children()[0];
-        alert(input.id);
 		if(input.checked){
                 $firstLetters = input.id.substr(0,3); //on teste le type de la checkbox
                 switch ($firstLetters) {
                     case "arr" :
-                        $districts_list += input.id.substring(3,input.name.length) +",";
+                        $districts_list += input.id.substring(3,input.id.length) +",";
                         break;
                     case "typ":
-                        $type_list      += input.id.substring(3,input.name.length) +",";
+                        $type_list      += input.id.substring(3,input.id.length) +",";
                         break;
                 }
 		}	
