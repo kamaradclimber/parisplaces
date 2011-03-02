@@ -42,21 +42,59 @@ function addAddressesOnTheMap() {
     places = new Array();
     var marker;
     var address;
+    var category;
     for(i=0; i<document.getElementsByName("address").length; i++) {
         address = document.getElementsByName("address")[i].getAttribute("value");
-        turnsItToMarker(address);
+        category = document.getElementsByName("address")[i].getAttribute("category");
+        turnsItToMarker(address, category);
     }
 }
 
 
 
-function turnsItToMarker(address) {
+function turnsItToMarker(address, category) {
+	var icoUrl = null;
+	
+	if(category != null)
+	{
+	if(category.search(/jardi/i) > -1 || category.search(/promena/i) > -1)
+		icoUrl = "icos/arbre.png";
+	if(category.search(/biblio/i) > -1)
+		icoUrl = "icos/biblio.png";
+	if(category.search(/ecole/i) > -1 || category.search(/crèche/i) > -1)
+		icoUrl = "icos/ecole.png";
+	if(category.search(/mairie/i) > -1)
+		icoUrl = "icos/fr.png";
+	if(category.search(/pigeo/i) > -1)
+		icoUrl = "icos/pigeon.png";
+	if(category.search(/piscin/i) > -1)
+		icoUrl = "icos/piscine.png";
+	if(category.search(/gymn/i) > -1)
+		icoUrl = "icos/sport.png";
+	if(category.search(/tennis/i) > -1)
+		icoUrl = "icos/tennis.png";
+	if(category.search(/conserva/i) > -1)
+		icoUrl = "icos/violon.png";
+	}
+		
     // create a marker linked to the postal address
     geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-            var marker = new google.maps.Marker({ 
-                position: results[0].geometry.location,
-            });
+			var marker;
+			if(icoUrl != null)
+			{
+				//var image = 'images/parkIcon.png';
+				marker = new google.maps.Marker({ 
+						position: results[0].geometry.location,
+						icon: icoUrl,
+					});	
+			}
+			else
+			{
+				marker = new google.maps.Marker({ 
+					position: results[0].geometry.location,
+				});	
+			}
             marker.address = address;
 
             putOnTheMap(marker);
@@ -149,6 +187,7 @@ function fillZoneArrays()
 function doHilightZones()
 {
 	fillZoneArrays();
+
 	for(i=1; i<=20; i ++)
 	{
 		arGeo[i-1].hideDocument();
@@ -156,7 +195,7 @@ function doHilightZones()
 
 	for (i=0;i<hilightedZones.length;i++)
 	{
-		arGeo[i].showDocument();
+		arGeo[hilightedZones[i]-1].showDocument();
 	}
 }
 
