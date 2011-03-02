@@ -28,10 +28,14 @@ function initialize() {
 		arGeo.push(geoXml);
 		}
 		
-	hilightedZones = new Array();
 	$(".caseArr").click(function(){
-		hilightZones();
+		hilightedZones = new Array();
+		$(".caseArr:checked").each(function(index){
+			hilightedZones.push($(this).attr('id').substr(3));
+		});
+	hilightZones();
 	});
+	
 }
 
 function addAddressesOnTheMap() {

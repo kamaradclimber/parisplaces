@@ -2,6 +2,8 @@
 function dialogBoxFiltersManager(){
 	var checkedFilters = []; 
 	var nonCheckedFilters = [];
+	hilightedZones = new Array();
+	
 	$("#districts-dialog-box li").each(function(){
 		var li = $(this);
 		var input = li.children()[0];
@@ -9,10 +11,16 @@ function dialogBoxFiltersManager(){
 			//On coche l'élément du DOM 'input'
 			input.setAttribute('checked',true);
 			checkedFilters.push(li);
+	
+			var zoneNumber = $(this).attr('name');
+			zoneNumber = zoneNumber.substr(3);
+			hilightedZones.push(zoneNumber);		
 		}
 		else{
 			nonCheckedFilters.push(li);
-		}	
+		}
+
+		
 	});	
 	
 	var totalFilters = checkedFilters.concat(nonCheckedFilters);
@@ -22,6 +30,8 @@ function dialogBoxFiltersManager(){
     var data = checkSelect();
     getPlaces(data);
 	$(document).trigger('close.facebox');
+	
+	hilightZones();
 }
 
 function changeHomePageFilters(totalFilters){
