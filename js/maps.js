@@ -152,7 +152,7 @@ function doHilightZones()
 
 	for (i=0;i<hilightedZones.length;i++)
 	{
-		arGeo[i-1].showDocument();
+		arGeo[i].showDocument();
 	}
 }
 
