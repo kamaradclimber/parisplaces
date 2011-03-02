@@ -71,28 +71,47 @@ public abstract class CsvConnector extends DataSource{
     	
     	//Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
     	Collection<String> types = hierarchy.findSubCategories(Arrays.asList(typeOfLocation));
-    	
-    	String request="SELECT * FROM CSVREAD('" + file + "',NULL, '"+encoding+"', ';') WHERE "+districtColumnName+" IN (";
+    	//types.add("Promenade ouverte, mail planté, jardin, square");
+    	String request="SELECT * FROM CSVREAD('" + file + "',NULL, '"+encoding+"', ';')";
     	//TODO: ISO pas a mettre ici ->sous classe
-    	for (int district : districts)
+    	
+    	if (districts.length>0 || types.size() >0)
+    	{//then we add a WHERE condition
+    		request += " WHERE ";
+    		if (districts.length>0)
+    		{
+    			request += districtColumnName+" IN (";
+    	
+    			for (int district : districts)
+    			{
+    				request += "'"+districtName(district)+"',";
+    			}
+
+    			if (districts.length!=0)//we have a ',' in the end
+    				request = request.substring(0, request.length()-1);
+
+    			request += ")";
+    		}
+    	if (districts.length>0 && types.size() >0)
     	{
-    		request += "'"+districtName(district)+"',";
+    		request += "AND ";
     	}
+    	
+    	if (types.size()>0)
+    	{
+    		request += typeColumnName +" IN (";
+    	
+    		for (String type : types)
+    		{
+    			request+="'"+type+"',";
+    		}
 
-    	if (districts.length!=0)//we have a ',' in the end
-    		request = request.substring(0, request.length()-1);
+    		if (types.size()!=0)//we have a ',' in the end
+    			request = request.substring(0, request.length()-1);
 
-//   	request += ") AND "+ typeColumnName +" IN (";
-//    	
-//    	for (String type : types)
-//    	{
-//    		request+="'"+type+"',";
-//    	}
-//
-//    	if (types.size()!=0)//we have a ',' in the end
-//    		request = request.substring(0, request.length()-1);
-
-    	request += ")";
+    		request += ")";
+    	}
+    	}
     	System.out.println("debut de la requete");
     	System.out.println(request);
     	System.out.println("fin de la requete");
