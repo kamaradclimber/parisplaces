@@ -26,19 +26,15 @@ public abstract class CsvConnector extends DataSource{
 	static Connection connection;
 	
 	protected String districtColumnName;
-	
+	protected String encoding = "NULL";
 	protected String typeColumnName;
 	
+	//used to count the number of connections.
+	static private int nbConnection = 0;
+	
 	static {
-		try {
-			Class.forName("org.h2.Driver");
-			connection = DriverManager.
-			    getConnection("jdbc:h2:~/test", "sa", "");
-			System.out.println("connection org.h2 etablie");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		
 	}
 
     
@@ -49,12 +45,24 @@ public abstract class CsvConnector extends DataSource{
         typeColumnName = "type";
         districtColumnName = "arrondissement";
         configure();
+        if (nbConnection==0)
+			try {
+				Class.forName("org.h2.Driver");
+				connection = DriverManager.
+					getConnection("jdbc:h2:~/test", "sa", "");
+				System.out.println("connection org.h2 etablie");
+		        connection.setReadOnly(true);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        nbConnection++;
     }
         
     @Override
     protected void finalize() throws Throwable {
-    	// TODO souci: la connection sera fermée plusieurs fois ou pas du tout si il y a plusieurs instances de CSV.
-    	connection.close();
+    	nbConnection --;
+    	if (nbConnection ==0) connection.close();
     	super.finalize();
     }
     
@@ -64,8 +72,8 @@ public abstract class CsvConnector extends DataSource{
     	//Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
     	Collection<String> types = hierarchy.findSubCategories(Arrays.asList(typeOfLocation));
     	
-    	String request="SELECT * FROM CSVREAD('" + file + "',NULL, NULL, ';')WHERE '"+districtColumnName+"' IN (";
-    	
+    	String request="SELECT * FROM CSVREAD('" + file + "',NULL, '"+encoding+"', ';') WHERE "+districtColumnName+" IN (";
+    	//TODO: ISO pas a mettre ici ->sous classe
     	for (int district : districts)
     	{
     		request += "'"+districtName(district)+"',";
@@ -73,9 +81,9 @@ public abstract class CsvConnector extends DataSource{
 
     	if (districts.length!=0)//we have a ',' in the end
     		request = request.substring(0, request.length()-1);
-//
-//    	request += ") AND "+ typeColumnName +" IN (";
-//    	//'S_gest' 'COLUMN1'
+
+//   	request += ") AND "+ typeColumnName +" IN (";
+//    	
 //    	for (String type : types)
 //    	{
 //    		request+="'"+type+"',";
@@ -91,15 +99,6 @@ public abstract class CsvConnector extends DataSource{
     	PreparedStatement ps = connection.prepareStatement( request );
 
     	ResultSet rs = ps.executeQuery();
-    	
-//        while (rs.next()) {
-//            for (int i = 0; i < meta.getColumnCount(); i++) {
-//            	meta.getColumnName(i);
-//                System.out.println(
-//                    meta.getColumnLabel(i + 1) + ": " +
-//                    rs.getString(i + 1));
-//            }
-//    	}
 //    	System.out.println("affichage des resultat...");
 //    	printResults(rs);
 //    	System.out.println("fin d'affichage des resultat...");
