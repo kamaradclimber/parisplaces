@@ -38,7 +38,7 @@ function addAddressesOnTheMap() {
     // and then add each point as a marker on the map
 
     //clear the previous marker
-    places.forEach( function(marker) { marker.setMap(null); });
+    places.forEach(function(marker) { marker.setMap(null); });
     places = new Array();
     var marker;
     var address;
@@ -156,7 +156,7 @@ function doHilightZones()
 
 	for (i=0;i<hilightedZones.length;i++)
 	{
-		arGeo[i-1].showDocument();
+		arGeo[i].showDocument();
 	}
 }
 

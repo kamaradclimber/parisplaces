@@ -5,9 +5,9 @@ $test_mode = false;
 
 if ($test_mode) {
     if (rand(0,1)) {
-echo '<?xml version="1.0"?><places total="2193" limit="5" offset="">         <place>         <name>BIBLIO  DU LOUVRE</name>         <address>4 PLACE DU LOUVRE 75001</address>     </place>         <place>         <name>BIBLIOTHEQUE MUNICIPALE LA FONTAINE</name>         <address>91 RUE RAMBUTEAU 75001</address>     </place>         <place>         <name>ECOLE MATERNELLE 27 RUE LA SOURDIERE</name>         <address>27 RUE DE LA SOURDIERE 75001</address>     </place>         <place>         <name>ECOLE MATERNELLE 6 RUE SAINT-GERMAIN L\'AUXERROIS</name>         <address>6 RUE SAINT-GERMAIN L\'AUXERROIS 75001</address>     </place>         <place>         <name>ECOLE �L�MENTAIRE 11 RUE ARGENTEUIL</name>         <address>11 RUE D\' ARGENTEUIL 75001</address>     </place>         </places>';
+echo '<?xml version="1.0"?><places total="2193" limit="5" offset="">         <place>         <name>BIBLIO  DU LOUVRE</name>         <address>4 PLACE DU LOUVRE 75001</address>     </place>         <place>         <name>BIBLIOTHEQUE MUNICIPALE LA FONTAINE</name>         <address>91 RUE RAMBUTEAU 75001</address>     </place>         <place>         <name>ECOLE MATERNELLE 27 RUE LA SOURDIERE</name>         <address>27 RUE DE LA SOURDIERE 75001</address>     </place>         <place>         <name>ECOLE MATERNELLE 6 RUE SAINT-GERMAIN L\'AUXERROIS</name>         <address>6 RUE SAINT-GERMAIN L\'AUXERROIS 75001</address>     </place>         <place>         <name>ECOLE ELEMENTAIRE 11 RUE ARGENTEUIL</name>         <address>11 RUE D\' ARGENTEUIL 75001</address>     </place>         </places>';
     } else {
-echo '<?xml version="1.0"?><places total="2193" limit="5" offset="">         <place>         <name>MUSEE  DU LOUVRE</name>         <address>4 PLACE DU LOUVRE 75001</address>     </place>         <place>         <name>BIBLIOTHEQUE MUNICIPALE LA FONTAINE</name>         <address>91 RUE RAMBUTEAU 75001</address>     </place>         <place>         <name>ECOLE MATERNELLE 27 RUE LA SOURDIERE</name>         <address>27 RUE DE LA SOURDIERE 75001</address>     </place>         <place>         <name>ECOLE MATERNELLE 6 RUE SAINT-GERMAIN L\'AUXERROIS</name>         <address>6 RUE SAINT-GERMAIN L\'AUXERROIS 75001</address>     </place>         <place>         <name>ECOLE �L�MENTAIRE 11 RUE ARGENTEUIL</name>         <address>11 RUE D\' ARGENTEUIL 75001</address>     </place>         </places>';
+echo '<?xml version="1.0"?><places total="2193" limit="5" offset="">         <place>         <name>MUSEE  DU LOUVRE</name>         <address>4 PLACE DU LOUVRE 75001</address>     </place>         <place>         <name>BIBLIOTHEQUE MUNICIPALE LA FONTAINE</name>         <address>91 RUE RAMBUTEAU 75001</address>     </place>         <place>         <name>ECOLE MATERNELLE 27 RUE LA SOURDIERE</name>         <address>27 RUE DE LA SOURDIERE 75001</address>     </place>         <place>         <name>ECOLE MATERNELLE 6 RUE SAINT-GERMAIN L\'AUXERROIS</name>         <address>6 RUE SAINT-GERMAIN L\'AUXERROIS 75001</address>     </place>         <place>         <name>ECOLE ELEMENTAIRE 11 RUE ARGENTEUIL</name>         <address>11 RUE D\' ARGENTEUIL 75001</address>     </place>         </places>';
     }
 }
 
@@ -43,7 +43,7 @@ if ($key != '_' and $key != 'destination') {
     if ($handle) {
         while (!feof($handle)) {
             $buffer = fgets($handle, 4096);
-            echo $buffer;
+            echo ($buffer);
         }
         fclose($handle);
     } // */
