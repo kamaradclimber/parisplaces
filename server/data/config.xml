@@ -1,0 +1,100 @@
+<placeCategories>
+
+<placeCategory id=”typ_culture” label=”Lieux culturels” popular=”true”>
+
+<placeCategory id=”typ_cinema” label=”Cinémas” />
+
+</placeCategory>
+
+<placeCategory id=”typ_sport” label=”Equipements sportifs” />
+
+</placeCategories>
+
+
+
+
+<placeCategories>
+
+<placeCategory id="typ_jeunesse" label="typ_eunesse">
+	<placeCategory id="typ_antenne_action_jeunes_information" label="Antenne Action Jeunes Information" />
+	<placeCategory id="typ_bassin-ecole" label="Bassin-école" />
+	<placeCategory id="typ_creche" label="Crèche">
+		<placeCategory id="typ_creche_collective" label="Crèche collective" />
+		<placeCategory id="typ_creche_familiale" label="Crèche familiale" />
+	</placeCategory>
+	<placeCategory id="typ_ecole_elementaire" label="Ecole élémentaire et annexes" />
+	<placeCategory id="typ_ecole_maternelle" label="Ecole maternelle et annexes" />
+	<placeCategory id="typ_ecole_polyvalente" label="Ecole polyvalente" />
+	<placeCategory id="typ_espace_jeune" label="Espace Jeune" />
+	<placeCategory id="typ_halte_garderie" label="Halte-garderie" />
+	<placeCategory id="typ_ecole_elementaire" label="Ecole élémentaire et annexes" />
+	<placeCategory id="typ_jardin_d_enfants" label="Jardin d'enfants">
+		<placeCategory id="typ_jardin_d_enfants_opac" label="Jardin d'enfants OPAC" />
+		<placeCategory id="typ_jardin_d_enfants_simple" label="Jardin d'enfants" />
+		<placeCategory id="typ_jardin_maternel" label="Jardin maternel" />
+	</placeCategory>
+
+</placeCategory>
+
+
+
+Jeunesse
+
+    * Antenne Action Jeunes Information
+    * Bassin-école
+    * Crèche collective
+    * Crèche familiale
+    * Ecole élémentaire & annexes
+    * Ecole maternelle & annexes
+    * Ecole polyvalente
+    * Espace jeune
+    * Halte-garderie
+    * Jardin d’enfants OPAC
+    * Jardin maternel
+    * Jardin d’enfant
+
+Administratif
+
+    * Annexes de Mairie d’arrondissement
+    * Mairie d’arrondissement
+    * Maison des association, locaux associatifs
+
+Sport
+
+    * Aire de roller
+    * Aires sportives en accès libre
+    * Bain-douche
+    * Equipements multi accueil
+    * Equipements sportifs d’extérieur
+    * Gymnase
+    * Mur d’escalade d’extérieur
+    * Mur d’escalade d’intérieur
+    * Piscine
+    * Salle polyvalente (multi-usages)
+    * Salle de sport
+    * Stade
+    * Terrain d’éducation physique
+    * Terrain de boules
+    * Terrain de Tennis
+
+Culture
+
+    * Bibliothèque
+    *
+    * Centre d’animation
+    * Conservatoire
+    * Médiathèque
+
+Espace vert
+
+    * Espace vert partagé, éphémère ou pédagogique
+    * Jardinet décoratif, plate bande
+    * Promenade ouverte, mail planté, jardin, square
+    * Terre-plein, jardinière
+
+Divers
+
+    * Pigeonnier
+    * Talus d’espace ferroviaire
+    * Talus planté
+
