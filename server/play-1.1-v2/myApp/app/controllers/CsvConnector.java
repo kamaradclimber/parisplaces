@@ -66,19 +66,18 @@ public abstract class CsvConnector extends DataSource{
     	super.finalize();
     }
     
-    public ArrayList<Place> getLocations(int[] districts, String[]  typeOfLocation) throws SQLException
+    public ArrayList<Place> getLocations(ArrayList<Integer> districts, String[]  typeOfLocation) throws SQLException
     {
     	
     	//Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
     	Collection<String> types = hierarchy.findSubCategories(Arrays.asList(typeOfLocation));
-    	//types.add("Promenade ouverte, mail planté, jardin, square");
+    	types.add("Promenade ouverte, mail planté, jardin, square");
     	String request="SELECT * FROM CSVREAD('" + file + "',NULL, '"+encoding+"', ';')";
-    	//TODO: ISO pas a mettre ici ->sous classe
     	
-    	if (districts.length>0 || types.size() >0)
+    	if (districts.size()>0 || types.size() >0)
     	{//then we add a WHERE condition
     		request += " WHERE ";
-    		if (districts.length>0)
+    		if (districts.size()>0)
     		{
     			request += districtColumnName+" IN (";
     	
@@ -87,12 +86,12 @@ public abstract class CsvConnector extends DataSource{
     				request += "'"+districtName(district)+"',";
     			}
 
-    			if (districts.length!=0)//we have a ',' in the end
+    			if (districts.size()!=0)//we have a ',' in the end
     				request = request.substring(0, request.length()-1);
 
     			request += ")";
     		}
-    	if (districts.length>0 && types.size() >0)
+    	if (districts.size()>0 && types.size() >0)
     	{
     		request += "AND ";
     	}
