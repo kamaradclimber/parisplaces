@@ -1,6 +1,6 @@
 //these variables are meant to get where we are in the pagination
 var currentOffset =0;
-var currentLimit = 5;
+var currentLimit =10;
 
 //list of the word not to capitalize
 //mainly common words like le, las, les, du 
@@ -16,11 +16,9 @@ var commonWords= {"rue":1,
 };
 
 
-
 function displayMessage(string) {
     $("#message").empty(); // on vide le div
     $("#message").html(string);
-    
 }
 
 function loading() {
@@ -46,7 +44,7 @@ function checkSelect(){
                         $districts_list += input.id.substring(3,input.id.length) +",";
                         break;
                     case "typ":
-                        $type_list      += input.id.substring(3,input.id.length) +",";
+                        $type_list += input.id.substring(3,input.id.length) +",";
                         break;
                 }
 		}	
@@ -67,10 +65,6 @@ function checkSelect(){
 }
 
 
-
-
-
-
 function makeThemBouncable() {
     //makes the marker be able to react on the mouse hovering on the associated address
     $("div.result").mouseenter(function() { //start bouncing if mouse enter the address zone
@@ -87,19 +81,19 @@ function makeThemBouncable() {
 function afficher(donnees){ 
     $("#results_zone").empty(); // on vide le div
 
-
     // on stocke la parité pour pouvoir faire un affichage plus elegant	
     var even = 0;
     var class;
-
     //we dont want to display more than currentLimitItems, even if the server does not work as expected (else the geocoder is the bottleneck of the application)
     var i=0;
+    //Total number of results (useful for pagination)
+    var resultsNumber;
 
     // parcours du xml
-    $(donnees).find('place').each(  function() {
+    $(donnees).find('place').each(function(){
         even = (even +1) % 2;
         class = "result ";                                              //permet de rendre les résultats bouncable 
-        if (even == 0 ) { class += "even"; } else { class += "odd"; }   //permet de rendre l'affichage plus élégant
+        if (even == 0) { class += "even"; } else { class += "odd"; }   //permet de rendre l'affichage plus élégant
         if (i<currentLimit) {
             var id = $(this).attr('id');
             var name = $(this).find('name').text();
@@ -116,16 +110,18 @@ function afficher(donnees){
         }
         i = i+1;
     } );
-
+    
+    resultsNumber = $(donnees).find('places').attr('total');
+    alert(resultsNumber);
 
     addAddressesOnTheMap();
     makeThemBouncable();
+    addPagination(resultsNumber);
 }
 
 
 function findAssociatedMarker(address) {
     //find the marker displayed on the map corresponding to the address 
-
     var result;
     for(i=0; i<places.length;i++) {
         if ( places[i].address == address) {
@@ -145,7 +141,7 @@ function getPlaces(data){
     displayMessage(data);
     $.ajax({  // ajax
         type: "GET",
-        dataType: "html",
+        dataType: "xml",
         data: data,
         url: page, // url de la page à charger
         cache: false, // pas de mise en cache
@@ -153,17 +149,19 @@ function getPlaces(data){
             displayMessage("");
             afficher(result);
             notLoading();
-            addPagination();
         },
         error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
                   displayMessage("Argh Something is not good\n (don't kill the messenger !)");
 
-              }
+        }
     });
 }
 
-function addPagination() {
+function addPagination(resultsNumber) {
+    
     $('#pagination').html("");
+    
+    //First Version of Pagination
     if (currentOffset > 0) {
         $('#pagination').append('<div id="prev"><a>Precedent</a><div>');
         $('#prev a').click(function() {
@@ -176,7 +174,11 @@ function addPagination() {
         currentOffset += currentLimit;
         getResults(currentOffset,currentLimit);
     });
-
+    
+    //Second Version of Pagination
+    
+    
+    
 }
 
 function requestConstructor(offset, limit) {
@@ -196,38 +198,29 @@ function getResults(offset, limit) {
 }
 
 function reactToClickOnForm() {
-        currentLimit = 5;
-        currentOffset = 0;
-        getResults(currentOffset,currentLimit);
-        return true; // on laisse la case cochée
+    currentLimit = 10;
+    currentOffset = 0;
+    getResults(currentOffset,currentLimit);
+    return true; // on laisse la case cochée
 }
 
-
-// Pour checker les checkbox en cliquant sur le texte associé
 $(document).ready(function(){ 	// le document est chargé
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-
-var class= this.className;     
-	   currentLimit = 10;
-        currentOffset = 0;
-        getResults(currentOffset,currentLimit);
-        return true; // on laisse la case cochée
         reactToClickOnForm();
     });
 
- $("li span").click(function(){
+    // Pour checker les checkbox en cliquant sur le texte associé
+    $("li span").click(function(){
 		var span= $(this);
 		var li = span.parent();
 		var input = li.children()[0];	
 		if(input.checked){
 		    input.checked=false;
+		    reactToClickOnForm();
 		}
 		else{
 			input.checked=true;
-			currentLimit = 5;
-			currentOffset = 0;
-			getResults(currentOffset,currentLimit);
-		return true;
+			reactToClickOnForm();
 		}	
 	});
      
@@ -270,7 +263,6 @@ function cleanifyer(name,address) {
     }
    return name; 
 }
-
 
 function properCap(str) {
     //var string = str.toLowerCase();
