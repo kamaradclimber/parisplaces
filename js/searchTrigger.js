@@ -1,5 +1,6 @@
 //Cette fonction est appelé quand l'utilisateur clique sur "Rechercher" dans la boite de dialogue
 function dialogBoxFiltersManager(){
+
 	var checkedFilters = []; 
 	var nonCheckedFilters = [];
 	
@@ -7,13 +8,13 @@ function dialogBoxFiltersManager(){
 	$("#districts-dialog-box li").each(function(){
 		var li = $(this);
 		var input = li.children()[0];
-		var zoneNumber = $(this).attr('name');
+		var zoneNumber = input.name;
 		zoneNumber = zoneNumber.substr(3);	
 		if(input.checked){
 			//On coche l'élément du DOM 'input'
 			input.setAttribute('checked',true);
 			checkedFilters.push(li);
-			input.setAttribute('id','arr'+zoneNumber);		
+			input.setAttribute('id','arr'+zoneNumber);	
 		}
 		else{
 			nonCheckedFilters.push(li);
