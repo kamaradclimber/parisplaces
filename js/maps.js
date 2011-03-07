@@ -46,13 +46,13 @@ function addAddressesOnTheMap() {
     for(i=0; i<document.getElementsByName("address").length; i++) {
         address = document.getElementsByName("address")[i].getAttribute("value");
         category = document.getElementsByName("address")[i].getAttribute("category");
-        turnsItToMarker(address, category);
+        turnsItToMarker(address, category, 0);
     }
 }
 
 
 
-function turnsItToMarker(address, category) {
+function turnsItToMarker(address, category, nbtry) {
 	var icoUrl = null;
 	
 	if(category != null)
@@ -76,7 +76,46 @@ function turnsItToMarker(address, category) {
 	if(category.search(/conserva/i) > -1)
 		icoUrl = "icos/violon.png";
 	}
-		
+	
+//maintenant on passe les demandes de marker par requete http se qui "en theorie, dapres la doc de google maps" permettre de faire plus de requete a la seconde
+    var data = "destination=geocode&sensor=false&";
+
+    data += "address=" + address.replace(" ", "+");
+
+    $.ajax({  // ajax
+        type: "GET",
+        dataType: "json",
+        data:data,
+        url: "connecteur.php", // url de la page à charger
+        cache: false, // pas de mise en cache
+        success:function(results){ // si la requête est un succès
+            //en cas du succès on affiche un marker
+			var marker;
+			if(icoUrl != null) {
+             marker = new google.maps.Marker({ 
+                position: new google.maps.LatLng(results.results[0].geometry.location.lat,
+                                                 results.results[0].geometry.location.lng),
+                    icon: icoUrl,
+            });	
+
+            } else {
+
+             marker = new google.maps.Marker({ 
+                position: new google.maps.LatLng(results.results[0].geometry.location.lat,
+                                                 results.results[0].geometry.location.lng)
+            });	
+
+            }
+            marker.address = address;
+
+            putOnTheMap(marker);
+        },
+        error:function(JSonHttpRequest, textStatus, errorThrows){ // erreur durant la requete
+                displayMessage("not working ....");
+              }
+    });
+// */
+/*    
     // create a marker linked to the postal address
     geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
@@ -100,9 +139,15 @@ function turnsItToMarker(address, category) {
             putOnTheMap(marker);
 
         } else {
-            displayMessage("Geocode was not successful for the following reason: " + status);
+            if (nbtry > 5) {
+                displayMessage("Geocode was not successful for the following reason: " + status);
+            } else {
+                displayMessage("En attente"+ nbtry);
+                setTimeout("turnsItToMarker(address, category,nbtry+1 )",100 );
+                displayMessage("Fini" + nbtry);
+            }
         }
-    });
+    }); // */
 }
 
 function putOnTheMap(marker) {
