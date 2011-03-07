@@ -33,7 +33,7 @@ function notLoading() {
 }
 
 function checkSelect(){
-    //parcourt les checboxes et teste si elle sont cochées ou non
+    //parcourt les checkboxes et teste si elle sont cochées ou non
     // on renvoit dans le format demandé par le serveur :  district=1,2,5,... (du type category=list)
     $districts_list	= "";
     $type_list	= "";
@@ -204,10 +204,7 @@ function reactToClickOnForm() {
 
 
 // Pour checker les checkbox en cliquant sur le texte associé
-
-
 $(document).ready(function(){ 	// le document est chargé
-    addPagination();
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
 
 var class= this.className;     
