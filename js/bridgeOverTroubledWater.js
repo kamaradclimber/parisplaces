@@ -252,8 +252,34 @@ $(document).ready(function(){ 	// le document est chargé
 
 });
 
+
+function intersection(str1, str2) {
+    //test if there is an intersection like:
+    //STRING1111strin
+    //     G1111strinGHGHG
+    var l1 = str1.length;
+    var l2 = str2.length;
+    for (var start=0; start<l1;start++) {
+    //$("#message").append(str1.substring(start, l1) + "    ");
+    //$("#message").append(str2.substr(0,l1-start) + "<br> ");
+    if (str1.substring(start, l1) == str2.substr(0,l1-start))
+    { 
+        //alert('ok');
+        return start;
+    }
+    }
+    return -1;
+}
+
 function cleanifyer(name,address) {
    //try to suppress the address contained in the name if it is !
+
+    var i = intersection(name,address);
+    //alert(name + i);
+    if (i == -1) return name;
+    return name.substring(0,i-1);
+
+
 
     var cleanadd = address.substr(0,address.length-6);
     if (name.substr(name.length - cleanadd.length ,  cleanadd.length) == cleanadd)
