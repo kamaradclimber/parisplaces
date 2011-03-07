@@ -138,7 +138,6 @@ function findAssociatedMarker(address) {
 
 function getPlaces(data){
     page="connecteur.php"; // on recuperer l' adresse du lien
-    displayMessage(data);
     $.ajax({  // ajax
         type: "GET",
         dataType: "xml",
@@ -186,6 +185,7 @@ function requestConstructor(offset, limit) {
     data = checkSelect();
     if (offset != null) {data += "&offset="+offset;}
     if (limit != null) {data += "&limit="+limit;}
+    data+="&destination=getPlaces";
     return data;
 }
 
