@@ -204,7 +204,7 @@ function getResults(offset, limit) {
     //fonction qui va chercher les résultats.
     //commence par mettre en chargement, puis construit une requete et enfin l'exécute
     data = requestConstructor(offset,limit);
-    if (data.indexOf("arr",0) >= 0) { 
+    if (data.indexOf("district",0) >= 0) { 
         loading();
         getPlaces(data);
     } else {
