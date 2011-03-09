@@ -1,10 +1,27 @@
 function parsing(xml) {
 
 alert("ok");
-$(xml).find("placeCategory placeCategory").each(function() {
-    
-    alert($(this).attr('label'));
+$(xml).find("placeCategories").children().each(function() {
+   //traitement des placesCategory niveau 1
+   //
+    if ($(this).children().size() ==0 ) {
+        //si il a des enfants
+    $("#message").append("<p>pere"+  $(this).attr("label")   + "</p>");
+    $(this).children().each(function() {
 
+        $("#message").append("<p>fils"+  $(this).attr("label")   + "</p>");
+    })
+
+    } else { 
+        //si il na pas  
+        $("#message").append("<p>noeud normal"+  $(this).attr("label")   + "</p>");
+
+    }
+    $("#message").append("<p>pere"+  $(this).attr("label")   + "</p>");
+    $(this).find("placeCategory").each(function() {
+
+        $("#message").append("<p>fils"+  $(this).attr("label")   + "</p>");
+    })
 })
 
 alert("ok");
@@ -33,6 +50,8 @@ function getXml() {
 function getDynamicXml() {
 
 }
+
+
 
 
 
