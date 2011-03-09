@@ -179,9 +179,6 @@ function toggleBounce(marker) {
     }
 }
 
-
-
-
 function highlight(marker) {
 
     var addresses = $("results_zone");

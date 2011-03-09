@@ -170,24 +170,19 @@ function getPlaces(requestArguments){
 function addPagination(resultsNumber) {
     
     $('#pagination').html("");
+    pagesNumber = resultsNumber/currentLimit;
     
-    //First Version of Pagination
-    if (currentOffset > 0) {
-        $('#pagination').append('<div id="prev"><a>Precedent</a><div>');
-        $('#prev a').click(function() {
-            currentOffset = Math.max(currentOffset - currentLimit,0);
-            getResults(currentOffset,currentLimit);
-        });
-    }
-    $('#pagination').append('<div id="next"><a>Suivant</a><div>');
-    $('#next a').click(function() {
-        currentOffset += currentLimit;
-        getResults(currentOffset,currentLimit);
-    });
-    
-    //Second Version of Pagination
-    
-    
+    for(var i=0; i<pagesNumber;i++){
+        $("<a/>")
+            .append(i+1)
+            .attr("id",i)
+            .click(function(){
+                pageClicked = $(this).attr("id")
+                newOffset = currentOffset + pageClicked*currentLimit;
+                getResults(newOffset,currentLimit);
+            })
+            .appendTo('#pagination');
+    }    
     
 }
 
