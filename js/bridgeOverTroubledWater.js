@@ -210,6 +210,7 @@ function getResults(offset, limit) {
     } else {
         // la liste des arrondissements est entièrement décochée => on ne fait rien
         $("#results_zone").html("<p style=\"padding-left:13px; text-align:center;\">Aucune recherche jusqu'à maintenant.</p>");
+        $('#pagination').html("");
 
     }
 }
