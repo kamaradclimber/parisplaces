@@ -202,35 +202,33 @@ function reactToClickOnForm() {
         return true; // on laisse la case cochée
 }
 
-
-// Pour checker les checkbox en cliquant sur le texte associé
-$(document).ready(function(){ 	// le document est chargé
-    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-
-var class= this.className;     
-	   currentLimit = 10;
-        currentOffset = 0;
-        getResults(currentOffset,currentLimit);
-        return true; // on laisse la case cochée
-        reactToClickOnForm();
-    });
-
- $("li span").click(function(){
-		var span= $(this);
-		var li = span.parent();
+function reactToClickOnText(span){
+	var li = span.parent();
 		var input = li.children()[0];	
 		if(input.checked){
 		    input.checked=false;
+			reactToClickOnForm();
+			highlightZones();
 		}
 		else{
 			input.checked=true;
-			currentLimit = 5;
-			currentOffset = 0;
-			getResults(currentOffset,currentLimit);
-		return true;
-		}	
+			reactToClickOnForm();
+			highlightZones();
+		}
+}
+
+$(document).ready(function(){ 	// le document est chargé
+    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
+        reactToClickOnForm();
+    });
+
+	// Pour checker les checkbox en cliquant sur le texte associé
+ $("li span").click(function(){
+		var span= $(this);
+		reactToClickOnText(span);
 	});
      
+	 //check All
   $(".category h5 input").click(function(){
 		var checked_status= this.checked;	
 		var parentInput= this;
