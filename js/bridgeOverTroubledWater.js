@@ -156,6 +156,7 @@ function getPlaces(data){
         },
         error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
                   displayMessage("Argh Something is not good\n (don't kill the messenger !)");
+                  notLoading();
 
         }
     });
