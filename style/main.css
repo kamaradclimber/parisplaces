@@ -48,6 +48,15 @@
 	letter-spacing:-1px;
 }
 
+.trice
+{
+	float:left;
+	padding:12px;
+	width:93%;
+	background:#6699CC;
+	border-top: 1px solid #E5E1C8;
+	border-bottom:1px solid #E5E1C8;
+}
 .odd
 {
 	float:left;
@@ -63,6 +72,8 @@
 	float:left;
 	padding:12px;
 	width:93%;
+	border-top: 1px solid #E5E1C8;
+	border-bottom:1px solid #E5E1C8;
 }
 
 /*-------- MAP ZONE ------------------------*/

@@ -198,9 +198,16 @@ function requestConstructor(offset, limit) {
 function getResults(offset, limit) {
     //fonction qui va chercher les résultats.
     //commence par mettre en chargement, puis construit une requete et enfin l'exécute
-    loading();
     data = requestConstructor(offset,limit);
-    getPlaces(data);
+    if (data.indexOf("district",0) >= 0) { 
+        loading();
+        getPlaces(data);
+    } else {
+        // la liste des arrondissements est entièrement décochée => on ne fait rien
+        $("#results_zone").html("<p style=\"padding-left:13px; text-align:center;\">Aucune recherche jusqu'à maintenant.</p>");
+        $('#pagination').html("");
+
+    }
 }
 
 function reactToClickOnForm() {
@@ -219,46 +226,46 @@ $(document).ready(function(){ 	// le document est chargé
 
     // Pour checker les checkbox en cliquant sur le texte associé
     $("li span").click(function(){
-		var span= $(this);
-		var li = span.parent();
-		var input = li.children()[0];	
-		if(input.checked){
-		    input.checked=false;
-		    reactToClickOnForm();
-		}
-		else{
-			input.checked=true;
-			reactToClickOnForm();
-		}	
-	});
+        var span= $(this);
+        var li = span.parent();
+        var input = li.children()[0];	
+        if(input.checked){
+            input.checked=false;
+            reactToClickOnForm();
+        }
+        else{
+            input.checked=true;
+            reactToClickOnForm();
+        }	
+    });
 
-  //lorsqu'on clique sur une catégorie de lieu ca clique sur tous les enfants  
-  $(".category h5 input").click(function(){
-		var checked_status= this.checked;	
-		var parentInput= this;
-		var h5= this.parentNode;
-		var htmlObj=h5.nextSibling;
-		while(htmlObj!=null)
-		{
-			htmlObj= h5.nextSibling;
-			while (htmlObj.nodeType==3){htmlObj=htmlObj.nextSibling;}
-			if(htmlObj.tagName.toLowerCase()=='ul')
-			{
-				var li= htmlObj.getElementsByTagName('li');
-				var c=li.length;
-				var i=0;
-				for (i=0;i<c;i++)
-				{
-					var input= li[i].firstChild;
-					input.checked=checked_status;
-				}
-				break;	
-			}
-		}
-	}
-	);
-	
-   makeThemBouncable();
+    //lorsqu'on clique sur une catégorie de lieu ca clique sur tous les enfants  
+    $(".category h5 input").click(function(){
+        var checked_status= this.checked;	
+        var parentInput= this;
+        var h5= this.parentNode;
+        var htmlObj=h5.nextSibling;
+        while(htmlObj!=null)
+    {
+        htmlObj= h5.nextSibling;
+        while (htmlObj.nodeType==3){htmlObj=htmlObj.nextSibling;}
+        if(htmlObj.tagName.toLowerCase()=='ul')
+    {
+        var li= htmlObj.getElementsByTagName('li');
+        var c=li.length;
+        var i=0;
+        for (i=0;i<c;i++)
+    {
+        var input= li[i].firstChild;
+        input.checked=checked_status;
+    }
+    break;	
+    }
+    }
+    }
+    );
+
+    makeThemBouncable();
 
 });
 
@@ -276,19 +283,19 @@ function intersection(str1, str2) {
     var l1 = str1.length;
     var l2 = str2.length;
     for (var start=0; start<l1;start++) {
-    //$("#message").append(str1.substring(start, l1) + "    ");
-    //$("#message").append(str2.substr(0,l1-start) + "<br> ");
-    if (str1.substring(start, l1) == str2.substr(0,l1-start))
-    { 
-        //alert('ok');
-        return start;
-    }
+        //$("#message").append(str1.substring(start, l1) + "    ");
+        //$("#message").append(str2.substr(0,l1-start) + "<br> ");
+        if (str1.substring(start, l1) == str2.substr(0,l1-start))
+        { 
+            //alert('ok');
+            return start;
+        }
     }
     return -1;
 }
 
 function cleanifyer(name,address) {
-   //try to suppress the address contained in the name if it is !
+    //try to suppress the address contained in the name if it is !
 
     var i = intersection(name,address);
     //alert(name + i);

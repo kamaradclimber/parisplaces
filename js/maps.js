@@ -115,39 +115,6 @@ function turnsItToMarker(address, category, nbtry) {
               }
     });
 // */
-/*    
-    // create a marker linked to the postal address
-    geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-			var marker;
-			if(icoUrl != null)
-			{
-				//var image = 'images/parkIcon.png';
-				marker = new google.maps.Marker({ 
-						position: results[0].geometry.location,
-						icon: icoUrl,
-					});	
-			}
-			else
-			{
-				marker = new google.maps.Marker({ 
-					position: results[0].geometry.location,
-				});	
-			}
-            marker.address = address;
-
-            putOnTheMap(marker);
-
-        } else {
-            if (nbtry > 5) {
-                displayMessage("Geocode was not successful for the following reason: " + status);
-            } else {
-                displayMessage("En attente"+ nbtry);
-                setTimeout("turnsItToMarker(address, category,nbtry+1 )",100 );
-                displayMessage("Fini" + nbtry);
-            }
-        }
-    }); // */
 }
 
 function putOnTheMap(marker) {
@@ -184,9 +151,10 @@ function highlight(marker) {
     var addresses = $("results_zone");
     for(i=0; i<document.getElementsByName("address").length; i++) {
         if (document.getElementsByName("address")[i].getAttribute("value")== marker.address ) {
-            document.getElementsByName("address")[i].setAttribute("class", "odd");
+            document.getElementsByName("address")[i].setAttribute("class", "trice");
         } else {
-            document.getElementsByName("address")[i].setAttribute("class", "even");
+            if (i%2==0) document.getElementsByName("address")[i].setAttribute("class", "odd");
+            if (i%2==1) document.getElementsByName("address")[i].setAttribute("class", "even");
         }
     }
 }
