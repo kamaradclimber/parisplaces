@@ -70,7 +70,7 @@ public abstract class CsvConnector extends DataSource{
     {
     	
     	//Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
-    	Collection<String> types = hierarchy.findSubCategories(Arrays.asList(typeOfLocation));
+    	Collection<String> types = super.hierarchy.findSubCategories(Arrays.asList(typeOfLocation));
     	types.add("Promenade ouverte, mail planté, jardin, square");
     	String request="SELECT * FROM CSVREAD('" + file + "',NULL, '"+encoding+"', ';')";
     	
@@ -133,7 +133,7 @@ public abstract class CsvConnector extends DataSource{
 		
     	TreeSet<String> result = new TreeSet<String>();
     	
-    	result.addAll(hierarchy.findSubCategories(types));
+    	result.addAll(super.hierarchy.findSubCategories(types));
     	
     	return result;
     }

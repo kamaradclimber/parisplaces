@@ -10,14 +10,14 @@ public abstract class DataSource {
 
 	//configFile = "config.xml";
     
-	Categories hierarchy;
+	PlaceCategory hierarchy;
 	
 	public DataSource()
 	{
 		
 	}
 	
-	abstract public ArrayList<Place> getLocations(int[] districts, String[]  typeOfLocation) throws SQLException;
+	abstract public ArrayList<Place> getLocations(ArrayList<Integer> districts, String[]  typeOfLocation) throws SQLException;
 	
 	abstract public void configure();
 	//initialise hierarchy
