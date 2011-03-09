@@ -214,7 +214,6 @@ function getResults(offset, limit) {
 
 function reactToClickOnForm() {
     //porte bien son nom !
-	console.log("reactToClickOnForm");
     currentLimit = 10;
     currentOffset = 0;
     getResults(currentOffset,currentLimit);
