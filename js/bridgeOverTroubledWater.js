@@ -112,7 +112,6 @@ function afficher(donnees){
     } );
     
     resultsNumber = $(donnees).find('places').attr('total');
-    alert(resultsNumber);
 
     addAddressesOnTheMap();
     makeThemBouncable();
