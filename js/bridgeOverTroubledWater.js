@@ -50,7 +50,7 @@ function checkSelect(){
                         $districts_list += input.id.substring(3,input.id.length) +",";
                         break;
                     case "typ":
-                        $type_list += input.id.substring(3,input.id.length) +",";
+					   $type_list += input.id.substring(3,input.id.length) +",";
 						break;
                 }
 		}	
