@@ -170,20 +170,31 @@ function getPlaces(requestArguments){
 function addPagination(resultsNumber) {
     
     $('#pagination').html("");
-    pagesNumber = resultsNumber/currentLimit;
+    pagesNumber = Math.floor(resultsNumber/currentLimit);
     
-    for(var i=0; i<pagesNumber;i++){
-        $("<a/>")
-            .append(i+1)
-            .attr("id",i)
-            .click(function(){
-                pageClicked = $(this).attr("id")
-                newOffset = currentOffset + pageClicked*currentLimit;
-                getResults(newOffset,currentLimit);
-            })
-            .appendTo('#pagination');
-    }    
+    function loopPagination(start,end){
+        for(var i=start; i<end;i++){
+            $("<a/>")
+                .append(i+1)
+                .attr("id",i)
+                .click(function(){
+                    pageClicked = $(this).attr("id")
+                    newOffset = currentOffset + pageClicked*currentLimit;
+                    getResults(newOffset,currentLimit);
+                })
+                .appendTo('#pagination');
+        } 
+    }
     
+    if(pagesNumber<7){
+        loopPagination(0,pagesNumber);
+    }
+    else{
+        loopPagination(0,3);
+        $("<span>...</span>").appendTo("#pagination");
+        loopPagination(pagesNumber-3,pagesNumber); 
+    }
+        
 }
 
 function requestConstructor(offset, limit) {
