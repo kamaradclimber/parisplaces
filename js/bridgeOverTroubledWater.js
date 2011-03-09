@@ -12,7 +12,13 @@ var commonWords= {"rue":1,
     "des":1,
     "place":1,
     "boulevard":1,
-    "rues":1
+    "rues":1,
+    "rue":1,
+    "bd":1,
+    "place":1,
+    "sentier":1,
+    "chemin":1,
+    "de":1
 };
 
 
