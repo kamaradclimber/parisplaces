@@ -155,7 +155,7 @@ function getPlaces(data){
             notLoading();
         },
         error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
-                  displayMessage("Argh Something is not good\n (don't kill the messenger !)");
+                  displayMessage("Argh Communication with server has failed\n (don't kill the messenger !)");
                   notLoading();
 
         }
