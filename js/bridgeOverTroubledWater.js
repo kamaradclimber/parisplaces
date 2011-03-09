@@ -12,7 +12,13 @@ var commonWords= {"rue":1,
     "des":1,
     "place":1,
     "boulevard":1,
-    "rues":1
+    "rues":1,
+    "rue":1,
+    "bd":1,
+    "place":1,
+    "sentier":1,
+    "chemin":1,
+    "de":1
 };
 
 
@@ -49,16 +55,15 @@ function checkSelect(){
                 }
 		}	
 	});	
-    arguments="";
 
-
+    //suppression de la dernière virgule pour les arrondissements et les types de lieu
     if ($districts_list.length>0) { $districts_list = $districts_list.slice(0,-1); }
     if ($type_list.length>0) { $type_list = $type_list.slice(0,-1); }
     //construct the url
     var url = "";
     if ($districts_list.length>0) { url += "district="+ $districts_list + "&"; }
     if ($type_list.length>0) { url += "type="+ $type_list + "&"; }
-
+    
     //remove the trailing &
     if (url.length>0) { url = url.slice(0,-1); }
     return url;
@@ -66,7 +71,8 @@ function checkSelect(){
 
 
 function makeThemBouncable() {
-    //makes the marker be able to react on the mouse hovering on the associated address
+    //makes all the marker be able to react on the mouse hovering on the associated address
+    ////this function is pure side effects and take all the currently displayed addresses
     $("div.result").mouseenter(function() { //start bouncing if mouse enter the address zone
         var marker = findAssociatedMarker($(this).attr('value'));
         toggleBounce(marker);
@@ -79,7 +85,7 @@ function makeThemBouncable() {
 
 
 function afficher(donnees){ 
-    $("#results_zone").empty(); // on vide le div
+    $("#results_zone").empty(); // l'affichage des données 
 
     // on stocke la parité pour pouvoir faire un affichage plus elegant	
     var even = 0;
@@ -99,10 +105,11 @@ function afficher(donnees){
             var name = $(this).find('name').text();
             var  address = $(this).find('address').text();
 
+            //on nettoie le nom en essayant d'enlever l'addresse du nom si elle y est
             name = cleanifyer(name,address);
             var  category = $(this).find('category').text();
 
-            // construction du html à afficher pour cette adresse.
+            // construction du html à afficher pour cette adresse. tout en essayant de régler la capitalisation
             var html = "<h4>" + properCap(name) + "</h4>";
             html += "<p>"+  properCap(address) + "</p>";
             //affichage du html dans la bonne zone
@@ -112,7 +119,8 @@ function afficher(donnees){
     } );
     
     resultsNumber = $(donnees).find('places').attr('total');
-
+    
+    // ajout des addresses, les rends réactives au survol de souris puis ajout de la pagination
     addAddressesOnTheMap();
     makeThemBouncable();
     addPagination(resultsNumber);
@@ -120,7 +128,7 @@ function afficher(donnees){
 
 
 function findAssociatedMarker(address) {
-    //find the marker displayed on the map corresponding to the address 
+    //finds the marker displayed on the map corresponding to the address 
     var result;
     for(i=0; i<places.length;i++) {
         if ( places[i].address == address) {
@@ -135,21 +143,25 @@ function findAssociatedMarker(address) {
     }
 }
 
-function getPlaces(data){
+function getPlaces(requestArguments){
     page="connecteur.php"; // on recuperer l' adresse du lien
     $.ajax({  // ajax
         type: "GET",
         dataType: "xml",
-        data: data,
+        data: requestArguments,
         url: page, // url de la page à charger
         cache: false, // pas de mise en cache
-        success:function(result){ // si la requête est un succès
+        success:function(results){
+            //si la requete est un succès alors on affiche les resultats, on supprime le message d'erreur eventuellement affiché et on surpprime aussi licone de chargement
             displayMessage("");
-            afficher(result);
+            afficher(results);
             notLoading();
         },
-        error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
-                  displayMessage("Argh Something is not good\n (don't kill the messenger !)");
+        error:function(XMLHttpRequest, textStatus, errorThrows){ 
+                  // erreur durant la requete donne lieu à un message dérreur et suppression de l ícone de chargement pour ne pas donner de faux espoir à l'utilisateur
+                  // pour le moment il ne se passe rien d'autre, on _pourrait_ relancer une autre requete
+                  displayMessage("Argh Communication with server has failed\n (don't kill the messenger !)");
+                  notLoading();
 
         }
     });
@@ -180,7 +192,7 @@ function addPagination(resultsNumber) {
 }
 
 function requestConstructor(offset, limit) {
-    //construit la requete et vérfiie au passage que les arguments ont bien été donnés.
+    //construit la requete et vérifie au passage que les arguments ont bien été donnés.
     data = checkSelect();
     if (offset != null) {data += "&offset="+offset;}
     if (limit != null) {data += "&limit="+limit;}
@@ -197,6 +209,7 @@ function getResults(offset, limit) {
 }
 
 function reactToClickOnForm() {
+    //porte bien son nom !
     currentLimit = 10;
     currentOffset = 0;
     getResults(currentOffset,currentLimit);
@@ -204,6 +217,7 @@ function reactToClickOnForm() {
 }
 
 $(document).ready(function(){ 	// le document est chargé
+    // on selectionne tous les liens et on définit une action quand on clique dessus
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
         reactToClickOnForm();
     });
@@ -222,7 +236,8 @@ $(document).ready(function(){ 	// le document est chargé
 			reactToClickOnForm();
 		}	
 	});
-     
+
+  //lorsqu'on clique sur une catégorie de lieu ca clique sur tous les enfants  
   $(".category h5 input").click(function(){
 		var checked_status= this.checked;	
 		var parentInput= this;
@@ -253,6 +268,12 @@ $(document).ready(function(){ 	// le document est chargé
 });
 
 
+
+
+//toutes les fonctions qui permettent le nettoyage des resultats
+//
+//
+//
 function intersection(str1, str2) {
     //test if there is an intersection like:
     //STRING1111strin

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 
+@XmlChildren("subCategories")
 public class PlaceCategory {
 
 	String value;
