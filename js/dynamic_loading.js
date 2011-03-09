@@ -1,27 +1,35 @@
 function parsing(xml) {
 
 alert("ok");
+        $("#places").html("");
+        $("#places").append("<h4>Lieux</h4>");
 $(xml).find("placeCategories").children().each(function() {
    //traitement des placesCategory niveau 1
    //
-    if ($(this).children().size() ==0 ) {
+    if ($(this).children().size() > 0 ) {
         //si il a des enfants
-    $("#message").append("<p>pere"+  $(this).attr("label")   + "</p>");
-    $(this).children().each(function() {
+        $("#places").append("<div class=\"category\" >");
+        $("#places").append("<h5><input type=\"checkbox\" class=\"Checkall\"/>");
+        $("#places").append($(this).attr("label"));
+        $("#places").append("</h5>");
+        $("#places").append("<ul>");
+        $("#places").append("<div id=\"" + $(this).attr("id") + "\"> </div>");
 
-        $("#message").append("<p>fils"+  $(this).attr("label")   + "</p>");
+        var id = "#"+ $(this).attr("id");
+        alert(id);
+    $(this).children().each(function() {
+        //on traite chacun des enfants
+
+        $(id).append("<li>");
+        $(id ).append("<input type=\"checkbox\" ><span>" + $(this).attr("label") + "</span></li>");
     })
+        $("#places").append("</ul></div>");
 
     } else { 
         //si il na pas  
         $("#message").append("<p>noeud normal"+  $(this).attr("label")   + "</p>");
 
     }
-    $("#message").append("<p>pere"+  $(this).attr("label")   + "</p>");
-    $(this).find("placeCategory").each(function() {
-
-        $("#message").append("<p>fils"+  $(this).attr("label")   + "</p>");
-    })
 })
 
 alert("ok");
