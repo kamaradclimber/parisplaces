@@ -1,8 +1,9 @@
+<?xml version="1.0"?>
 <placeCategories>
-    <placeCategory id=”culture” label=”Lieux culturels” popular=”true”>
-        <placeCategory id=”cinemas” label=”Cinémas” />
+    <placeCategory id="culture" label="Lieux culturels" popular="true">
+        <placeCategory id="cinemas" label="Cinémas" />
     </placeCategory>
-    <placeCategory id=”sport” label=”Equipements sportifs” />
+    <placeCategory id="sport" label="Equipements sportifs" />
 </placeCategories> 
 
 
