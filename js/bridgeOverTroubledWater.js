@@ -170,7 +170,7 @@ function getPlaces(requestArguments){
 function addPagination(resultsNumber) {
     
     $('#pagination').html("");
-    pagesNumber = Math.floor(resultsNumber/currentLimit);
+    pagesNumber = Math.ceil(resultsNumber/currentLimit);
     
     function loopPagination(start,end){
         for(var i=start; i<end;i++){
