@@ -1,5 +1,13 @@
 function parsing(xml) {
 
+alert("ok");
+$(xml).find("placeCategory placeCategory").each(function() {
+    
+    alert($(this).attr('label'));
+
+})
+
+alert("ok");
 
 }
 
@@ -10,8 +18,9 @@ function getXml() {
         dataType: "xml",
         url: "static_places_categories.xml", // url de la page à charger
         cache: false, // pas de mise en cache
-        success:function(results){
+        success:function(xml){
             alert("le chargement a fonctionné");
+            parsing(xml);
         },
         error:function(XMLHttpRequest, textStatus, errorThrows){ 
             alert("le chargement du xml statique ne marche pas");
