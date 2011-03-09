@@ -1,6 +1,6 @@
 //these variables are meant to get where we are in the pagination
 var currentOffset =0;
-var currentLimit = 5;
+var currentLimit =10;
 
 //list of the word not to capitalize
 //mainly common words like le, las, les, du 
@@ -12,15 +12,19 @@ var commonWords= {"rue":1,
     "des":1,
     "place":1,
     "boulevard":1,
-    "rues":1
+    "rues":1,
+    "rue":1,
+    "bd":1,
+    "place":1,
+    "sentier":1,
+    "chemin":1,
+    "de":1
 };
-
 
 
 function displayMessage(string) {
     $("#message").empty(); // on vide le div
     $("#message").html(string);
-    
 }
 
 function loading() {
@@ -46,33 +50,29 @@ function checkSelect(){
                         $districts_list += input.id.substring(3,input.id.length) +",";
                         break;
                     case "typ":
-                        $type_list      += input.id.substring(3,input.id.length) +",";
+                        $type_list += input.id.substring(3,input.id.length) +",";
                         break;
                 }
 		}	
 	});	
-    arguments="";
 
-
+    //suppression de la dernière virgule pour les arrondissements et les types de lieu
     if ($districts_list.length>0) { $districts_list = $districts_list.slice(0,-1); }
     if ($type_list.length>0) { $type_list = $type_list.slice(0,-1); }
     //construct the url
     var url = "";
     if ($districts_list.length>0) { url += "district="+ $districts_list + "&"; }
     if ($type_list.length>0) { url += "type="+ $type_list + "&"; }
-
+    
     //remove the trailing &
     if (url.length>0) { url = url.slice(0,-1); }
     return url;
 }
 
 
-
-
-
-
 function makeThemBouncable() {
-    //makes the marker be able to react on the mouse hovering on the associated address
+    //makes all the marker be able to react on the mouse hovering on the associated address
+    ////this function is pure side effects and take all the currently displayed addresses
     $("div.result").mouseenter(function() { //start bouncing if mouse enter the address zone
         var marker = findAssociatedMarker($(this).attr('value'));
         toggleBounce(marker);
@@ -85,30 +85,31 @@ function makeThemBouncable() {
 
 
 function afficher(donnees){ 
-    $("#results_zone").empty(); // on vide le div
-
+    $("#results_zone").empty(); // l'affichage des données 
 
     // on stocke la parité pour pouvoir faire un affichage plus elegant	
     var even = 0;
     var class;
-
     //we dont want to display more than currentLimitItems, even if the server does not work as expected (else the geocoder is the bottleneck of the application)
     var i=0;
+    //Total number of results (useful for pagination)
+    var resultsNumber;
 
     // parcours du xml
-    $(donnees).find('place').each(  function() {
+    $(donnees).find('place').each(function(){
         even = (even +1) % 2;
         class = "result ";                                              //permet de rendre les résultats bouncable 
-        if (even == 0 ) { class += "even"; } else { class += "odd"; }   //permet de rendre l'affichage plus élégant
+        if (even == 0) { class += "even"; } else { class += "odd"; }   //permet de rendre l'affichage plus élégant
         if (i<currentLimit) {
             var id = $(this).attr('id');
             var name = $(this).find('name').text();
             var  address = $(this).find('address').text();
 
+            //on nettoie le nom en essayant d'enlever l'addresse du nom si elle y est
             name = cleanifyer(name,address);
             var  category = $(this).find('category').text();
 
-            // construction du html à afficher pour cette adresse.
+            // construction du html à afficher pour cette adresse. tout en essayant de régler la capitalisation
             var html = "<h4>" + properCap(name) + "</h4>";
             html += "<p>"+  properCap(address) + "</p>";
             //affichage du html dans la bonne zone
@@ -116,16 +117,18 @@ function afficher(donnees){
         }
         i = i+1;
     } );
-
-
+    
+    resultsNumber = $(donnees).find('places').attr('total');
+    
+    // ajout des addresses, les rends réactives au survol de souris puis ajout de la pagination
     addAddressesOnTheMap();
     makeThemBouncable();
+    addPagination(resultsNumber);
 }
 
 
 function findAssociatedMarker(address) {
-    //find the marker displayed on the map corresponding to the address 
-
+    //finds the marker displayed on the map corresponding to the address 
     var result;
     for(i=0; i<places.length;i++) {
         if ( places[i].address == address) {
@@ -140,67 +143,84 @@ function findAssociatedMarker(address) {
     }
 }
 
-function getPlaces(data){
+function getPlaces(requestArguments){
     page="connecteur.php"; // on recuperer l' adresse du lien
-    displayMessage(data);
     $.ajax({  // ajax
         type: "GET",
-        dataType: "html",
-        data: data,
+        dataType: "xml",
+        data: requestArguments,
         url: page, // url de la page à charger
         cache: false, // pas de mise en cache
-        success:function(result){ // si la requête est un succès
+        success:function(results){
+            //si la requete est un succès alors on affiche les resultats, on supprime le message d'erreur eventuellement affiché et on surpprime aussi licone de chargement
             displayMessage("");
-            afficher(result);
+            afficher(results);
             notLoading();
-            addPagination();
         },
-        error:function(XMLHttpRequest, textStatus, errorThrows){ // erreur durant la requete
-                  displayMessage("Argh Something is not good\n (don't kill the messenger !)");
+        error:function(XMLHttpRequest, textStatus, errorThrows){ 
+                  // erreur durant la requete donne lieu à un message dérreur et suppression de l ícone de chargement pour ne pas donner de faux espoir à l'utilisateur
+                  // pour le moment il ne se passe rien d'autre, on _pourrait_ relancer une autre requete
+                  displayMessage("Argh Communication with server has failed\n (don't kill the messenger !)");
+                  notLoading();
 
-              }
+        }
     });
 }
 
-function addPagination() {
+function addPagination(resultsNumber) {
+    
     $('#pagination').html("");
-    if (currentOffset > 0) {
-        $('#pagination').append('<div id="prev"><a>Precedent</a><div>');
-        $('#prev a').click(function() {
-            currentOffset = Math.max(currentOffset - currentLimit,0);
-            getResults(currentOffset,currentLimit);
-        });
-    }
-    $('#pagination').append('<div id="next"><a>Suivant</a><div>');
-    $('#next a').click(function() {
-        currentOffset += currentLimit;
-        getResults(currentOffset,currentLimit);
-    });
-
+    pagesNumber = resultsNumber/currentLimit;
+    
+    for(var i=0; i<pagesNumber;i++){
+        $("<a/>")
+            .append(i+1)
+            .attr("id",i)
+            .click(function(){
+                pageClicked = $(this).attr("id")
+                newOffset = currentOffset + pageClicked*currentLimit;
+                getResults(newOffset,currentLimit);
+            })
+            .appendTo('#pagination');
+    }    
+    
 }
 
 function requestConstructor(offset, limit) {
-    //construit la requete et vérfiie au passage que les arguments ont bien été donnés.
+    //construit la requete et vérifie au passage que les arguments ont bien été donnés.
     data = checkSelect();
     if (offset != null) {data += "&offset="+offset;}
     if (limit != null) {data += "&limit="+limit;}
+    data+="&destination=getPlaces";
     return data;
 }
 
 function getResults(offset, limit) {
     //fonction qui va chercher les résultats.
     //commence par mettre en chargement, puis construit une requete et enfin l'exécute
-    loading();
     data = requestConstructor(offset,limit);
-    getPlaces(data);
+    if (data.indexOf("district",0) >= 0) { 
+        loading();
+        getPlaces(data);
+    } else {
+        // la liste des arrondissements est entièrement décochée => on ne fait rien
+        $("#results_zone").html("<p style=\"padding-left:13px; text-align:center;\">Aucune recherche jusqu'à maintenant.</p>");
+        $('#pagination').html("");
+        places.forEach(function(marker) { marker.setMap(null); });
+        places = new Array();
+
+    }
 }
 
 function reactToClickOnForm() {
-        currentLimit = 5;
-        currentOffset = 0;
-        getResults(currentOffset,currentLimit);
-        return true; // on laisse la case cochée
+    //porte bien son nom !
+	console.log("reactToClickOnForm");
+    currentLimit = 10;
+    currentOffset = 0;
+    getResults(currentOffset,currentLimit);
+    return true; // on laisse la case cochée
 }
+
 
 function reactToClickOnText(span){
 	var li = span.parent();
@@ -218,6 +238,7 @@ function reactToClickOnText(span){
 }
 
 $(document).ready(function(){ 	// le document est chargé
+    // on selectionne tous les liens et on définit une action quand on clique dessus
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
         reactToClickOnForm();
     });
@@ -248,18 +269,53 @@ $(document).ready(function(){ 	// le document est chargé
 					var input= li[i].firstChild;
 					input.checked=checked_status;
 				}
+				reactToClickOnForm();
 				break;	
 			}
 		}
+		
 	}
 	);
 	
    makeThemBouncable();
 
+
 });
 
+
+
+
+//toutes les fonctions qui permettent le nettoyage des resultats
+//
+//
+//
+function intersection(str1, str2) {
+    //test if there is an intersection like:
+    //STRING1111strin
+    //     G1111strinGHGHG
+    var l1 = str1.length;
+    var l2 = str2.length;
+    for (var start=0; start<l1;start++) {
+        //$("#message").append(str1.substring(start, l1) + "    ");
+        //$("#message").append(str2.substr(0,l1-start) + "<br> ");
+        if (str1.substring(start, l1) == str2.substr(0,l1-start))
+        { 
+            //alert('ok');
+            return start;
+        }
+    }
+    return -1;
+}
+
 function cleanifyer(name,address) {
-   //try to suppress the address contained in the name if it is !
+    //try to suppress the address contained in the name if it is !
+
+    var i = intersection(name,address);
+    //alert(name + i);
+    if (i == -1) return name;
+    return name.substring(0,i-1);
+
+
 
     var cleanadd = address.substr(0,address.length-6);
     if (name.substr(name.length - cleanadd.length ,  cleanadd.length) == cleanadd)
@@ -268,7 +324,6 @@ function cleanifyer(name,address) {
     }
    return name; 
 }
-
 
 function properCap(str) {
     //var string = str.toLowerCase();

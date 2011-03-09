@@ -48,6 +48,15 @@
 	letter-spacing:-1px;
 }
 
+.trice
+{
+	float:left;
+	padding:12px;
+	width:93%;
+	background:#6699CC;
+	border-top: 1px solid #E5E1C8;
+	border-bottom:1px solid #E5E1C8;
+}
 .odd
 {
 	float:left;
@@ -63,6 +72,8 @@
 	float:left;
 	padding:12px;
 	width:93%;
+	border-top: 1px solid #E5E1C8;
+	border-bottom:1px solid #E5E1C8;
 }
 
 /*-------- MAP ZONE ------------------------*/
@@ -72,7 +83,7 @@
 	margin-top:20px;
 	margin-bottom:20px;
 	float:left;
-	width:60%;
+	width:62%;
 }
 
 #map_zone iframe
@@ -98,12 +109,6 @@
     text-align:center;
 }
 
-#next{
-    float:left;
-    width:50%;
-}
-
-#prev{
-    float:left;
-    width:50%;
+#pagination a {
+    padding:3px;
 }

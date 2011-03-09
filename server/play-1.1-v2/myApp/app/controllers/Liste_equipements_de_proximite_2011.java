@@ -18,7 +18,7 @@ public class Liste_equipements_de_proximite_2011 extends CsvConnector {
 	public Liste_equipements_de_proximite_2011()
 			throws SQLException {
 		super("data/Liste_equipements_de_proximite_2011.csv");
-		super.hierarchy = new Categories("Halte-garderie");
+		super.hierarchy = new PlaceCategory("Halte-garderie");
 		super.typeColumnName = "COLUMN1";
 		super.districtColumnName = "S_gest";
 		super.encoding = "ISO-8859-1";
@@ -75,6 +75,7 @@ public class Liste_equipements_de_proximite_2011 extends CsvConnector {
 			if (description != null) description = description.replace("&", "et");
 			type = rs.getString(2);
 			if (type != null) type = type.replace("&", "et");
+			//TODO:remplacer par le ou les types correspondants
 			voie = rs.getString(7);
 			if (voie != null) voie = voie.replace("&", "et");
 			//TODO: pas ici qu'il faut remplacer, et de plus d'autres caractères interdits
