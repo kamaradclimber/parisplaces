@@ -209,6 +209,7 @@ function getResults(offset, limit) {
 }
 
 function reactToClickOnForm() {
+    //porte bien son nom !
     currentLimit = 10;
     currentOffset = 0;
     getResults(currentOffset,currentLimit);
@@ -216,6 +217,7 @@ function reactToClickOnForm() {
 }
 
 $(document).ready(function(){ 	// le document est chargé
+    // on selectionne tous les liens et on définit une action quand on clique dessus
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
         reactToClickOnForm();
     });
@@ -234,7 +236,8 @@ $(document).ready(function(){ 	// le document est chargé
 			reactToClickOnForm();
 		}	
 	});
-     
+
+  //lorsqu'on clique sur une catégorie de lieu ca clique sur tous les enfants  
   $(".category h5 input").click(function(){
 		var checked_status= this.checked;	
 		var parentInput= this;
@@ -265,6 +268,12 @@ $(document).ready(function(){ 	// le document est chargé
 });
 
 
+
+
+//toutes les fonctions qui permettent le nettoyage des resultats
+//
+//
+//
 function intersection(str1, str2) {
     //test if there is an intersection like:
     //STRING1111strin
