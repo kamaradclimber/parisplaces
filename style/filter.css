@@ -132,7 +132,7 @@ a.cancel
 	color:#999;
 }
 
-a.search
+a.search, a.searchCategory
 {
 	display:block;
 	float:left;

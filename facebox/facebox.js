@@ -320,16 +320,19 @@
 		.click(function(){
 			dialogBoxFiltersManager();
 		});		
+		
+	$("a.searchCategory")
+		.click(function(){
+		dialogBoxCategoryFiltersManager();
+	});		
   })
   
   // Check les checkbox en cliquant sur texte associé
    $(document).bind('reveal.facebox',function(){
    $("li span").click(function(){
-		//alert("test");
 		var span= $(this);
 		var li = span.parent();
 		var input = li.children()[0];
-				
 		if(input.checked){
 		input.checked=false;
 		}
@@ -350,7 +353,7 @@ $(document).bind('reveal.facebox',function(){
 		{
 			htmlObj= h5.nextSibling;
 			while (htmlObj.nodeType==3){htmlObj=htmlObj.nextSibling;}
-			if(htmlObj.tagName.toLowerCase()=='ul')
+			if(htmlObj.tagName.toLowerCase()=='div')
 			{
 				var li= htmlObj.getElementsByTagName('li');
 				var c=li.length;

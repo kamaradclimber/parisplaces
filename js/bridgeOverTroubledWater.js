@@ -50,8 +50,8 @@ function checkSelect(){
                         $districts_list += input.id.substring(3,input.id.length) +",";
                         break;
                     case "typ":
-                        $type_list += input.id.substring(3,input.id.length) +",";
-                        break;
+					   $type_list += input.id.substring(3,input.id.length) +",";
+						break;
                 }
 		}	
 	});	
@@ -144,7 +144,7 @@ function findAssociatedMarker(address) {
 }
 
 function getPlaces(requestArguments){
-    page="connecteur.php"; // on recuperer l' adresse du lien
+	page="connecteur.php"; // on recuperer l' adresse du lien
     $.ajax({  // ajax
         type: "GET",
         dataType: "xml",
@@ -170,20 +170,31 @@ function getPlaces(requestArguments){
 function addPagination(resultsNumber) {
     
     $('#pagination').html("");
-    pagesNumber = resultsNumber/currentLimit;
+    pagesNumber = Math.ceil(resultsNumber/currentLimit);
     
-    for(var i=0; i<pagesNumber;i++){
-        $("<a/>")
-            .append(i+1)
-            .attr("id",i)
-            .click(function(){
-                pageClicked = $(this).attr("id")
-                newOffset = currentOffset + pageClicked*currentLimit;
-                getResults(newOffset,currentLimit);
-            })
-            .appendTo('#pagination');
-    }    
+    function loopPagination(start,end){
+        for(var i=start; i<end;i++){
+            $("<a/>")
+                .append(i+1)
+                .attr("id",i)
+                .click(function(){
+                    pageClicked = $(this).attr("id")
+                    newOffset = currentOffset + pageClicked*currentLimit;
+                    getResults(newOffset,currentLimit);
+                })
+                .appendTo('#pagination');
+        } 
+    }
     
+    if(pagesNumber<7){
+        loopPagination(0,pagesNumber);
+    }
+    else{
+        loopPagination(0,3);
+        $("<span>...</span>").appendTo("#pagination");
+        loopPagination(pagesNumber-3,pagesNumber); 
+    }
+        
 }
 
 function requestConstructor(offset, limit) {
@@ -199,8 +210,8 @@ function getResults(offset, limit) {
     //fonction qui va chercher les résultats.
     //commence par mettre en chargement, puis construit une requete et enfin l'exécute
     data = requestConstructor(offset,limit);
-    if (data.indexOf("district",0) >= 0) { 
-        loading();
+    if (data.indexOf("district",0) >= 0 || data.indexOf("type",0) >=0) { 
+		loading();
         getPlaces(data);
     } else {
         // la liste des arrondissements est entièrement décochée => on ne fait rien
@@ -220,54 +231,63 @@ function reactToClickOnForm() {
     return true; // on laisse la case cochée
 }
 
+
+function reactToClickOnText(span){
+	var li = span.parent();
+		var input = li.children()[0];	
+		if(input.checked){
+		    input.checked=false;
+			reactToClickOnForm();
+			highlightZones();
+		}
+		else{
+			input.checked=true;
+			reactToClickOnForm();
+			highlightZones();
+		}
+}
+
 $(document).ready(function(){ 	// le document est chargé
     // on selectionne tous les liens et on définit une action quand on clique dessus
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
         reactToClickOnForm();
     });
 
-    // Pour checker les checkbox en cliquant sur le texte associé
-    $("li span").click(function(){
-        var span= $(this);
-        var li = span.parent();
-        var input = li.children()[0];	
-        if(input.checked){
-            input.checked=false;
-            reactToClickOnForm();
-        }
-        else{
-            input.checked=true;
-            reactToClickOnForm();
-        }	
-    });
+	// Pour checker les checkbox en cliquant sur le texte associé
+ $("li span").click(function(){
+		var span= $(this);
+		reactToClickOnText(span);
+	});
+     
+	 //check All
+  $(".category h5 input").click(function(){
+		var checked_status= this.checked;	
+		var parentInput= this;
+		var h5= this.parentNode;
+		var htmlObj=h5.nextSibling;
+		while(htmlObj!=null)
+		{
+			htmlObj= h5.nextSibling;
+			while (htmlObj.nodeType==3){htmlObj=htmlObj.nextSibling;}
+			if(htmlObj.tagName.toLowerCase()=='ul')
+			{
+				var li= htmlObj.getElementsByTagName('li');
+				var c=li.length;
+				var i=0;
+				for (i=0;i<c;i++)
+				{
+					var input= li[i].firstChild;
+					input.checked=checked_status;
+				}
+				reactToClickOnForm();
+				break;	
+			}
+		}		
+	}
+	);
+	
+   makeThemBouncable();
 
-    //lorsqu'on clique sur une catégorie de lieu ca clique sur tous les enfants  
-    $(".category h5 input").click(function(){
-        var checked_status= this.checked;	
-        var parentInput= this;
-        var h5= this.parentNode;
-        var htmlObj=h5.nextSibling;
-        while(htmlObj!=null)
-    {
-        htmlObj= h5.nextSibling;
-        while (htmlObj.nodeType==3){htmlObj=htmlObj.nextSibling;}
-        if(htmlObj.tagName.toLowerCase()=='ul')
-    {
-        var li= htmlObj.getElementsByTagName('li');
-        var c=li.length;
-        var i=0;
-        for (i=0;i<c;i++)
-    {
-        var input= li[i].firstChild;
-        input.checked=checked_status;
-    }
-    break;	
-    }
-    }
-    }
-    );
-
-    makeThemBouncable();
 
 });
 
