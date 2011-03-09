@@ -51,7 +51,7 @@ function checkSelect(){
                         break;
                     case "typ":
                         $type_list += input.id.substring(3,input.id.length) +",";
-                        break;
+						break;
                 }
 		}	
 	});	
@@ -144,7 +144,7 @@ function findAssociatedMarker(address) {
 }
 
 function getPlaces(requestArguments){
-    page="connecteur.php"; // on recuperer l' adresse du lien
+	page="connecteur.php"; // on recuperer l' adresse du lien
     $.ajax({  // ajax
         type: "GET",
         dataType: "xml",
@@ -199,8 +199,8 @@ function getResults(offset, limit) {
     //fonction qui va chercher les résultats.
     //commence par mettre en chargement, puis construit une requete et enfin l'exécute
     data = requestConstructor(offset,limit);
-    if (data.indexOf("district",0) >= 0) { 
-        loading();
+    if (data.indexOf("district",0) >= 0 || data.indexOf("type",0) >=0) { 
+		loading();
         getPlaces(data);
     } else {
         // la liste des arrondissements est entièrement décochée => on ne fait rien
@@ -271,8 +271,7 @@ $(document).ready(function(){ 	// le document est chargé
 				reactToClickOnForm();
 				break;	
 			}
-		}
-		
+		}		
 	}
 	);
 	
