@@ -176,10 +176,9 @@ function addPagination(resultsNumber) {
         for(var i=start; i<end;i++){
             $("<a/>")
                 .append(i+1)
-                .attr("href","")
+                .attr("href","#results_title")
                 .attr("id",i)
                 .click(function(event){
-                    event.preventDefault();
                     pageClicked = $(this).attr("id")
                     currentOffset = pageClicked*currentLimit;
                     getResults(currentOffset,currentLimit);
@@ -203,7 +202,6 @@ function addPagination(resultsNumber) {
             loopPagination(currentPage-5,pagesNumber);
         }
     }
-        
 }
 
 function requestConstructor(offset, limit) {
