@@ -2,8 +2,18 @@
 <placeCategories>
     <placeCategory id="culture" label="Lieux culturels" popular="true">
         <placeCategory id="cinemas" label="Cinémas" />
+        <placeCategory id="musee" label="Musées" />
     </placeCategory>
-    <placeCategory id="sport" label="Equipements sportifs" />
+    <placeCategory id="test" label="Lieux débauchés" popular="true">
+        <placeCategory id="de" label="Ruelle sombre" />
+        <placeCategory id="dtr" label="Bar tendencieux" />
+        <placeCategory id="dty" label="Salon de thé" />
+    </placeCategory>
+    <placeCategory id="sport" label="Equipements sportifs qui n'est pas affiché" />
+    <placeCategory id="cult" label="Salons et Expositions" popular="false">
+        <placeCategory id="cineas" label="Porte de Versailles" />
+        <placeCategory id="mue" label="Expo internationale de la choucroute de Melun" />
+    </placeCategory>
 </placeCategories> 
 
 

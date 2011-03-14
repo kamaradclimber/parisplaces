@@ -16,8 +16,15 @@
         <script language="javascript" src="js/dynamic_loading.js"></script>
         <script language="javascript">
             jQuery(document).ready(function($) {
+                getXml(true);
+                while (!dynamic_loaded && false) {
+                    setTimeout(function() {
+                        $//do nothing
+                    }, 100);
+                }
+                alert("ready1");
                 $('a[rel*=facebox]').facebox();
-                getXml();
+
             })
         </script>
     </head>
@@ -30,7 +37,7 @@
         </header>
         <div id="main">
             <div id="main_container">
-            <div id="message"> </div>
+                <div id="message"> </div>
                 <div id="filter_zone">
                     <h3>Visualisez les lieux de Paris!</h3>
                     <div id="districts">
@@ -52,24 +59,24 @@
                         <div class="category">
                             <h5><input type="checkbox" class="Checkall"/>Jeunesse</h5>
                             <ul>
-							<div class="Jeunesse">
-                                <li><input id="typcreche_collective" type="checkbox"  /><span>Crèche collective</span></li>
-                                <li><input id="typcreche_familiale" type="checkbox"  /><span>Crèche familiale</span></li>
-                                <li><input id="typecole_elementaire" type="checkbox" /><span>Ecole élémentaire & annexes</span></li>
-                                <li><input id="typecole_maternelle" type="checkbox" /><span>Ecole maternelle & annexes</span></li>
-                                <li><input id="typecole_polyvalente" type="checkbox" /><span>Ecole polyvalente</span></li>
-                            </div>
+							    <div class="Jeunesse">
+                                    <li><input id="typcreche_collective" type="checkbox"  /><span>Crèche collective</span></li>
+                                    <li><input id="typcreche_familiale" type="checkbox"  /><span>Crèche familiale</span></li>
+                                    <li><input id="typecole_elementaire" type="checkbox" /><span>Ecole élémentaire & annexes</span></li>
+                                    <li><input id="typecole_maternelle" type="checkbox" /><span>Ecole maternelle & annexes</span></li>
+                                    <li><input id="typecole_polyvalente" type="checkbox" /><span>Ecole polyvalente</span></li>
+                                </div>
 							</ul>
                         </div>
                         <div class="category">
                             <h5><input type="checkbox" class="Checkall"/>Sport</h5>
                             <ul>
                                 <div class="Sport">
-								<li><input id="typaires_sportives_en_acces_libre" type="checkbox" ><span>Aires sportives en accès libre</span></li>
-                                <li><input id="typgymnase" type="checkbox" ><span>Gymnase</span></li>
-                                <li><input id="typpiscine" type="checkbox" ><span>Piscine</span></li>
-                                <li><input id="typsalle_de_sport" type="checkbox" ><span>Salle de sport</span></li>
-                                <li><input id="typterrain_de_tennis" type="checkbox" ><span>Terrain de Tennis</span></li>
+								    <li><input id="typaires_sportives_en_acces_libre" type="checkbox" ><span>Aires sportives en accès libre</span></li>
+                                    <li><input id="typgymnase" type="checkbox" ><span>Gymnase</span></li>
+                                    <li><input id="typpiscine" type="checkbox" ><span>Piscine</span></li>
+                                    <li><input id="typsalle_de_sport" type="checkbox" ><span>Salle de sport</span></li>
+                                    <li><input id="typterrain_de_tennis" type="checkbox" ><span>Terrain de Tennis</span></li>
 								</div>
 							</ul>
                         </div>
@@ -77,16 +84,16 @@
                             <h5><input type="checkbox"  class="Checkall"/>Autres</h5>
                             <ul>
 								<div class="Autres">
-                                <li><input id="typbiblio" type="checkbox"/><span>Bibliothèque</span></li>
-                                <li><input id="typconservatoire" type="checkbox"/><span>Conservatoire</span></li>
-                                <li><input id="typespace_vert" type="checkbox"/><span>Espace vert</span></li>
-                                <li><input id="typmairie_d_arrondissement" type="checkbox"/><span>Mairie d’arrondissement</span></li>
-                                <li><input id="typpigeonnier" type="checkbox"/><span>Pigeonnier</span></li>
+                                    <li><input id="typbiblio" type="checkbox"/><span>Bibliothèque</span></li>
+                                    <li><input id="typconservatoire" type="checkbox"/><span>Conservatoire</span></li>
+                                    <li><input id="typespace_vert" type="checkbox"/><span>Espace vert</span></li>
+                                    <li><input id="typmairie_d_arrondissement" type="checkbox"/><span>Mairie d’arrondissement</span></li>
+                                    <li><input id="typpigeonnier" type="checkbox"/><span>Pigeonnier</span></li>
 								</div>
 							</ul>
                         </div>
-                        <a href="category-dialog-box.html" rel="facebox">Voir d'autres types de lieu</a>
                     </div>
+                    <a href="category-dialog-box.html" rel="facebox">Voir d'autres types de lieu</a>
                 </div>
                 <div id="left_column">
                     <div id="results_title">
