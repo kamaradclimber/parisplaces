@@ -181,20 +181,27 @@ function addPagination(resultsNumber) {
                 .click(function(event){
                     event.preventDefault();
                     pageClicked = $(this).attr("id")
-                    newOffset = currentOffset + pageClicked*currentLimit;
-                    getResults(newOffset,currentLimit);
+                    currentOffset = pageClicked*currentLimit;
+                    getResults(currentOffset,currentLimit);
                 })
                 .appendTo('#pagination');
         } 
     }
     
-    if(pagesNumber<7){
+    if(pagesNumber<11){
         loopPagination(0,pagesNumber);
     }
     else{
-        loopPagination(0,3);
-        $("<span>...</span>").appendTo("#pagination");
-        loopPagination(pagesNumber-3,pagesNumber); 
+        currentPage = currentOffset/currentLimit;
+        if(currentPage<5){
+            loopPagination(0,9);            
+        }
+        else if(pagesNumber-currentPage>5){
+            loopPagination(currentPage-5,currentPage+5);
+        }
+        else{
+            loopPagination(currentPage-5,pagesNumber);
+        }
     }
         
 }
@@ -221,7 +228,6 @@ function getResults(offset, limit) {
         $('#pagination').html("");
         places.forEach(function(marker) { marker.setMap(null); });
         places = new Array();
-
     }
 }
 
