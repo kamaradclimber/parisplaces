@@ -144,6 +144,7 @@ function findAssociatedMarker(address) {
 }
 
 function getPlaces(requestArguments){
+    alert(requestArguments);
 	page="connecteur.php"; // on recuperer l' adresse du lien
     $.ajax({  // ajax
         type: "GET",
@@ -236,12 +237,12 @@ function reactToClickOnText(span){
 	var li = span.parent();
 		var input = li.children()[0];	
 		if(input.checked){
-		    input.checked=false;
+		    //input.checked=false;
 			reactToClickOnForm();
 			highlightZones();
 		}
 		else{
-			input.checked=true;
+			//input.checked=true;
 			reactToClickOnForm();
 			highlightZones();
 		}

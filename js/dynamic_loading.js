@@ -20,13 +20,17 @@ $(xml).find("placeCategories").children().each(function() {
                 "\"> </div>");
 
             var id = "#"+"typ" + $(this).attr("id");
+            var compteur = 0;
             $(this).children().each(function() {
+                compteur++;
+                if (compteur <5 || isFacebox) {
                 //on traite chacun des enfants
 
                 $(ref+id).append("<li>"+
-                    "<input type=\"checkbox\" ><span onClick=\"clickNear(this)\" >" + 
+                    "<input type=\"checkbox\" id=\"typ"+ $(this).attr('id')   + "\" ><span onClick=\"clickNear(this)\" >" + 
                     $(this).attr("label") 
                     + "</span></li>");
+                }
             })
             $(ref+"#places").append("</ul></div>");
         } else { 
@@ -63,8 +67,8 @@ function checkAll1(t) {
 
     function clickNear(t) {   
             var span= t;
-            var li = span.parent();
-            var input = li.children()[0];
+            var li = span.parentNode;
+            var input = li.firstChild;
             if(input.checked){
                 input.checked=false;
             }
@@ -101,7 +105,6 @@ function getDynamicXml(displayPopularOnly, callback,isFacebox) {
         url: "connecteur.php", // url de la page à charger
         cache: false, // pas de mise en cache
         success:function(xml){
-            alert("le chargement a fonctionné");
             parsing(xml, displayPopularOnly,isFacebox, callback);
         },
         error:function(XMLHttpRequest, textStatus, errorThrows){ 

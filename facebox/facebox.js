@@ -316,10 +316,7 @@
 
     $(document).bind('reveal.facebox',function(){
             addSearch();
-        getDynamicXml(false,function(){
-            clickNear();
-    //        clickAll();
-        },true);
+        getDynamicXml(false,function(){} ,true);
     });
 
 
@@ -334,22 +331,6 @@
                 dialogBoxCategoryFiltersManager();
             });		
     };
-
-    // Check les checkbox en cliquant sur texte associé
-    function clickNear() {   
-        $("li span").click(function(){
-            var span= $(this);
-            var li = span.parent();
-            var input = li.children()[0];
-            if(input.checked){
-                input.checked=false;
-            }
-            else{
-                input.checked=true;
-            }	
-        });
-    };
-
 
 
 })(jQuery);
