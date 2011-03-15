@@ -270,7 +270,6 @@ function init_bridge() {
 		var htmlObj=h5.nextSibling;
 		while(htmlObj!=null)
 		{
-			htmlObj= h5.nextSibling;
 			while (htmlObj.nodeType==3){htmlObj=htmlObj.nextSibling;}
 			if(htmlObj.tagName.toLowerCase()=='ul')
 			{
@@ -285,6 +284,7 @@ function init_bridge() {
 				reactToClickOnForm();
 				break;	
 			}
+			htmlObj= h5.nextSibling;
 		}		
 	}
 	);

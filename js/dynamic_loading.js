@@ -12,7 +12,7 @@ $(xml).find("placeCategories").children().each(function() {
             //si il a des enfants
             $(ref+"#places").append(
                 "<div class=\"category\" >"+
-                "<h5><input type='checkbox' class='Checkall' />" +
+                "<h5><input onClick=\"checkAll1()\" type='checkbox' class='Checkall' />" +
                 $(this).attr("label") +
                 "</h5>"+
                 "<ul><div id=\"typ" + 
@@ -38,6 +38,32 @@ $(xml).find("placeCategories").children().each(function() {
 })
 callback();
 }
+
+function checkAll1() {
+    $(".category h5 input").click(function(){
+        var checked_status= this.checked;	
+        var parentInput= this;
+        var h5= this.parentNode;
+        var htmlObj=h5.nextSibling;
+        while(htmlObj!=null) {
+            htmlObj= h5.nextSibling;
+            while (htmlObj.nodeType==3){htmlObj=htmlObj.nextSibling;}
+            if(htmlObj.tagName.toLowerCase()=='ul') {
+                var li= htmlObj.getElementsByTagName('li');
+                var c=li.length;
+                var i=0;
+                for (i=0;i<c;i++) {
+                    var input= li[i].firstChild;
+                    input.checked=checked_status;
+                }
+                break;	
+            }
+        }		
+    }
+    );
+}
+
+
 
 
 function getXml(displayPopularOnly,callback, isFacebox) {
