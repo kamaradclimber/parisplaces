@@ -1,0 +1,7 @@
+<dataSources>
+	<dataSource id=”csvParis1” type=”csv” file=”myfile.csv”>
+		<categories>
+			<placeCategory id=”cinemas” label=”Cinémas” value=”CINEMAS” />
+		</categories>
+	</dataSource>
+</dataSource>
