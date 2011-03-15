@@ -124,6 +124,7 @@ function afficher(donnees){
     addAddressesOnTheMap();
     makeThemBouncable();
     addPagination(resultsNumber);
+    makeMapScrollable();
 }
 
 
@@ -163,7 +164,6 @@ function getPlaces(requestArguments){
                   // pour le moment il ne se passe rien d'autre, on _pourrait_ relancer une autre requete
                   displayMessage("Argh Communication with server has failed\n (don't kill the messenger !)");
                   notLoading();
-
         }
     });
 }
@@ -177,27 +177,32 @@ function addPagination(resultsNumber) {
         for(var i=start; i<end;i++){
             $("<a/>")
                 .append(i+1)
-                .attr("href","")
+                .attr("href","#results_title")
                 .attr("id",i)
                 .click(function(event){
-                    event.preventDefault();
                     pageClicked = $(this).attr("id")
-                    newOffset = currentOffset + pageClicked*currentLimit;
-                    getResults(newOffset,currentLimit);
+                    currentOffset = pageClicked*currentLimit;
+                    getResults(currentOffset,currentLimit);
                 })
                 .appendTo('#pagination');
         } 
     }
     
-    if(pagesNumber<7){
+    if(pagesNumber<10){
         loopPagination(0,pagesNumber);
     }
     else{
-        loopPagination(0,3);
-        $("<span>...</span>").appendTo("#pagination");
-        loopPagination(pagesNumber-3,pagesNumber); 
+        currentPage = currentOffset/currentLimit;
+        if(currentPage<5){
+            loopPagination(0,9);            
+        }
+        else if(pagesNumber-currentPage>5){
+            loopPagination(currentPage-5,currentPage+5);
+        }
+        else{
+            loopPagination(currentPage-5,pagesNumber);
+        }
     }
-        
 }
 
 function requestConstructor(offset, limit) {
@@ -223,7 +228,7 @@ function getResults(offset, limit) {
         $('#pagination').html("");
         places.forEach(function(marker) { marker.setMap(null); });
         places = new Array();
-
+        makeMapNotScrollable();
     }
 }
 
@@ -291,10 +296,8 @@ function init_bridge() {
 			htmlObj= h5.nextSibling;
 		}		
 	}
-	);
-	
+	);	
    makeThemBouncable();
-
 
 };
 

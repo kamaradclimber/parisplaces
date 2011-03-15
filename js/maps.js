@@ -236,6 +236,33 @@ function unique(ar) {
     return a;
   };
 
+function makeMapScrollable(){
 
+    var scrollingMap = $("#map");
+    var resultsZoneHeight = $("#results_zone").height();
+    var scrollLimit = resultsZoneHeight;
+    $(window).scroll(function(){
+        if($(window).scrollTop() <= 341){ 
+            scrollingMap.css("position","relative");
+        }
+        else if($(window).scrollTop() <= scrollLimit+10){//584
+            scrollingMap
+                .css("margin-top","0px")
+                .css("position","fixed")
+                .css("top","10px");                
+        }
+        else{
+            scrollingMap
+                .css("position","relative")
+                .css("margin-top",scrollLimit-331+"px");
+        }
+    });
+}
 
+function makeMapNotScrollable(){
+
+    var scrollingMap = $("#map");
+    $(window).unbind("scroll");
+
+}
 

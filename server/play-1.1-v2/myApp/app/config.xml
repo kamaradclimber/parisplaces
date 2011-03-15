@@ -1,0 +1,98 @@
+
+<dataSources>
+
+<controllers.Liste_equipements_de_proximite_2011 >
+
+
+<categories>
+
+<models.PlaceCategory id="typ_jeunesse" label="Jeunesse">
+	<models.PlaceCategory id="typ_antenne_action_jeunes_information" label="Antenne Action Jeunes Information" value="Antenne action jeunes information" />
+	<models.PlaceCategory id="typ_bassin_ecole" label="Bassin-école" value="Bassin-école" />
+	<models.PlaceCategory id="typ_creche" label="Crèche">
+		<models.PlaceCategory id="typ_creche_collective" label="Crèche collective" value="Crèche collective" />
+		<models.PlaceCategory id="typ_creche_familiale" label="Crèche familiale" value="Crèche familiale" />
+	</models.PlaceCategory>
+	<models.PlaceCategory id="typ_ecole_elementaire" label="Ecole élémentaire et annexes" value="Ecole élémentaire &amp; annexes" />
+	<models.PlaceCategory id="typ_ecole_maternelle" label="Ecole maternelle et annexes" value="Ecole maternelle &amp; annexes" />
+	<models.PlaceCategory id="typ_ecole_polyvalente" label="Ecole polyvalente" value="Ecole polyvalente" />
+	<models.PlaceCategory id="typ_espace_jeune" label="Espace Jeune" value="Espace jeune" />
+	<models.PlaceCategory id="typ_halte_garderie" label="Halte-garderie" value="Halte-garderie" />
+	<models.PlaceCategory id="typ_jardin_d_enfants" label="Jardin d'enfants">
+		<models.PlaceCategory id="typ_jardin_d_enfants_opac" label="Jardin d'enfants OPAC" value="Jardin d'enfants OPAC" />
+		<models.PlaceCategory id="typ_jardin_maternel" label="Jardin maternel" value="Jardin maternel" />
+	</models.PlaceCategory>
+
+</models.PlaceCategory>
+
+<models.PlaceCategory id="typ_administratif" label="Administratif" >
+	<models.PlaceCategory id="typ_annexes_de_mairie_d_arrondissement" label="Annexes de Mairie d’arrondissement" value="Annexe de Mairie d'arrondissement" />
+	<models.PlaceCategory id="typ_mairie_d_arrondissement" label="Mairie d’arrondissement" value="Mairie d’arrondissement" />
+	<models.PlaceCategory id="typ_maison_des_association_locaux_associatifs" label="Maison des association, locaux associatifs" value="Maison des association, locaux associatifs" />
+</models.PlaceCategory>
+
+<models.PlaceCategory id="typ_sport" label="Sport" >
+	<models.PlaceCategory id="typ_aire_de_roller" label="Aire de roller" value="Aire de roller" />
+	<models.PlaceCategory id="typ_aires_sportives_en_acces_libre" label="Aires sportives en accès libre" value="Aires sportives en accès libre" />
+	<models.PlaceCategory id="typ_bain-douche" label="Bain-douche" value="Bain-douche" />
+	<models.PlaceCategory id="typ_equipements_multi_accueil" label="Equipements multi accueil" value="Equipements multi accueil" />
+	<models.PlaceCategory id="typ_equipements_sportifs_d_exterieur" label="Equipements sportifs d’extérieur" value="Equipements sportifs d’extérieur" />
+	<models.PlaceCategory id="typ_gymnase" label="Gymnase" value="Gymnase" />
+	<models.PlaceCategory id="typ_mur_d_escalade" label="Mur d’escalade" >
+		<models.PlaceCategory id="typ_mur_d_escalade_d_exterieur" label="Mur d’escalade d’extérieur" value="Mur d’escalade d’extérieur" />
+		<models.PlaceCategory id="typ_mur_d_escalade_d_interieur" label="Mur d’escalade d’intérieur" value="Mur d’escalade d’intérieur" />
+	</models.PlaceCategory>
+	<models.PlaceCategory id="typ_piscine" label="Piscine" value="Piscine" />
+	<models.PlaceCategory id="typ_salle_polyvalente_multi-usages" label="Salle polyvalente (multi-usages)" value="Salle polyvalente (multi-usages)" />
+	<models.PlaceCategory id="typ_salle_de_sport" label="Salle de sport" value="Salle de sport" />
+	<models.PlaceCategory id="typ_stade" label="Stade" value="Stade" />
+	<models.PlaceCategory id="typ_terrain_d_education_physique" label="Terrain d’éducation physique" value="Terrain d’éducation physique" />
+	<models.PlaceCategory id="typ_terrain_de_boules" label="Terrain de boules" value="Terrain de boules" />
+	<models.PlaceCategory id="typ_terrain_de_tennis" label="Terrain de Tennis" value="Terrain de Tennis" />
+</models.PlaceCategory>
+
+<models.PlaceCategory id="culture" label="Culture">
+
+    <models.PlaceCategory id="biblio" label="Bibliothèque" value="Bibliothèque"/>
+
+    <models.PlaceCategory id="centre_animation" label="Centre d'animation" value="Centre d'animation"/>
+
+    <models.PlaceCategory id="conservatoire" label="Conservatoire" value="Conservatoire"/>
+
+    <models.PlaceCategory id="mediatheque" label="Médiathèque" value="Médiathèque"/>
+
+</models.PlaceCategory>
+
+<models.PlaceCategory id="espace_vert" label="Espace vert">
+
+    <models.PlaceCategory id="espace_partage" label="Espace vert partagé" value="Espace vert partagé, éphémère ou pédagogique"/>
+
+    <models.PlaceCategory id="jardinet" label="Jardinet" value="Jardinet décoratif, plate bande"/>
+
+    <models.PlaceCategory id="promenade" label="Promenade" value="Promenade ouverte, mail planté, jardin, square"/>
+
+    <models.PlaceCategory id="terre_plein" label="Terre-plein" value="Terre-plein, jardinière"/>
+
+</models.PlaceCategory>
+
+   
+
+<models.PlaceCategory id="divers" label="Divers">   
+
+    <models.PlaceCategory id="pigeonnier" label="Pigeonnier" value="Pigeonnier"/>
+
+    <models.PlaceCategory id="talus" label="Talus">
+
+        <models.PlaceCategory id="talus_plante" label="Talus planté" value="Talus planté"/>
+
+        <models.PlaceCategory id="talus_ferroviaire" label="Talus d'espace ferroviaire" value="Talus d'espace ferroviaire"/>
+
+    </models.PlaceCategory>
+
+</models.PlaceCategory>
+</categories>
+
+</controllers.Liste_equipements_de_proximite_2011>
+
+</dataSources>
+

@@ -34,6 +34,7 @@
 {
 	float:left;
 	margin-right:12px;
+	min-height:320px;
 }
 
 #results_title h3
@@ -80,6 +81,7 @@
 
 #map_zone
 {
+    position:relative;
 	margin-top:20px;
 	margin-bottom:20px;
 	float:left;
