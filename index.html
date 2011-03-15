@@ -16,14 +16,10 @@
         <script language="javascript" src="js/dynamic_loading.js"></script>
         <script language="javascript">
             jQuery(document).ready(function($) {
-                getXml(true);
-                while (!dynamic_loaded && false) {
-                    setTimeout(function() {
-                        $//do nothing
-                    }, 100);
-                }
-                alert("ready1");
-                $('a[rel*=facebox]').facebox();
+                getXml(true, function(){
+			init_bridge();
+			$('a[rel*=facebox]').facebox();
+			}, false);
 
             })
         </script>

@@ -314,8 +314,16 @@
 		});		
   })
 
-
   $(document).bind('reveal.facebox',function(){
+	getXml(false,function(){
+		addSearch();
+		clickNear();
+		clickAll();
+		},true);
+	});
+
+
+function addSearch() {
   	$("a.search")
 		.click(function(){
 			dialogBoxFiltersManager();
@@ -325,11 +333,11 @@
 		.click(function(){
 		dialogBoxCategoryFiltersManager();
 	});		
-  })
+  };
   
   // Check les checkbox en cliquant sur texte associé
-   $(document).bind('reveal.facebox',function(){
-   $("li span").click(function(){
+function clickNear() {   
+$("li span").click(function(){
 		var span= $(this);
 		var li = span.parent();
 		var input = li.children()[0];
@@ -340,11 +348,18 @@
 			input.checked=true;
 		}	
 	});
-	})
+	};
 
 		// Check all function
-$(document).bind('reveal.facebox',function(){
-   $(".category-dialog-box h5 input").click(function(){
+function clickAll() {
+console.log($("#facebox .content #places .category  #typculture").html()  );
+console.log("jy suis");
+var boxes = document.getElementsByTagName('input');
+alert(boxes.length);
+for(var i=0; i< boxes.length;i++) {
+alert(boxes[i]);
+boxes[i].onclick = function(){
+        console.log("un");
 		var checked_status= this.checked;	
 		var parentInput= this;
 		var h5= this.parentNode;
@@ -367,7 +382,11 @@ $(document).bind('reveal.facebox',function(){
 			}
 		}
 	}
-	);
-});
+}
+	;
+
+console.log(document.getElementById('typculture'));
+console.log(document.getElementById('typculture').onclick);
+};
 	
 })(jQuery);

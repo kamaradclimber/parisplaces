@@ -1,19 +1,18 @@
-var dynamic_loaded = false;
 
-
-function parsing(xml, displayPopularOnly) {
-
-        $("#places").html("");
-        $("#places").append("<h4>Lieux</h4>");
+function parsing(xml, displayPopularOnly, isFacebox,callback) {
+	var ref ="";
+	if (isFacebox) { ref = "#facebox " ; }
+        $(ref+ "#places").html("");
+        $(ref+ "#places").append("<h4>Lieux</h4>");
 $(xml).find("placeCategories").children().each(function() {
    //traitement des placesCategory niveau 1
    //
     if ($(this).attr('popular')=="true" || !displayPopularOnly ) {
         if ($(this).children().size() > 0 ) {
             //si il a des enfants
-            $("#places").append(
+            $(ref+"#places").append(
                 "<div class=\"category\" >"+
-                "<h5><input type=\"checkbox\" class=\"Checkall\"/>" +
+                "<h5><input type='checkbox' class='Checkall' />" +
                 $(this).attr("label") +
                 "</h5>"+
                 "<ul><div id=\"typ" + 
@@ -24,37 +23,34 @@ $(xml).find("placeCategories").children().each(function() {
             $(this).children().each(function() {
                 //on traite chacun des enfants
 
-                $(id).append("<li>"+
+                $(ref+id).append("<li>"+
                     "<input type=\"checkbox\" ><span>" + 
                     $(this).attr("label") 
                     + "</span></li>");
             })
-            $("#places").append("</ul></div>");
+            $(ref+"#places").append("</ul></div>");
         } else { 
             //si il na pas d'enfant et qu'il n'est pas un enfant 
-            $("#message").append("<p>noeud normal"+  $(this).attr("label")   + "</p>");
+           // $("#message").append("<p>noeud normal"+  $(this).attr("label")   + "</p>");
 
         }
     }
 })
-
-alert("ok");
-dynamic_loaded = true;
+callback();
 }
 
 
-function getXml(displayPopularOnly) {
+function getXml(displayPopularOnly,callback, isFacebox) {
     $.ajax({  // ajax
         type: "GET",
         dataType: "xml",
         url: "static_places_categories.xml", // url de la page à charger
         cache: false, // pas de mise en cache
         success:function(xml){
-            alert("le chargement a fonctionné");
-            parsing(xml, displayPopularOnly);
+            parsing(xml, displayPopularOnly,isFacebox, callback);
         },
         error:function(XMLHttpRequest, textStatus, errorThrows){ 
-                  alert("le chargement du xml statique ne marche pas");
+                  displayMessage("le chargement du xml statique ne marche pas");
                   dynamic_loaded = true; //pour que ca ne bloque pas tout le reste
               }
     });
@@ -63,17 +59,17 @@ function getXml(displayPopularOnly) {
 
 
 function getDynamicXml() {
-data = "";
-    data+="destination=getPlaceCategories";
+    var data ="destination=getPlaceCategories";
     $.ajax({  // ajax
         type: "GET",
         dataType: "xml",
-        data: data
+        data: data,
         url: "connecteur.php", // url de la page à charger
         cache: false, // pas de mise en cache
         success:function(xml){
             alert("le chargement a fonctionné");
-            parsing(xml, displayPopularOnly);
+            parsing(xml, displayPopularOnly,isFacebox);
+		callback();
         },
         error:function(XMLHttpRequest, textStatus, errorThrows){ 
                   alert("le chargement du xml statique ne marche pas");

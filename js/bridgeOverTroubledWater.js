@@ -247,14 +247,11 @@ function reactToClickOnText(span){
 		}
 }
 
-$(document).ready(function(){ 	// le document est chargé
+function init_bridge() {
+
+//$(document).ready(function(){ 	// le document est chargé
     // on selectionne tous les liens et on définit une action quand on clique dessus
-    while (!dynamic_loaded && false) {
-        setTimeout(function () {
-            //do nothing
-        }, 100)
-    }
-    alert("ready");
+
     $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
         reactToClickOnForm();
     });
@@ -295,7 +292,7 @@ $(document).ready(function(){ 	// le document est chargé
    makeThemBouncable();
 
 
-});
+};
 
 
 
