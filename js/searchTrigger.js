@@ -79,7 +79,11 @@ function dialogBoxCategoryFiltersManager(){
     $("#facebox #places .Checkall").each(function() { //on a donc uniquement les méta catégories
         var input = $(this);
         var header = $(input).parent().html();
-        var div_cat = $(input).parent().siblings("ul").html(); //le code complet il faudrait le vider
+        var div_cat = $(input).parent().parent().children("ul").html();        //le code complet il faudrait le vider
+        var firstPar = div_cat.indexOf("\"",0);
+        var sndPar   = div_cat.indexOf("\"",firstPar+1);
+        div_cat = div_cat.substring(firstPar+1, sndPar);
+        //alert(div_cat);
         head2cat[header] = div_cat;
         displayed[header] = new Array();
         //console.log(header);
@@ -89,8 +93,8 @@ function dialogBoxCategoryFiltersManager(){
                 var inp = $(this).children("input");
                 if ($(inp).is(':checked')  ) {
                     //alors il faut l'ajouter à ceux qui seront affichés
-			        // inp.setAttribute('checked',true);//il faudrait peut etre cocher lelement du DOM comme dans lancienne fonction mais je nen suis pas sur
-                    displayed[header].push($(this).html());
+			        inp.attr('checked',true);//il faudrait peut etre cocher lelement du DOM comme dans lancienne fonction mais je nen suis pas sur
+                    displayed[header].push(  $(this).html() ) ;
                 
                 
                 } else {
@@ -103,128 +107,56 @@ function dialogBoxCategoryFiltersManager(){
             
 
     }); 
-
+/*
     for( var header in head2cat) {
         console.log(header);
         console.log(head2cat[header]);
+        console.log("debut");
         for (var i =0; i<displayed[header].length; i++) {
             console.log("   "+ displayed[header][i]);
         }
+        console.log("fin");
     }
+    */
 
 
-
-/*
-	$(".JeunesseFacebox li").each(function(){
-		var li = $(this);
-		var input = li.children()[0];
-		var categoryCode = input.name;
-		categoryCode = categoryCode.substr(3);	
-		if(input.checked){
-			//On coche l'élément du DOM 'input'
-			input.setAttribute('checked',true);
-			checkedJeunesseFilters.push(li);
-			input.setAttribute('name','jeu'+categoryCode);	
-			}
-		else{
-			nonCheckedJeunesseFilters.push(li);
-			input.setAttribute('name','jeu'+categoryCode);	
-		}
-	});	
-	
-	$(".SportFacebox li").each(function(){
-		var li = $(this);
-		var input = li.children()[0];
-		var categoryCode = input.name;
-		categoryCode = categoryCode.substr(3);	
-		if(input.checked){
-			//On coche l'élément du DOM 'input'
-			input.setAttribute('checked',true);
-			checkedSportFilters.push(li);
-			input.setAttribute('name','spo'+categoryCode);	
-		}
-		else{
-			nonCheckedSportFilters.push(li);
-			input.setAttribute('name','spo'+categoryCode);	
-		}
-	});
-	$(".AutresFacebox li").each(function(){
-		var li = $(this);
-		
-		var input = li.children()[0];
-		var categoryCode = input.name;
-		categoryCode = categoryCode.substr(3);	
-		if(input.checked){
-			//On coche l'élément du DOM 'input'
-			input.setAttribute('checked',true);
-			checkedAutreFilters.push(li);
-			input.setAttribute('name','aut'+categoryCode);	
-		}
-		else{
-			nonCheckedAutreFilters.push(li);
-			input.setAttribute('name','aut'+categoryCode);	
-		}
-	});		
-	//ConcatŽner le tableau des filtres non-cochŽs au tableau des filtres cochŽs
-	var totalJeunesseFilters = checkedJeunesseFilters.concat(nonCheckedJeunesseFilters);
-	var i=0;
-	for (i=0;i<totalJeunesseFilters.length;i++){
-	//alert(totalJeunesseFilters[i].html());
-	}
-	var totalSportFilters = checkedSportFilters.concat(nonCheckedSportFilters);
-	//alert(totalSportFilters.length);
-	var totalAutreFilters = checkedAutreFilters.concat(nonCheckedAutreFilters);
-	//alert(totalAutreFilters.length);
-	//Changer la page principale lorsque l'évènement se termine
-	changeHomePageCategoryFilters(totalJeunesseFilters,totalSportFilters,totalAutreFilters);
-
-//*/
-
+    changeHomePageCategoryFilters(head2cat, displayed);
 	$(document).trigger('close.facebox');
 
     reactToClickOnForm();	
 	highlightZones();
 }
 
-function changeHomePageCategoryFilters(totalJeunesseFilters,totalSportFilters,totalAutreFilters){
-	var filterListHTML ='';
-	//gestion des lieux Jeunesse
-	for(i=0;i<5;i++) {
-		filterListHTML += '<li>'+totalJeunesseFilters[i].html()+'</li>'; 
-	}
-	for(i=6, c = totalJeunesseFilters.length;i<c; i++){
-		filterListHTML += '<li style="display:none;">'+totalJeunesseFilters[i].html()+'</li>'; 
-	}
-	$(".Jeunesse").html(filterListHTML);
-	
-	
-		//gestion des lieux Sport
-	filterListHTML ='';
-	for(i=0;i<5;i++) {
-		filterListHTML += '<li>'+totalSportFilters[i].html()+'</li>'; 
-	}
-	for(i=6, c = totalSportFilters.length;i<c; i++){
-		filterListHTML += '<li style="display:none;">'+totalSportFilters[i].html()+'</li>'; 
-	}
-	$(".Sport").html(filterListHTML);
-	
-		//gestion des lieux Autres
-	filterListHTML ='';
-	for(i=0;i<5;i++) {
-		filterListHTML += '<li>'+totalAutreFilters[i].html()+'</li>'; 
-	}
-	for(i=6, c = totalAutreFilters.length;i<c; i++){
-		filterListHTML += '<li style="display:none;">'+totalAutreFilters[i].html()+'</li>'; 
-	}
-	$(".Autres").html(filterListHTML);
+function changeHomePageCategoryFilters(head2cat, displayed){
+
+        $("#filter_zone #places").html("Hello");
+        $("#places").append("<h4>Lieux</h4>");
+
+    for( var header in head2cat) {
+        if (displayed[header].length >0) {
+            console.log("on affiche celle ci");
+        $("#places").append("<h5><div class=\"category\">");
+    
+        $("#places").append(header);
+        $("#places").append("<ul>");
+        $("#places").append("<div id=\""+ head2cat[header]+ "\">");
+        console.log(header);
+        console.log(head2cat[header]);
+        alert(displayed[header].length); /// cets ICICICICICICICICICICI
+        for (var i =0; i<displayed[header].length; i++) {
+            $("#places "+head2cat[header]).append("<li>"+ displayed[header][i] + "</li>");
+            alert($("#places "+ head2cat[header] + " li input")) ;
+        }
+        //$(#places " + head2cat[header] + " li input").attr('check', true);
+        $("#places").append("</div>");
+        $("#places").append("</ul>");
+        $("#places").append("</div></h5>");
+        }
+    }
+    
+
+
+
     
 	
-    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
-        reactToClickOnForm();
-		});
-		// Pour checker les checkbox en cliquant sur le texte associé
- $("li span").click(function(){
-		var span= $(this);
-		reactToClickOnText(span);
-	});	
 }
