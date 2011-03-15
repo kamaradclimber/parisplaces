@@ -24,7 +24,7 @@ if (!$test_mode) {
             $bob = "places?";
             $daurl = 'http://138.195.76.136/';
         } else if  ($_GET['destination'] == 'getPlaceCategories') {
-            $bob = "getplacecategories.xml";
+            $bob = "placecategories";
             $daurl = 'http://138.195.76.136/';
             header('Content-type: application/xhtml+xml');
         } else if  ($_GET['destination'] == 'geocode') {

@@ -12,7 +12,7 @@ $(xml).find("placeCategories").children().each(function() {
             //si il a des enfants
             $(ref+"#places").append(
                 "<div class=\"category\" >"+
-                "<h5><input onClick=\"checkAll1()\" type='checkbox' class='Checkall' />" +
+                "<h5><input onClick=\"checkAll1(this)\" type='checkbox' class='Checkall' />" +
                 $(this).attr("label") +
                 "</h5>"+
                 "<ul><div id=\"typ" + 
@@ -39,11 +39,10 @@ $(xml).find("placeCategories").children().each(function() {
 callback();
 }
 
-function checkAll1() {
-    $(".category h5 input").click(function(){
-        var checked_status= this.checked;	
-        var parentInput= this;
-        var h5= this.parentNode;
+function checkAll1(t) {
+        var checked_status= t.checked;	
+        var parentInput= t;
+        var h5= t.parentNode;
         var htmlObj=h5.nextSibling;
         while(htmlObj!=null) {
             htmlObj= h5.nextSibling;
@@ -59,11 +58,22 @@ function checkAll1() {
                 break;	
             }
         }		
-    }
-    );
 }
 
 
+    function clickNear(t) {   
+        $("li span").click(function(){
+            var span= $(this);
+            var li = span.parent();
+            var input = li.children()[0];
+            if(input.checked){
+                input.checked=false;
+            }
+            else{
+                input.checked=true;
+            }	
+        });
+    };
 
 
 function getXml(displayPopularOnly,callback, isFacebox) {
@@ -84,7 +94,7 @@ function getXml(displayPopularOnly,callback, isFacebox) {
 }
 
 
-function getDynamicXml() {
+function getDynamicXml(displayPopularOnly, callback,isFacebox) {
     var data ="destination=getPlaceCategories";
     $.ajax({  // ajax
         type: "GET",
@@ -94,11 +104,10 @@ function getDynamicXml() {
         cache: false, // pas de mise en cache
         success:function(xml){
             alert("le chargement a fonctionné");
-            parsing(xml, displayPopularOnly,isFacebox);
-		callback();
+            parsing(xml, displayPopularOnly,isFacebox, callback);
         },
         error:function(XMLHttpRequest, textStatus, errorThrows){ 
-                  alert("le chargement du xml statique ne marche pas");
+                  alert("le chargement du xml dynamique ne marche pas");
                   dynamic_loaded = true; //pour que ca ne bloque pas tout le reste
               }
     });

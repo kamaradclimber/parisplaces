@@ -315,8 +315,8 @@
     })
 
     $(document).bind('reveal.facebox',function(){
-        getXml(false,function(){
             addSearch();
+        getDynamicXml(false,function(){
             clickNear();
     //        clickAll();
         },true);
@@ -350,31 +350,6 @@
         });
     };
 
-    // Check all function
-    function checkAll1(){
-        console.log("un");
-        /*var checked_status= this.checked;	
-        //var parentInput= this;
-        //var h5= this.parentNode;
-        var htmlObj=h5.nextSibling;
-        while(htmlObj!=null)
-        {
-        htmlObj= h5.nextSibling;
-        while (htmlObj.nodeType==3){htmlObj=htmlObj.nextSibling;}
-        if(htmlObj.tagName.toLowerCase()=='div')
-        {
-        var li= htmlObj.getElementsByTagName('li');
-        var c=li.length;
-        var i=0;
-        for (i=0;i<c;i++)
-        {
-        var input= li[i].firstChild;
-        input.checked=checked_status;
-        }
-        break;	
-        }
-        }*/
-    }
 
 
 })(jQuery);
