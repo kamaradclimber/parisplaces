@@ -144,7 +144,7 @@ function findAssociatedMarker(address) {
 }
 
 function getPlaces(requestArguments){
-    alert(requestArguments);
+    console.log(requestArguments);
 	page="connecteur.php"; // on recuperer l' adresse du lien
     $.ajax({  // ajax
         type: "GET",
@@ -216,6 +216,7 @@ function getResults(offset, limit) {
         getPlaces(data);
     } else {
         // la liste des arrondissements est entièrement décochée => on ne fait rien
+        displayMessage("Sélectionner un arrondissement pour lancer la recherche");
         $("#results_zone").html("<p style=\"padding-left:13px; text-align:center;\">Aucune recherche jusqu'à maintenant.</p>");
         $('#pagination').html("");
         places.forEach(function(marker) { marker.setMap(null); });

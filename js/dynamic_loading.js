@@ -110,7 +110,7 @@ function getDynamicXml(displayPopularOnly, callback,isFacebox) {
             parsing(xml, displayPopularOnly,isFacebox, callback);
         },
         error:function(XMLHttpRequest, textStatus, errorThrows){ 
-                  alert("le chargement du xml dynamique ne marche pas");
+                  displayMessage("le chargement du xml dynamique ne marche pas");
                   dynamic_loaded = true; //pour que ca ne bloque pas tout le reste
               }
     });
@@ -120,36 +120,3 @@ function getDynamicXml(displayPopularOnly, callback,isFacebox) {
 
 
 
-/*                        <div class="category">
-                          <h5><input type="checkbox" class="Checkall"/>Jeunesse</h5>
-                          <ul>
-                          <li><input type="checkbox"  /><span>Crèche collective</span></li>
-                          <li><input type="checkbox"  /><span>Crèche familiale</span></li>
-                          <li><input type="checkbox" /><span>Ecole élémentaire & annexes</span></li>
-                          <li><input type="checkbox" /><span>Ecole maternelle & annexes</span></li>
-                          <li><input type="checkbox" /><span>Ecole polyvalente</span></li>
-                          </ul>
-                          </div>
-                          <div class="category">
-                          <h5><input type="checkbox" class="Checkall"/>Sport</h5>
-                          <ul>
-                          <li><input type="checkbox" ><span>Aires sportives en accès libre</span></li>
-                          <li><input type="checkbox" ><span>Gymnase</span></li>
-                          <li><input type="checkbox" ><span>Piscine</span></li>
-                          <li><input type="checkbox" ><span>Salle de sport</span></li>
-                          <li><input type="checkbox" ><span>Terrain de Tennis</span></li>
-                          </ul>
-                          </div>
-                          <div class="category">
-                          <h5><input type="checkbox"  class="Checkall"/>Autres</h5>
-                          <ul>
-                          <li><input type="checkbox"/><span>Bibliothèque</span></li>
-                          <li><input type="checkbox"/><span>Conservatoire</span></li>
-                          <li><input type="checkbox"/><span>Espace vert</span></li>
-                          <li><input type="checkbox"/><span>Mairie d’arrondissement</span></li>
-                          <li><input type="checkbox"/><span>Pigeonnier</span></li>
-                          </ul>
-                          </div>
-
-
-// */

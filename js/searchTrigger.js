@@ -97,21 +97,7 @@ function dialogBoxCategoryFiltersManager(){
                 //console.log($(this));
             })
         })
-            
-
     }); 
-/*
-    for( var header in head2cat) {
-        console.log(header);
-        console.log(head2cat[header]);
-        console.log("debut");
-        for (var i =0; i<displayed[header].length; i++) {
-            console.log("   "+ displayed[header][i]);
-        }
-        console.log("fin");
-    }
-    */
-
 
     changeHomePageCategoryFilters(head2cat, displayed);
 	$(document).trigger('close.facebox');
@@ -122,23 +108,20 @@ function dialogBoxCategoryFiltersManager(){
 
 function changeHomePageCategoryFilters(head2cat, displayed){
 
-        $("#filter_zone #places").html();
-        $("#places").append("<h4>Lieux</h4>");
+        $("#filter_zone #places").html("");
+        $("#filter_zone #places").append("<h4>Lieux</h4>");
 
     for( var header in head2cat) {
         if (displayed[header].length >0) {
-        $("#places").append("<div class=\"category\"><h5>" + header+ "</h5><ul><div id=\""+ head2cat[header]+ "\">");
+        $("#filter_zone #places").append("<div class=\"category\"><h5>" + header+ "</h5><ul><div id=\""+ head2cat[header]+ "\">");
         for (var i =0; i<displayed[header].length; i++) {
-            $("#places #"+head2cat[header]).append("<li>"+ displayed[header][i] + "</li>");
+            $("#filter_zone #places #"+head2cat[header]).append("<li>"+ displayed[header][i] + "</li>");
+            console.log(displayed[header][i]);
         }
-        $("#places #" + head2cat[header] + " li input").attr('checked', true);
-        $("#places").append("</div>" + "</ul>"+ "</div>");
+        $("#filter_zone #places #" + head2cat[header] + " li input").attr('checked', true);
+        $("#filter_zone #places").append("</div>" + "</ul>"+ "</div>");
         }
     }
-    
-
-
-
     
 	
 }
