@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<placeCategories>
+	<placeCategory id="culture" label="Lieux culturels" popular="true">
+		<placeCategory id="biblio" label="Bibliotheques" popular="true" />
+		<placeCategory id="cinemas" label="Cinemas" />
+	</placeCategory>
+	<placeCategory id="sport" label="Equipements sportifs" />
+</placeCategories>

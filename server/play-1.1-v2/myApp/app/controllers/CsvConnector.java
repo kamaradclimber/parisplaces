@@ -1,5 +1,6 @@
 package controllers;
 
+
 import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +11,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.TreeSet;
 import java.util.Vector;
 
 import models.Place;
+import models.PlaceCategory;
 
 import org.h2.tools.Csv;
 
@@ -52,6 +55,7 @@ public abstract class CsvConnector extends DataSource{
 					getConnection("jdbc:h2:~/test", "sa", "");
 				System.out.println("connection org.h2 etablie");
 		        connection.setReadOnly(true);
+		        
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -70,43 +74,47 @@ public abstract class CsvConnector extends DataSource{
     {
     	
     	//Collection<String> types = consolidate( Arrays.asList(typeOfLocation));
-    	Collection<String> types = super.hierarchy.findSubCategories(Arrays.asList(typeOfLocation));
-    	types.add("Promenade ouverte, mail planté, jardin, square");
+    	//System.out.println("Hierarchy dans getLocations: "+categories);
+    	Collection<String> types= new HashSet<String>();
+    	for (PlaceCategory category : categories)
+    	{
+    		types.addAll(category.findSubCategories(Arrays.asList(typeOfLocation)));
+    	}
+    	//types.add("Promenade ouverte, mail planté, jardin, square");
     	String request="SELECT * FROM CSVREAD('" + file + "',NULL, '"+encoding+"', ';')";
-    	
+    	//String request = "SELECT * FROM CSVREAD('" + file + "',NULL, '"+encoding+"', ';') WHERE S_gest IN ('MAIRIE DU  2E','MAIRIE DU  3E') AND COLUMN1 IN ('Ecole polyvalente')";
     	if (districts.size()>0 || types.size() >0)
     	{//then we add a WHERE condition
-    		request += " WHERE ";
+    		request += " WHERE (";
     		if (districts.size()>0)
     		{
-    			request += districtColumnName+" IN (";
-    	
+    			
     			for (int district : districts)
     			{
-    				request += "'"+districtName(district)+"',";
+    				request += districtColumnName+"='"+districtName(district)+"' OR ";
     			}
 
     			if (districts.size()!=0)//we have a ',' in the end
-    				request = request.substring(0, request.length()-1);
+    				request = request.substring(0, request.length()-3);
 
-    			request += ")";
+    			request += ") ";
     		}
     	if (districts.size()>0 && types.size() >0)
     	{
-    		request += "AND ";
+    		request += " AND ( ";
     	}
     	
     	if (types.size()>0)
     	{
-    		request += typeColumnName +" IN (";
+    		//request += typeColumnName +" IN (";
     	
     		for (String type : types)
     		{
-    			request+="'"+type+"',";
+    			request+=typeColumnName+"='"+type.replace("'", "''")+"' OR ";
     		}
 
     		if (types.size()!=0)//we have a ',' in the end
-    			request = request.substring(0, request.length()-1);
+    			request = request.substring(0, request.length()-3);
 
     		request += ")";
     	}
@@ -114,8 +122,7 @@ public abstract class CsvConnector extends DataSource{
     	System.out.println("debut de la requete");
     	System.out.println(request);
     	System.out.println("fin de la requete");
-    	PreparedStatement ps = connection.prepareStatement( request );
-
+    	PreparedStatement ps = connection.prepareStatement( request);
     	ResultSet rs = ps.executeQuery();
 //    	System.out.println("affichage des resultat...");
 //    	printResults(rs);
@@ -133,7 +140,7 @@ public abstract class CsvConnector extends DataSource{
 		
     	TreeSet<String> result = new TreeSet<String>();
     	
-    	result.addAll(super.hierarchy.findSubCategories(types));
+    	//result.addAll(hierarchy.findSubCategories(types));
     	
     	return result;
     }

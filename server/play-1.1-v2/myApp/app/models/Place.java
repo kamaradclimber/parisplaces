@@ -17,6 +17,7 @@ public class Place {
 	int AP_cp;
 	String AP_voie;
 	
+	
 	public Place(int ar) {
 		arrondissement = ar;
 	}
@@ -53,11 +54,27 @@ public class Place {
 		return name;
 	}
 	
+	public String getTypeDePlace() {
+		return typeDePlace;
+	}
+	
 	@Override
 	public String toString() {
 		return "Place [arrondissement=" + arrondissement + ", designation="
 				+ designation + ", name=" + name + ", typeDePlace="
 				+ typeDePlace + ", Address=" + getAddress() + "]";
+	}
+	
+	public int compareTo(Object arg0) {
+		try {
+			Place a = (Place) arg0;
+			return this.getName().compareTo(a.getName());
+		}
+		catch (ClassCastException e) {
+			e.printStackTrace();
+			System.out.println("Attention tu essayes de comparer des non-places ! Ca va tout casser");
+			return -10;
+		}
 	}
 
 }

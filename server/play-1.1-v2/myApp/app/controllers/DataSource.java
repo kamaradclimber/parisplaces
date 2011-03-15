@@ -1,16 +1,16 @@
 package controllers;
 
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import models.Place;
+import models.PlaceCategory;
 
 public abstract class DataSource {
 
 	//configFile = "config.xml";
     
-	PlaceCategory hierarchy;
+	public ArrayList<PlaceCategory> categories;
 	
 	public DataSource()
 	{
