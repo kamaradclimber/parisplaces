@@ -44,6 +44,7 @@ callback();
 }
 
 function checkAll1(t) {
+    //cette fonction coche toutes les sous cases d'une méta catégorie
         var checked_status= t.checked;	
         var parentInput= t;
         var h5= t.parentNode;
@@ -66,6 +67,7 @@ function checkAll1(t) {
 
 
     function clickNear(t) {   
+        //cette fonction permet que le clic sur un texte déclenche le clic sur la box associée
             var span= t;
             var li = span.parentNode;
             var input = li.firstChild;

@@ -61,13 +61,6 @@ function changeHomePageFilters(totalFilters){
 	
 function dialogBoxCategoryFiltersManager(){
     console.log("on entre dans le filter amanager");
-	var checkedJeunesseFilters = []; 
-	var nonCheckedJeunesseFilters = [];
-	var checkedSportFilters = []; 
-	var nonCheckedSportFilters = [];
-	var checkedAutreFilters = []; 
-	var nonCheckedAutreFilters = [];
-	//RŽpartir les filtres cochŽs et les filtres non cochŽs dans les tableaux correspondants
 
     //on va parcourir les cases cochées, déterminer les méta catégories qui ont des enfants cochées et mettre tout ca dans un bel objet
     //ensuite on essaiera de les afficher
@@ -129,28 +122,17 @@ function dialogBoxCategoryFiltersManager(){
 
 function changeHomePageCategoryFilters(head2cat, displayed){
 
-        $("#filter_zone #places").html("Hello");
+        $("#filter_zone #places").html();
         $("#places").append("<h4>Lieux</h4>");
 
     for( var header in head2cat) {
         if (displayed[header].length >0) {
-            console.log("on affiche celle ci");
-        $("#places").append("<h5><div class=\"category\">");
-    
-        $("#places").append(header);
-        $("#places").append("<ul>");
-        $("#places").append("<div id=\""+ head2cat[header]+ "\">");
-        console.log(header);
-        console.log(head2cat[header]);
-        alert(displayed[header].length); /// cets ICICICICICICICICICICI
+        $("#places").append("<div class=\"category\"><h5>" + header+ "</h5><ul><div id=\""+ head2cat[header]+ "\">");
         for (var i =0; i<displayed[header].length; i++) {
-            $("#places "+head2cat[header]).append("<li>"+ displayed[header][i] + "</li>");
-            alert($("#places "+ head2cat[header] + " li input")) ;
+            $("#places #"+head2cat[header]).append("<li>"+ displayed[header][i] + "</li>");
         }
-        //$(#places " + head2cat[header] + " li input").attr('check', true);
-        $("#places").append("</div>");
-        $("#places").append("</ul>");
-        $("#places").append("</div></h5>");
+        $("#places #" + head2cat[header] + " li input").attr('checked', true);
+        $("#places").append("</div>" + "</ul>"+ "</div>");
         }
     }
     

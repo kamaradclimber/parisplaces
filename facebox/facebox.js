@@ -316,7 +316,7 @@
 
     $(document).bind('reveal.facebox',function(){
             addSearch();
-        getDynamicXml(false,function(){} ,true);
+        getXml(false,function(){} ,true);
     });
 
 
