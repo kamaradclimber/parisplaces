@@ -124,6 +124,7 @@ function afficher(donnees){
     addAddressesOnTheMap();
     makeThemBouncable();
     addPagination(resultsNumber);
+    makeMapScrollable();
 }
 
 
@@ -162,7 +163,6 @@ function getPlaces(requestArguments){
                   // pour le moment il ne se passe rien d'autre, on _pourrait_ relancer une autre requete
                   displayMessage("Argh Communication with server has failed\n (don't kill the messenger !)");
                   notLoading();
-
         }
     });
 }
@@ -187,7 +187,7 @@ function addPagination(resultsNumber) {
         } 
     }
     
-    if(pagesNumber<11){
+    if(pagesNumber<10){
         loopPagination(0,pagesNumber);
     }
     else{
@@ -226,6 +226,7 @@ function getResults(offset, limit) {
         $('#pagination').html("");
         places.forEach(function(marker) { marker.setMap(null); });
         places = new Array();
+        makeMapNotScrollable();
     }
 }
 
@@ -290,11 +291,8 @@ $(document).ready(function(){ 	// le document est chargé
 			}
 		}		
 	}
-	);
-	
+	);	
    makeThemBouncable();
-
-
 });
 
 

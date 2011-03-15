@@ -80,6 +80,7 @@
 
 #map_zone
 {
+    position:relative;
 	margin-top:20px;
 	margin-bottom:20px;
 	float:left;

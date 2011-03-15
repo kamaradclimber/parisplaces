@@ -236,6 +236,31 @@ function unique(ar) {
     return a;
   };
 
+function makeMapScrollable(){
 
+    var scrollingMap = $("#map");
+    $(window).scroll(function(){
+        if($(window).scrollTop() <= 340){ 
+            scrollingMap.css("position","relative");
+        }
+        else if($(window).scrollTop() <= 584){
+            scrollingMap
+                .css("margin-top","0px")
+                .css("position","fixed")
+                .css("top","10px");                
+        }
+        else{
+            scrollingMap
+                .css("position","relative")
+                .css("margin-top",240+"px");
+        }
+    });
+}
 
+function makeMapNotScrollable(){
+
+    var scrollingMap = $("#map");
+    $(window).unbind("scroll");
+
+}
 
