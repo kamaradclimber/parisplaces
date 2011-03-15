@@ -177,8 +177,10 @@ function addPagination(resultsNumber) {
         for(var i=start; i<end;i++){
             $("<a/>")
                 .append(i+1)
+                .attr("href","")
                 .attr("id",i)
-                .click(function(){
+                .click(function(event){
+                    event.preventDefault();
                     pageClicked = $(this).attr("id")
                     newOffset = currentOffset + pageClicked*currentLimit;
                     getResults(newOffset,currentLimit);
