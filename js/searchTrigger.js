@@ -60,6 +60,7 @@ function changeHomePageFilters(totalFilters){
 //Cette fonction est appelé quand l'utilisateur clique sur "Rechercher" dans la boite de dialogue des Catégories
 	
 function dialogBoxCategoryFiltersManager(){
+    console.log("on entre dans le filter amanager");
 	var checkedJeunesseFilters = []; 
 	var nonCheckedJeunesseFilters = [];
 	var checkedSportFilters = []; 
@@ -67,7 +68,53 @@ function dialogBoxCategoryFiltersManager(){
 	var checkedAutreFilters = []; 
 	var nonCheckedAutreFilters = [];
 	//RŽpartir les filtres cochŽs et les filtres non cochŽs dans les tableaux correspondants
-	
+
+    //on va parcourir les cases cochées, déterminer les méta catégories qui ont des enfants cochées et mettre tout ca dans un bel objet
+    //ensuite on essaiera de les afficher
+    //
+
+
+    var displayed = new Array();
+    var head2cat = new Array();
+    $("#facebox #places .Checkall").each(function() { //on a donc uniquement les méta catégories
+        var input = $(this);
+        var header = $(input).parent().html();
+        var div_cat = $(input).parent().siblings("ul").html(); //le code complet il faudrait le vider
+        head2cat[header] = div_cat;
+        displayed[header] = new Array();
+        //console.log(header);
+        //console.log(div_cat);
+        $(input).parent().siblings("ul").children().each(function() {
+            $(this).children("li").each(function(){
+                var inp = $(this).children("input");
+                if ($(inp).is(':checked')  ) {
+                    //alors il faut l'ajouter à ceux qui seront affichés
+			        // inp.setAttribute('checked',true);//il faudrait peut etre cocher lelement du DOM comme dans lancienne fonction mais je nen suis pas sur
+                    displayed[header].push($(this).html());
+                
+                
+                } else {
+                    //on fait rien du tout pour le moment
+                    //on pourrait stocker quand meme les autres pour completer si les colonnes sont petites
+                }
+                //console.log($(this));
+            })
+        })
+            
+
+    }); 
+
+    for( var header in head2cat) {
+        console.log(header);
+        console.log(head2cat[header]);
+        for (var i =0; i<displayed[header].length; i++) {
+            console.log("   "+ displayed[header][i]);
+        }
+    }
+
+
+
+/*
 	$(".JeunesseFacebox li").each(function(){
 		var li = $(this);
 		var input = li.children()[0];
@@ -130,6 +177,9 @@ function dialogBoxCategoryFiltersManager(){
 	//alert(totalAutreFilters.length);
 	//Changer la page principale lorsque l'évènement se termine
 	changeHomePageCategoryFilters(totalJeunesseFilters,totalSportFilters,totalAutreFilters);
+
+//*/
+
 	$(document).trigger('close.facebox');
 
     reactToClickOnForm();	
