@@ -24,7 +24,7 @@ $(xml).find("placeCategories").children().each(function() {
                 //on traite chacun des enfants
 
                 $(ref+id).append("<li>"+
-                    "<input type=\"checkbox\" ><span>" + 
+                    "<input type=\"checkbox\" ><span onClick=\"clickNear(this)\" >" + 
                     $(this).attr("label") 
                     + "</span></li>");
             })
@@ -62,8 +62,7 @@ function checkAll1(t) {
 
 
     function clickNear(t) {   
-        $("li span").click(function(){
-            var span= $(this);
+            var span= t;
             var li = span.parent();
             var input = li.children()[0];
             if(input.checked){
@@ -72,7 +71,6 @@ function checkAll1(t) {
             else{
                 input.checked=true;
             }	
-        });
     };
 
 
