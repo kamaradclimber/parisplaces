@@ -239,11 +239,13 @@ function unique(ar) {
 function makeMapScrollable(){
 
     var scrollingMap = $("#map");
+    var resultsZoneHeight = $("#results_zone").height();
+    var scrollLimit = resultsZoneHeight;
     $(window).scroll(function(){
-        if($(window).scrollTop() <= 340){ 
+        if($(window).scrollTop() <= 341){ 
             scrollingMap.css("position","relative");
         }
-        else if($(window).scrollTop() <= 584){
+        else if($(window).scrollTop() <= scrollLimit+10){//584
             scrollingMap
                 .css("margin-top","0px")
                 .css("position","fixed")
@@ -252,7 +254,7 @@ function makeMapScrollable(){
         else{
             scrollingMap
                 .css("position","relative")
-                .css("margin-top",240+"px");
+                .css("margin-top",scrollLimit-331+"px");
         }
     });
 }
