@@ -102,6 +102,9 @@ function dialogBoxCategoryFiltersManager(callback){
     changeHomePageCategoryFilters(head2cat, displayed);
 
     callback();
+    $("input").click(function(){ 	// on selectionne tous les liens et on définit une action quand on clique dessus
+        reactToClickOnForm();
+		});
     reactToClickOnForm();	
 	highlightZones();
 }
