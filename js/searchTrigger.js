@@ -114,11 +114,23 @@ function changeHomePageCategoryFilters(head2cat, displayed){
         $("#filter_zone #places").html("");
         $("#filter_zone #places").append("<h4>Lieux</h4>");
 
+        var display = true;
+
+
     for( var header in head2cat) {
         if (displayed[header].length >0) {
+            if (display) {
         $("#filter_zone #places").append("<div class=\"category\"><h5>" + header+ "</h5><ul><div id=\""+ head2cat[header]+ "\">");
+            } else {
+        $("#filter_zone #places").append("<div class=\"category\"><h5 style=\"display:none;\">" + header+ "</h5><ul><div id=\""+ head2cat[header]+ "\">");
+            }
         for (var i =0; i<displayed[header].length; i++) {
-            $("#filter_zone #places #"+head2cat[header]).append("<li>"+ displayed[header][i] + "</li>");
+            if (i < 7 && display) {
+                $("#filter_zone #places #"+head2cat[header]).append("<li>"+ displayed[header][i] + "</li>");
+            } else {
+                $("#filter_zone #places #"+head2cat[header]).append("<li style=\"display:none;\">"+ displayed[header][i] + "</li>");
+                display =false;
+            }
             console.log(displayed[header][i]);
         }
         $("#filter_zone #places #" + head2cat[header] + " li input").attr('checked', true);
