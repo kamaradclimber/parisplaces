@@ -119,7 +119,7 @@ function afficher(donnees){
     } );
     
     resultsNumber = $(donnees).find('places').attr('total');
-    
+   if (resultsNumber < 1)   $("#results_zone").append("<p style=\"padding-left:13px; text-align:center;\">Pas de résultat à cette requête.</p>");
     // ajout des addresses, les rends réactives au survol de souris puis ajout de la pagination
     addAddressesOnTheMap();
     makeThemBouncable();
