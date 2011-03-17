@@ -1,5 +1,5 @@
 //Cette fonction est appelé quand l'utilisateur clique sur "Rechercher" dans la boite de dialogue des arrondissements
-function dialogBoxFiltersManager(){
+function dialogBoxFiltersManager(callback){
 
 	var checkedFilters = []; 
 	var nonCheckedFilters = [];
@@ -27,7 +27,7 @@ function dialogBoxFiltersManager(){
 	
 	//Changer la page principale lorsque l'évènement se termine
 	changeHomePageFilters(totalFilters);
-	$(document).trigger('close.facebox');
+    callback();
 
     reactToClickOnForm();	
 	highlightZones();
@@ -59,7 +59,7 @@ function changeHomePageFilters(totalFilters){
 
 //Cette fonction est appelé quand l'utilisateur clique sur "Rechercher" dans la boite de dialogue des Catégories
 	
-function dialogBoxCategoryFiltersManager(){
+function dialogBoxCategoryFiltersManager(callback){
     console.log("on entre dans le filter amanager");
 
     //on va parcourir les cases cochées, déterminer les méta catégories qui ont des enfants cochées et mettre tout ca dans un bel objet
@@ -100,8 +100,8 @@ function dialogBoxCategoryFiltersManager(){
     }); 
 
     changeHomePageCategoryFilters(head2cat, displayed);
-	$(document).trigger('close.facebox');
 
+    callback();
     reactToClickOnForm();	
 	highlightZones();
 }

@@ -323,12 +323,12 @@
     function addSearch() {
         $("a.search")
             .click(function(){
-                dialogBoxFiltersManager();
+                dialogBoxFiltersManager(function() { $(document).trigger('close.facebox');}   );
             });		
 
         $("a.searchCategory")
             .click(function(){
-                dialogBoxCategoryFiltersManager();
+                dialogBoxCategoryFiltersManager(function() { $(document).trigger('close.facebox');}   );
             });		
     };
 
